@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CCAT Mastery · Info, Tips & Practice Tests</title>
+  <style>
+    :root {
+      --bg: #020617;
+      --bg-alt: #020617;
+      --card: #020617;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56,189,248,0.18);
+      --accent-soft2: rgba(56,189,248,0.06);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #1f2937;
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+      --shadow-soft: 0 22px 60px rgba(15,23,42,0.85);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      background:
+        radial-gradient(circle at top, #0b1120 0, #020617 40%, #000 100%);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(20px);
+      background: linear-gradient(to bottom,
+        rgba(15,23,42,0.96),
+        rgba(15,23,42,0.8),
+        transparent);
+      border-bottom: 1px solid rgba(15,23,42,0.95);
+    }
+
+    .nav-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0.55rem 1.25rem 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      color: #e5f3ff;
+    }
+
+    .logo-mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%,
+        #e0f2fe,
+        #38bdf8 40%,
+        #0ea5e9 60%,
+        #0369a1 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 12px 30px rgba(56,189,248,0.55);
+      font-size: 0.8rem;
+    }
+
+    .nav-main {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .nav-links a {
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: all 0.18s ease-out;
+      font-size: 0.84rem;
+      cursor: pointer;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover {
+      color: #e5f3ff;
+      border-color: rgba(148,163,184,0.45);
+      background: radial-gradient(circle at top, rgba(56,189,248,0.14), transparent 55%);
+    }
+
+    .nav-cta {
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      background: rgba(15,23,42,0.9);
+      color: #e5f3ff;
+      font-size: 0.84rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.18s ease-out;
+    }
+
+    .nav-cta:hover {
+      border-color: rgba(56,189,248,0.8);
+      background: radial-gradient(circle at top,
+        rgba(56,189,248,0.25),
+        rgba(15,23,42,0.98));
+      box-shadow: 0 10px 28px rgba(56,189,248,0.45);
+    }
+
+    main.page {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 1.7rem 1.25rem 3.5rem;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.1fr);
+      gap: 1.8rem;
+      align-items: center;
+      margin-bottom: 2.6rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      background: radial-gradient(circle at left,
+        rgba(56,189,248,0.32),
+        rgba(15,23,42,1));
+      border: 1px solid rgba(148,163,184,0.7);
+      font-size: 0.76rem;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+
+    .hero-kicker span.icon {
+      font-size: 0.95rem;
+    }
+
+    h1.hero-title {
+      font-size: clamp(2.1rem, 3.2vw, 2.6rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      margin-bottom: 0.45rem;
+    }
+
+    .hero-subtitle {
+      font-size: 0.98rem;
+      color: var(--muted);
+      max-width: 34rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .hero-metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-metric span.num {
+      color: #e5f3ff;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: center;
+      margin-bottom: 0.8rem;
+    }
+
+    .btn-primary {
+      padding: 0.65rem 1.4rem;
+      border-radius: 999px;
+      border: none;
+      background: radial-gradient(circle at 20% 0,
+        #e0f2fe,
+        #38bdf8 48%,
+        #0ea5e9 100%);
+      color: #020617;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      box-shadow: 0 16px 40px rgba(56,189,248,0.75);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: transform 0.12s ease-out, box-shadow 0.12s ease-out;
+    }
+
+    .btn-primary span {
+      font-size: 1.1rem;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 46px rgba(56,189,248,0.8);
+    }
+
+    .btn-ghost {
+      padding: 0.6rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.7);
+      background: rgba(15,23,42,0.9);
+      color: var(--muted);
+      font-size: 0.86rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .hero-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      max-width: 29rem;
+    }
+
+    .hero-right {
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(31,41,55,0.95);
+      background:
+        radial-gradient(circle at top,
+          rgba(56,189,248,0.16),
+          transparent 55%),
+        rgba(15,23,42,0.98);
+      padding: 1rem 1rem 1.1rem;
+      box-shadow: var(--shadow-soft);
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+
+    .hero-right h2 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+      color: #e5f3ff;
+    }
+
+    .hero-right ul {
+      padding-left: 1.1rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-right li + li {
+      margin-top: 0.2rem;
+    }
+
+    .hero-right-footer {
+      margin-top: 0.5rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    section {
+      margin-top: 2.4rem;
+    }
+
+    .section-kicker {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+
+    section h2 {
+      font-size: 1.3rem;
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.02em;
+    }
+
+    .section-intro {
+      font-size: 0.9rem;
+      color: var(--muted);
+      max-width: 40rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
+      gap: 1.4rem;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 880px) {
+      .two-col {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .card {
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top,
+        rgba(15,23,42,0.98),
+        rgba(15,23,42,0.98));
+      border: 1px solid rgba(31,41,55,0.95);
+      padding: 1rem;
+      box-shadow: 0 16px 40px rgba(15,23,42,0.8);
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.35rem;
+      color: #e5f3ff;
+    }
+
+    .pill {
+      display: inline-flex;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      font-size: 0.76rem;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .list {
+      padding-left: 1.05rem;
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    .list li + li {
+      margin-top: 0.18rem;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.95);
+      border: 1px solid rgba(148,163,184,0.6);
+      font-size: 0.76rem;
+      color: var(--muted);
+    }
+
+    .badge span.icon {
+      font-size: 0.9rem;
+    }
+
+    .qa {
+      margin-top: 0.5rem;
+    }
+
+    .qa-item {
+      border-radius: 0.9rem;
+      border: 1px solid rgba(31,41,55,0.9);
+      background: rgba(15,23,42,0.96);
+      padding: 0.7rem 0.8rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.45rem;
+    }
+
+    .qa-item strong {
+      display: block;
+      color: #e5f3ff;
+      margin-bottom: 0.15rem;
+    }
+
+    .examples-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    .example-card {
+      border-radius: 0.9rem;
+      border: 1px solid rgba(31,41,55,0.9);
+      background: rgba(15,23,42,0.96);
+      padding: 0.75rem 0.8rem;
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    .example-card .label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 0.15rem;
+    }
+
+    .example-card .q {
+      color: #e5f3ff;
+      margin-bottom: 0.3rem;
+    }
+
+    .example-card .a {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .offer {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1.1fr);
+      gap: 1.4rem;
+      margin-top: 0.7rem;
+    }
+
+    @media (max-width: 880px) {
+      .offer {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .offer-card {
+      border-radius: var(--radius-xl);
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,0.24), transparent 60%),
+        rgba(15,23,42,0.98);
+      border: 1px solid rgba(148,163,184,0.8);
+      padding: 1rem 1rem 1.1rem;
+      box-shadow: var(--shadow-soft);
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .price-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.8rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .price-main {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #e5f3ff;
+    }
+
+    .price-main span {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--muted);
+      margin-left: 0.1rem;
+    }
+
+    .badge-warning {
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(56,189,248,0.2);
+      border: 1px solid rgba(56,189,248,0.7);
+      font-size: 0.78rem;
+      color: #e0f2fe;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .price-tagline {
+      font-size: 0.88rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .price-list {
+      padding-left: 1.05rem;
+      font-size: 0.84rem;
+    }
+
+    .price-list li + li {
+      margin-top: 0.18rem;
+    }
+
+    .btn-full {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .offer-note {
+      margin-top: 0.45rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .portal-steps {
+      padding-left: 1.05rem;
+      font-size: 0.86rem;
+    }
+
+    .portal-steps li + li {
+      margin-top: 0.18rem;
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 1.3rem;
+      margin-top: 0.7rem;
+    }
+
+    @media (max-width: 880px) {
+      .faq-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    footer {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 1.9rem 1.25rem 1.6rem;
+      border-top: 1px solid rgba(31,41,55,0.9);
+      font-size: 0.78rem;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer a {
+      text-decoration: underline;
+      text-decoration-style: dotted;
+    }
+
+    .floating-offer {
+      position: fixed;
+      right: 1.25rem;
+      bottom: 1.25rem;
+      z-index: 40;
+      max-width: 260px;
+      border-radius: 18px;
+      padding: 0.8rem 0.9rem;
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,0.2), transparent 60%),
+        rgba(15,23,42,0.97);
+      border: 1px solid rgba(148,163,184,0.7);
+      box-shadow: 0 18px 40px rgba(15,23,42,0.9);
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .floating-offer-title {
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: #e5f3ff;
+      margin-bottom: 0.2rem;
+    }
+
+    .floating-offer-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.6rem;
+      margin-bottom: 0.55rem;
+    }
+
+    .floating-offer-price {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #e5f3ff;
+    }
+
+    .floating-offer-price span {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .floating-offer-text {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .floating-offer-btn {
+      margin-top: 0.3rem;
+      width: 100%;
+      justify-content: center;
+      font-size: 0.82rem;
+      box-shadow: 0 14px 30px rgba(56,189,248,0.7);
+    }
+
+    @media (max-width: 720px) {
+      .nav-inner {
+        padding-inline: 1rem;
+      }
+      main.page {
+        padding-inline: 1rem;
+      }
+      footer {
+        padding-inline: 1rem;
+      }
+      .floating-offer {
+        left: 0.75rem;
+        right: 0.75rem;
+        bottom: 0.85rem;
+        max-width: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-inner">
+      <div class="logo">
+        <div class="logo-mark">C</div>
+        <a href="#overview">CCAT Mastery</a>
+      </div>
+      <div class="nav-main">
+        <nav class="nav-links">
+          <a href="#overview">Overview</a>
+          <a href="#format">Format</a>
+          <a href="#tips">Tips</a>
+          <a href="#examples">Examples</a>
+          <a href="#package">Pricing</a>
+          <a href="#portal">Portal</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+        <button class="nav-cta" onclick="window.location.href='login.html'">
+          Login
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <!-- Hero / Overview -->
+    <section id="overview" class="hero">
+      <div>
+        <div class="hero-kicker">
+          <span class="icon">🧠</span>
+          CCAT-style prep · Timed simulations
+        </div>
+        <h1 class="hero-title">Everything you need for the CCAT, in one place.</h1>
+        <p class="hero-subtitle">
+          Learn what to expect on the Criteria Cognitive Aptitude Test, practice with realistic questions,
+          and take a full 50-question, 15-minute simulation — plus 5 more practice tests when you’re ready.
+        </p>
+        <div class="hero-metrics">
+          <div class="hero-metric"><span class="num">50</span> questions in 15 minutes on the real CCAT</div>
+          <div class="hero-metric"><span class="num">3</span> core skills: verbal, numerical, logical</div>
+          <div class="hero-metric"><span class="num">1</span> free full simulation included</div>
+        </div>
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="window.location.href='free-test.html'">
+            Start free practice test
+            <span>→</span>
+          </button>
+          <button class="btn-ghost" onclick="document.getElementById('examples').scrollIntoView({behavior:'smooth'})">
+            Try sample questions
+          </button>
+        </div>
+        <p class="hero-note">
+          No login required for your first full simulated test. For 5 additional simulations and saved
+          progress across attempts, you’ll unlock access with a one-time $9.99 package.
+        </p>
+      </div>
+
+      <aside class="hero-right">
+        <h2>What you’ll find on this page</h2>
+        <ul>
+          <li><strong>CCAT basics</strong> – what the test measures and how scoring works.</li>
+          <li><strong>Strategies</strong> – how to manage time, guess smart, and avoid traps.</li>
+          <li><strong>Example questions</strong> – with answers and short explanations.</li>
+          <li><strong>Practice tests</strong> – 1 free full simulation, plus 5 more for $9.99.</li>
+        </ul>
+        <div class="hero-right-footer">
+          CCAT® is a registered trademark of Criteria Corp. This site is not endorsed by, affiliated with,
+          or sponsored by Criteria Corp. It’s an independent prep resource for candidates.
+        </div>
+      </aside>
+    </section>
+
+    <!-- Format / What is CCAT -->
+    <section id="format">
+      <div class="section-kicker">Format</div>
+      <h2>What is the CCAT and how is it structured?</h2>
+      <p class="section-intro">
+        The Criteria Cognitive Aptitude Test (CCAT) is a pre-employment aptitude test designed to measure
+        problem-solving, critical thinking, and the ability to learn new information quickly.
+      </p>
+
+      <div class="two-col">
+        <div class="card">
+          <h3>Key facts</h3>
+          <ul class="list">
+            <li><strong>50 questions</strong> total.</li>
+            <li><strong>15 minutes</strong> to answer as many as you can.</li>
+            <li>Questions span <strong>numerical</strong>, <strong>verbal</strong>, and <strong>abstract/logical</strong> reasoning.</li>
+            <li>You’re <strong>not expected</strong> to finish all questions — accuracy and pace both matter.</li>
+            <li>No calculator is usually allowed; mental math and estimation are key.</li>
+          </ul>
+          <p style="margin-top:0.5rem;font-size:0.84rem;">
+            Your score reflects both how many questions you <em>attempt</em> and how many you get <em>right</em>.
+            There is no penalty for wrong answers, so guessing is better than leaving blanks.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Score ranges & percentiles</h3>
+          <p style="font-size:0.86rem;margin-bottom:0.4rem;">
+            Many roles look for a score that falls above a certain percentile among other test-takers.
+            A few rough guidelines (these are approximate, not official cutoffs):
+          </p>
+          <ul class="list">
+            <li><strong>Below 20</strong> – below average, you’ll want to improve pacing and fundamentals.</li>
+            <li><strong>20–29</strong> – average/solid for many roles.</li>
+            <li><strong>30–39</strong> – strong performance, often competitive for analytical positions.</li>
+            <li><strong>40+</strong> – excellent score, typically top percentiles.</li>
+          </ul>
+          <p style="font-size:0.8rem;margin-top:0.45rem;">
+            Each employer sets their own expectations. Your goal here is to get comfortable with the pace and
+            question types so your score reflects your true ability.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tips -->
+    <section id="tips">
+      <div class="section-kicker">Strategy</div>
+      <h2>Tips & tricks for a higher CCAT score</h2>
+      <p class="section-intro">
+        The biggest challenge on the CCAT isn’t any single question — it’s the <strong>time pressure</strong>.
+        Here are practical tactics you can apply immediately.
+      </p>
+
+      <div class="mini-grid">
+        <div class="card">
+          <h3>1. Don’t get stuck</h3>
+          <p>
+            If a question is taking more than ~30–40 seconds and you’re still lost, guess and move on.
+            The opportunity cost of spending 2–3 minutes on one problem is huge.
+          </p>
+        </div>
+        <div class="card">
+          <h3>2. Guess intelligently</h3>
+          <p>
+            There’s no negative marking. Eliminate obviously wrong options and guess from the remaining ones.
+            Two options left? You’ve turned it into a 50-50.
+          </p>
+        </div>
+        <div class="card">
+          <h3>3. Use rough math</h3>
+          <p>
+            Most questions don’t require perfect arithmetic. Estimation, simplifying fractions, and recognizing
+            common percent values (10%, 20%, 25%, 50%) will save time.
+          </p>
+        </div>
+        <div class="card">
+          <h3>4. Spot patterns fast</h3>
+          <p>
+            For sequences and logic, look first at simple differences, ratios, or “×2 + 1” style patterns before
+            considering more complex ideas.
+          </p>
+        </div>
+        <div class="card">
+          <h3>5. Manage anxiety</h3>
+          <p>
+            The countdown clock can be intimidating. That’s why we include a timed free simulation — so the real
+            CCAT feels like “just another practice run” you’ve done before.
+          </p>
+        </div>
+        <div class="card">
+          <h3>6. Practice under real conditions</h3>
+          <p>
+            Sitting with a timer, one question at a time, and no ability to go back is very different from
+            casually scrolling a question bank. Use the free simulation to rehearse the real thing.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Example questions -->
+    <section id="examples">
+      <div class="section-kicker">Examples</div>
+      <h2>Example CCAT-style questions with answers</h2>
+      <p class="section-intro">
+        Here are a few representative questions across numerical, verbal, and logical reasoning — in the same
+        spirit as what you’ll see in the actual exam.
+      </p>
+
+      <div class="examples-grid">
+        <div class="example-card">
+          <div class="label">Numerical reasoning</div>
+          <div class="q">
+            A factory produces 210 units in 7 hours at a constant rate. How many units does it produce per hour?
+          </div>
+          <div class="a">
+            <strong>Answer:</strong> 30 units/hour. Compute 210 ÷ 7 = 30.
+          </div>
+        </div>
+
+        <div class="example-card">
+          <div class="label">Verbal reasoning</div>
+          <div class="q">
+            Choose the word most similar in meaning to <em>“concise”</em>.
+          </div>
+          <div class="a">
+            <strong>Answer:</strong> <em>Brief</em>. “Concise” means using few words while still being clear.
+          </div>
+        </div>
+
+        <div class="example-card">
+          <div class="label">Logical / pattern</div>
+          <div class="q">
+            What comes next in the sequence: 3, 7, 15, 31, &nbsp;?
+          </div>
+          <div class="a">
+            <strong>Answer:</strong> 63. The pattern is “double and add 1”:
+            3→7 (3×2+1), 7→15 (7×2+1), 15→31 (15×2+1), so 31×2+1 = 63.
+          </div>
+        </div>
+      </div>
+
+      <p style="font-size:0.84rem;color:var(--muted);margin-top:0.55rem;">
+        The free practice test uses the same style and difficulty level — but with 50 questions and a strict
+        15-minute timer so you can experience the full pacing challenge.
+      </p>
+    </section>
+
+    <!-- Practice bundle / Pricing -->
+    <section id="package">
+      <div class="section-kicker">Full prep</div>
+      <h2>Get 5 additional CCAT simulations</h2>
+      <p class="section-intro">
+        Start with one full CCAT-style test for free. When you’re ready to go deeper, unlock 5 additional
+        practice tests that mirror the real exam’s structure.
+      </p>
+
+      <div class="offer">
+        <div class="offer-card">
+          <div class="price-row">
+            <div class="price-main">$9.99<span> · one-time</span></div>
+            <div class="badge-warning">
+              <span>★</span> Includes 5 extra full tests
+            </div>
+          </div>
+          <p class="price-tagline">
+            Build confidence with repeated exposure to 50-question, 15-minute simulations — all using the same
+            interface and timing as your free test.
+          </p>
+          <ul class="price-list">
+            <li><strong>1 free full simulated test</strong> – no login required.</li>
+            <li><strong>5 additional full simulations</strong> – unlocked after login and payment.</li>
+            <li>Each test is <strong>timed</strong>, one-question-at-a-time, with <strong>no back button</strong>, just like the real CCAT.</li>
+            <li>Instant score report with <strong>correct/incorrect breakdown</strong> and explanations.</li>
+          </ul>
+          <button class="btn-primary btn-full" onclick="window.location.href='login.html'">
+            Login or sign up to access the 5 additional tests
+          </button>
+          <p class="offer-note">
+            You’ll always keep access to your free test. Creating an account is required to unlock, save, and
+            re-visit the 5 additional simulations.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>How to use the practice bundle</h3>
+          <ol class="list">
+            <li><strong>Warm-up:</strong> Take the free full test once, under exam-like conditions.</li>
+            <li><strong>Review:</strong> Go through the explanations to see where your reasoning can improve.</li>
+            <li><strong>Repeat:</strong> Use the additional tests to sharpen timing, pattern recognition, and mental math.</li>
+            <li><strong>Track progress:</strong> Aim to improve your correct answers and overall pacing on each attempt.</li>
+          </ol>
+          <p style="margin-top:0.5rem;font-size:0.82rem;">
+            The goal isn’t to memorize specific questions — it’s to train the habits and instincts that carry over
+            to any new CCAT item you might see.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portal -->
+    <section id="portal">
+      <div class="section-kicker">Portal</div>
+      <h2>Your CCAT practice portal</h2>
+      <p class="section-intro">
+        The portal simply keeps track of your additional practice tests and any future features like progress
+        tracking and score history. Your first full test doesn’t require an account.
+      </p>
+
+      <div class="two-col">
+        <div class="card">
+          <h3>How it works</h3>
+          <ol class="portal-steps">
+            <li><strong>Step 1 – Take your free test:</strong> Use the free 50-question simulation to establish a baseline.</li>
+            <li><strong>Step 2 – Create your account:</strong> When you’re ready, go to the Login page and sign up with email + password.</li>
+            <li><strong>Step 3 – Unlock 5 more tests:</strong> Pay the one-time $9.99 and get access to 5 additional simulations.</li>
+          </ol>
+          <p style="margin-top:0.45rem;font-size:0.82rem;">
+            Over time, this same portal can host more tools — such as detailed analytics and targeted drills —
+            all tied to your account so you can see your improvement.
+          </p>
+          <button class="btn-ghost" style="margin-top:0.6rem;"
+            onclick="window.location.href='login.html'">
+            Go to Login / Sign Up page
+          </button>
+        </div>
+
+        <div class="card">
+          <h3>What an account gives you</h3>
+          <ul class="list">
+            <li>Access to 5 additional full CCAT-style tests.</li>
+            <li>Automatic saving of your scores and attempts.</li>
+            <li>Ability to revisit explanations and learn from mistakes.</li>
+            <li>Future features like performance trends and topic-level breakdowns.</li>
+          </ul>
+          <p style="margin-top:0.45rem;font-size:0.8rem;">
+            You can still use the free test without creating an account. The account is only required for the
+            extended practice bundle and saved history.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="section-kicker">FAQ</div>
+      <h2>Common questions about the CCAT and this site</h2>
+
+      <div class="faq-grid">
+        <div>
+          <div class="qa">
+            <div class="qa-item">
+              <strong>Is this the official CCAT?</strong>
+              No. CCAT® is a registered trademark of Criteria Corp. This website is an independent preparation
+              tool designed to help you feel more comfortable before you sit the official test.
+            </div>
+            <div class="qa-item">
+              <strong>Do I need to finish all 50 questions?</strong>
+              No. Very few people finish all 50 questions within 15 minutes. It’s normal to leave some unanswered.
+              Focus on balancing speed with accuracy.
+            </div>
+            <div class="qa-item">
+              <strong>Is there a penalty for guessing?</strong>
+              No. Wrong answers do not subtract points. If you’re running out of time, it’s better to guess than
+              to leave questions blank.
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="qa">
+            <div class="qa-item">
+              <strong>What do I get for $9.99?</strong>
+              You unlock 5 additional full-length CCAT-style practice tests that match the timing and structure
+              of your free test, plus score breakdowns and explanations.
+            </div>
+            <div class="qa-item">
+              <strong>Can I use the free test without an account?</strong>
+              Yes. The free 50-question simulation does not require login. Only the additional tests and future
+              premium features require an account.
+            </div>
+            <div class="qa-item">
+              <strong>Will practicing here guarantee a certain score?</strong>
+              No prep resource can guarantee a specific score. What you <em>can</em> expect is to feel more
+              familiar with the format, more comfortable under time pressure, and better prepared to show your
+              true ability.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> CCAT Mastery. All rights reserved.</p>
+    <p>CCAT® is a registered trademark of Criteria Corp. This site is for independent preparation only.</p>
+  </footer>
+
+  <!-- Floating upsell for 5 additional tests -->
+  <div class="floating-offer">
+    <div class="floating-offer-title">Need more CCAT practice?</div>
+    <div class="floating-offer-row">
+      <div class="floating-offer-price">$9.99 <span>· one-time</span></div>
+      <div class="floating-offer-text">Unlock 5 additional full simulated tests.</div>
+    </div>
+    <button class="btn-primary floating-offer-btn" onclick="window.location.href='login.html'">
+      Get 5 more practice tests
+    </button>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
