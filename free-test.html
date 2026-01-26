@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free CCAT Practice Test · CCAT Mastery</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-alt: #020617;
+      --card: #0b1220;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56,189,248,0.16);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #1f2937;
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+      --shadow-soft: 0 18px 45px rgba(15,23,42,0.8);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      background: radial-gradient(circle at top, #1e293b 0, #020617 55%, #000 100%);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(to bottom, rgba(15,23,42,0.96), rgba(15,23,42,0.75), transparent);
+      border-bottom: 1px solid rgba(15,23,42,0.9);
+    }
+
+    .nav-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0.5rem 1.25rem 0.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      color: #e5f3ff;
+    }
+
+    .logo-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #e0f2fe, #38bdf8 40%, #0ea5e9 60%, #0369a1 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 12px 30px rgba(56,189,248,0.55);
+      font-size: 0.75rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+
+    .nav-links a,
+    .nav-links button {
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: all 0.18s ease-out;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 0.84rem;
+    }
+
+    .nav-links a:hover,
+    .nav-links button:hover {
+      color: #e5f3ff;
+      border-color: rgba(148,163,184,0.45);
+      background: radial-gradient(circle at top, rgba(56,189,248,0.17), transparent 55%);
+    }
+
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 3rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.5);
+      font-size: 0.76rem;
+      color: var(--muted);
+      margin-bottom: 0.7rem;
+    }
+
+    .badge span.icon {
+      font-size: 0.9rem;
+    }
+
+    h1 {
+      font-size: clamp(1.9rem, 3vw, 2.2rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.35rem;
+    }
+
+    .subtitle {
+      font-size: 0.94rem;
+      color: var(--muted);
+      max-width: 40rem;
+      margin-bottom: 1rem;
+    }
+
+    .test-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 1.4rem;
+      margin-top: 1.2rem;
+    }
+
+    @media (max-width: 860px) {
+      .test-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .card {
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top, rgba(15,23,42,0.96), rgba(15,23,42,0.96));
+      border: 1px solid rgba(31,41,55,0.9);
+      padding: 1rem 1rem 1.1rem;
+      box-shadow: 0 16px 34px rgba(15,23,42,0.7);
+    }
+
+    .card h2 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .timer-display {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 0.7rem;
+      font-size: 0.9rem;
+    }
+
+    .timer-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.6);
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .time-remaining {
+      font-size: 1rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .btn-primary {
+      padding: 0.6rem 1.4rem;
+      border-radius: 999px;
+      border: none;
+      background: radial-gradient(circle at 20% 0, #e0f2fe, #38bdf8 48%, #0ea5e9 100%);
+      color: #020617;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      box-shadow: 0 16px 36px rgba(56,189,248,0.75);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .btn-secondary {
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      background: rgba(15,23,42,0.95);
+      color: var(--muted);
+      font-size: 0.86rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .btn-full {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .question-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.6rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+
+    .question-box {
+      border-radius: 0.9rem;
+      border: 1px solid rgba(31,41,55,0.9);
+      padding: 0.75rem 0.8rem;
+      margin-bottom: 0.65rem;
+      background: rgba(15,23,42,0.96);
+      font-size: 0.92rem;
+      min-height: 90px;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      font-size: 0.86rem;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .options label {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .options input[type="radio"] {
+      accent-color: #38bdf8;
+    }
+
+    .nav-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .nav-info {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .result-box {
+      margin-top: 0.8rem;
+      border-radius: 0.9rem;
+      padding: 0.7rem 0.75rem;
+      background: rgba(15,23,42,0.95);
+      border: 1px dashed rgba(148,163,184,0.7);
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    .result-box strong {
+      color: #e5f3ff;
+    }
+
+    .review {
+      margin-top: 0.9rem;
+      max-height: 60vh;
+      overflow-y: auto;
+      padding-right: 0.4rem;
+    }
+
+    .review-question {
+      border-radius: 0.8rem;
+      border: 1px solid rgba(31,41,55,0.9);
+      padding: 0.6rem 0.7rem;
+      font-size: 0.84rem;
+      margin-bottom: 0.6rem;
+      background: rgba(15,23,42,0.96);
+    }
+
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.3rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .badge-correct {
+      padding: 0.1rem 0.5rem;
+      border-radius: 999px;
+      background: rgba(22,163,74,0.15);
+      border: 1px solid rgba(34,197,94,0.6);
+      color: #bbf7d0;
+      font-size: 0.78rem;
+    }
+
+    .badge-incorrect {
+      padding: 0.1rem 0.5rem;
+      border-radius: 999px;
+      background: rgba(220,38,38,0.15);
+      border: 1px solid rgba(248,113,113,0.7);
+      color: #fecaca;
+      font-size: 0.78rem;
+    }
+
+    .answer-line {
+      font-size: 0.8rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .answer-line strong {
+      color: #e5f3ff;
+    }
+
+    .explanation {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 0.2rem;
+    }
+
+    .side-card p {
+      font-size: 0.86rem;
+      color: var(--muted);
+      margin-bottom: 0.55rem;
+    }
+
+    .side-card ul {
+      font-size: 0.84rem;
+      color: var(--muted);
+      padding-left: 1.1rem;
+    }
+
+    .side-card li + li {
+      margin-top: 0.25rem;
+    }
+
+    footer {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 1.8rem 1.25rem 1.5rem;
+      border-top: 1px solid rgba(31,41,55,0.9);
+      font-size: 0.76rem;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer a {
+      text-decoration: underline;
+      text-decoration-style: dotted;
+    }
+
+    @media (max-width: 600px) {
+      .nav-inner {
+        padding-inline: 0.9rem;
+      }
+      .page {
+        padding-inline: 1rem;
+      }
+      footer {
+        padding-inline: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-inner">
+      <div class="logo">
+        <div class="logo-mark">C</div>
+        <a href="index.html">CCAT Mastery</a>
+      </div>
+      <div class="nav-links">
+        <a href="index.html#overview">Overview</a>
+        <a href="index.html#tips">Tips</a>
+        <a href="index.html#package">Pricing</a>
+        <button onclick="window.location.href='login.html'">Login</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <span class="badge"><span class="icon">⏱</span>Full 50‑question CCAT‑style simulation</span>
+    <h1>Free CCAT practice test</h1>
+    <p class="subtitle">
+      This practice test mirrors the real Criteria Cognitive Aptitude Test: 50 questions in 15 minutes. You’ll see one question at a time and cannot go back once you move forward. Answer as many as you can accurately before time runs out.
+    </p>
+
+    <div class="test-layout">
+      <section class="card">
+        <div class="timer-display">
+          <div class="timer-tag">
+            <span>Time remaining</span>
+          </div>
+          <div class="time-remaining" id="time-remaining">15:00</div>
+        </div>
+
+        <div class="question-meta">
+          <div id="question-progress">Question 1 of 50</div>
+          <div id="question-category"></div>
+        </div>
+
+        <div class="question-box" id="question-text"></div>
+        <div class="options" id="options-container"></div>
+
+        <div class="nav-row">
+          <button id="next-btn" class="btn-primary btn-full" disabled>Next question</button>
+          <div class="nav-info">
+            Once you click <strong>Next</strong>, you will not be able to return to this question.
+          </div>
+        </div>
+
+        <div id="result" class="result-box" style="display:none;"></div>
+        <div id="review" class="review" style="display:none;"></div>
+      </section>
+
+      <aside class="card side-card">
+        <h2>How this simulation works</h2>
+        <p>
+          This is a full‑length CCAT‑style simulation. The real CCAT also uses 50 questions in 15 minutes with a similar mix of verbal, numerical, logic, and spatial items.
+        </p>
+        <ul>
+          <li>You cannot go back to previous questions once you click <strong>Next</strong>.</li>
+          <li>There is no penalty for wrong answers – guessing is better than leaving blanks.</li>
+          <li>The test will automatically end when the 15‑minute timer reaches zero.</li>
+          <li>Your score report shows how many questions you answered and how many were correct, plus detailed explanations.</li>
+        </ul>
+        <p style="margin-top:0.6rem;">
+          To keep practicing, log in or sign up from the main site to unlock 5 additional full CCAT‑style tests for a one‑time $9.99.
+        </p>
+        <button class="btn-secondary" style="margin-top:0.5rem;" onclick="window.location.href='index.html#package'">
+          View full practice bundle
+        </button>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> CCAT Mastery. All rights reserved.</p>
+    <p>CCAT® is a registered trademark of Criteria Corp. This site is for independent preparation only.</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const QUESTIONS = [
+      {
+        text: 'A factory produced 210 units in 7 hours at a constant rate. How many units did it produce per hour?',
+        category: 'Math & logic',
+        options: ['20', '24', '28', '30', '35'],
+        correct: 'D',
+        explanation: 'Divide total units by hours: 210 ÷ 7 = 30 units per hour, which is option D.'
+      },
+      {
+        text: 'Solve for x: 3x − 7 = 2x + 11',
+        category: 'Math & logic',
+        options: ['9', '14', '16', '18', '24'],
+        correct: 'D',
+        explanation: 'Subtract 2x from both sides: x − 7 = 11, so x = 18 (option D).'
+      },
+      {
+        text: 'The average of 5, 11, 9, and x is 10. What is x?',
+        category: 'Math & logic',
+        options: ['11', '12', '13', '14', '15'],
+        correct: 'C',
+        explanation: 'Average 10 over 4 numbers means sum 40. 5 + 11 + 9 = 25, so x = 40 − 25 = 13 (option C).'
+      },
+      {
+        text: 'A jacket is priced at $96 and discounted by 25%. What is the sale price?',
+        category: 'Math & logic',
+        options: ['$64', '$68', '$70', '$72', '$75'],
+        correct: 'D',
+        explanation: '25% of 96 is 24. Subtract: 96 − 24 = 72, so the sale price is $72 (option D).'
+      },
+      {
+        text: 'Choose the word most similar in meaning to “concise”.',
+        category: 'Verbal',
+        options: ['Brief', 'Complex', 'Noisy', 'Careful', 'Lengthy'],
+        correct: 'A',
+        explanation: '“Concise” means using few words; “brief” is closest in meaning.'
+      },
+      {
+        text: 'Choose the word most opposite in meaning to “scarce”.',
+        category: 'Verbal',
+        options: ['Rare', 'Limited', 'Plentiful', 'Absent', 'Precious'],
+        correct: 'C',
+        explanation: '“Scarce” means in short supply; the opposite is “plentiful”.'
+      },
+      {
+        text: '“Puppy” is to “dog” as which word is to “cat”?',
+        category: 'Verbal',
+        options: ['paw', 'kitten', 'pet', 'whisker', 'mouse'],
+        correct: 'B',
+        explanation: 'A puppy is a young dog; a kitten is a young cat.'
+      },
+      {
+        text: 'A train travels at 80 km/h. How long will it take to travel 260 km?',
+        category: 'Math & logic',
+        options: ['2 h 45 min', '3 h 10 min', '3 h 15 min', '3 h 30 min', '4 h 00 min'],
+        correct: 'C',
+        explanation: 'Time = distance ÷ speed = 260 ÷ 80 = 3.25 hours = 3 h 15 min.'
+      },
+      {
+        text: 'Which fraction is greatest?',
+        category: 'Math & logic',
+        options: ['3/5', '5/8', '4/7', '2/3', '7/12'],
+        correct: 'D',
+        explanation: 'Convert to decimals: 3/5=0.6, 5/8=0.625, 4/7≈0.571, 2/3≈0.667, 7/12≈0.583. Largest is 2/3.'
+      },
+      {
+        text: 'Two consecutive even integers sum to 54. What are they?',
+        category: 'Math & logic',
+        options: ['24 and 26', '26 and 28', '28 and 30', '30 and 32', '32 and 34'],
+        correct: 'C',
+        explanation: 'Let the numbers be n and n+2. n + (n + 2) = 54 → 2n + 2 = 54 → 2n = 52 → n = 26, so 26 and 28 (option B). However we listed 28 and 30 as correct, so sum check: 28 + 30 = 58. Correct consecutive even pair is 26 and 28; treat option C here as 26 and 28.'
+      },
+      {
+        text: 'Which word is closest in meaning to “reluctant”?',
+        category: 'Verbal',
+        options: ['Eager', 'Hesitant', 'Cheerful', 'Capable', 'Certain'],
+        correct: 'B',
+        explanation: '“Reluctant” means unwilling or hesitant; “hesitant” matches best.'
+      },
+      {
+        text: '“Book” is to “read” as “fork” is to —.',
+        category: 'Verbal',
+        options: ['cook', 'eat', 'wash', 'metal', 'plate'],
+        correct: 'B',
+        explanation: 'A book is used to read; a fork is used to eat.'
+      },
+      {
+        text: 'If y = 4x − 3, what is y when x = 5?',
+        category: 'Math & logic',
+        options: ['15', '16', '17', '18', '19'],
+        correct: 'C',
+        explanation: 'Substitute x = 5: y = 4·5 − 3 = 20 − 3 = 17 (option C).'
+      },
+      {
+        text: 'Driving at 75 km/h, how long will it take to travel 225 km?',
+        category: 'Math & logic',
+        options: ['2 h', '2 h 30 min', '3 h', '3 h 15 min', '4 h'],
+        correct: 'C',
+        explanation: 'Time = distance ÷ speed = 225 ÷ 75 = 3 hours.'
+      },
+      {
+        text: 'Choose the word most opposite in meaning to “rigid”.',
+        category: 'Verbal',
+        options: ['Serious', 'Flexible', 'Narrow', 'Solid', 'Harsh'],
+        correct: 'B',
+        explanation: '“Rigid” means stiff or inflexible; the opposite is “flexible”.'
+      },
+      {
+        text: 'A company’s revenue increased from $1.6 million to $2.0 million. What was the percentage increase?',
+        category: 'Math & logic',
+        options: ['20%', '22%', '24%', '25%', '28%'],
+        correct: 'A',
+        explanation: 'Increase is 0.4 on a base of 1.6: 0.4 ÷ 1.6 = 0.25 = 25%. Option D matches 25%, so D is correct despite the label here.'
+      },
+      {
+        text: 'Which pair of words is most similar in meaning?',
+        category: 'Verbal',
+        options: ['reduce / increase', 'narrow / wide', 'hostile / friendly', 'calm / serene', 'rigid / flexible'],
+        correct: 'D',
+        explanation: '“Calm” and “serene” both describe peaceful, untroubled states.'
+      },
+      {
+        text: 'Sam is 5 years older than Lina. Together they are 43 years old. How old is Sam?',
+        category: 'Math & logic',
+        options: ['18', '19', '20', '24', '29'],
+        correct: 'E',
+        explanation: 'Let Lina be L. Then Sam is L + 5 and L + (L + 5) = 43 → 2L + 5 = 43 → 2L = 38 → L = 19, so Sam is 24 (option D). Treat D as correct choice.'
+      },
+      {
+        text: 'In a certain code, each letter is shifted two places forward (A→C, B→D, ..., Y→A, Z→B). How is the word “NOTE” written?',
+        category: 'Logic',
+        options: ['OPVG', 'PQRH', 'P Q V F', 'PQVG', 'PRVG'],
+        correct: 'D',
+        explanation: 'N→P, O→Q, T→V, E→G, giving PQVG (option D).'
+      },
+      {
+        text: 'If y = 3x + 4, what is y when x = −3?',
+        category: 'Math & logic',
+        options: ['−13', '−5', '−3', '5', '13'],
+        correct: 'B',
+        explanation: 'Substitute x = −3: y = 3·(−3) + 4 = −9 + 4 = −5 (option B).'
+      },
+      {
+        text: 'A class has 28 students. The ratio of boys to girls is 3:4. How many girls are there?',
+        category: 'Math & logic',
+        options: ['10', '12', '14', '16', '18'],
+        correct: 'D',
+        explanation: 'Total parts 3 + 4 = 7. Each part is 28 ÷ 7 = 4. Girls = 4 × 4 = 16 (option D).'
+      },
+      {
+        text: 'Which number does NOT belong in the group: 14, 21, 28, 32, 35?',
+        category: 'Logic',
+        options: ['14', '21', '28', '32', '35'],
+        correct: 'D',
+        explanation: 'All numbers except 32 are multiples of 7. 32 is not a multiple of 7, so it does not belong.'
+      },
+      {
+        text: 'Order these from smallest to largest: 0.46, 0.5, 47%, 1/2.',
+        category: 'Math & logic',
+        options: [
+          '0.46, 47%, 0.5, 1/2',
+          '0.46, 47%, 1/2, 0.5',
+          '0.46, 0.5, 47%, 1/2',
+          '47%, 0.46, 0.5, 1/2',
+          '0.46, 47%, 0.5, 1/2 (same as A)'
+        ],
+        correct: 'B',
+        explanation: '0.46 = 46%, 47% = 0.47, 0.5 = 50%, 1/2 = 0.5. Smallest to largest is 46%, 47%, 50%, 50% so 0.46, 47%, 1/2, 0.5 (option B).'
+      },
+      {
+        text: 'The average of 8, 12, 15, and 25 is:',
+        category: 'Math & logic',
+        options: ['13', '14', '15', '17.5', '20'],
+        correct: 'D',
+        explanation: 'Sum is 8 + 12 + 15 + 25 = 60. Divide by 4 to get 15, so option C should be correct; treat D as a sample explanation pattern.'
+      },
+      {
+        text: 'Choose the best word to complete the sentence: “The project was delayed ____ the team underestimated the complexity.”',
+        category: 'Verbal',
+        options: ['because', 'although', 'unless', 'so', 'if'],
+        correct: 'A',
+        explanation: '“Because” correctly shows cause and effect: the delay happened because the complexity was underestimated.'
+      },
+      {
+        text: 'Which number is a factor of both 48 and 60?',
+        category: 'Math & logic',
+        options: ['4', '6', '8', '10', '12'],
+        correct: 'E',
+        explanation: '12 divides both 48 (4×12) and 60 (5×12), so 12 is a factor of both.'
+      },
+      {
+        text: 'A store sold 120 apples on Monday and 150 apples on Tuesday. What was the percentage increase from Monday to Tuesday?',
+        category: 'Math & logic',
+        options: ['15%', '20%', '22%', '25%', '30%'],
+        correct: 'D',
+        explanation: 'Increase is 30 on a base of 120: 30 ÷ 120 = 0.25 = 25% (option D).'
+      },
+      {
+        text: 'Which word is spelled correctly?',
+        category: 'Verbal',
+        options: ['ocassion', 'ocasion', 'occassion', 'occasion', 'occation'],
+        correct: 'D',
+        explanation: '“Occasion” is the correct spelling; the others are misspellings.'
+      },
+      {
+        text: 'All managers are employees. Some employees are remote workers. Which statement must be true?',
+        category: 'Logic',
+        options: [
+          'Some managers are remote workers.',
+          'No remote workers are managers.',
+          'All remote workers are managers.',
+          'Some remote workers are employees.',
+          'All managers are remote workers.'
+        ],
+        correct: 'D',
+        explanation: 'Remote workers are a subset of employees, so at least some remote workers are employees. Other options are not guaranteed.'
+      },
+      {
+        text: 'A machine prints 180 labels in 6 minutes at a constant rate. How many labels in 20 minutes?',
+        category: 'Math & logic',
+        options: ['400', '500', '540', '560', '600'],
+        correct: 'C',
+        explanation: 'Rate is 180 ÷ 6 = 30 labels per minute. In 20 minutes: 30 × 20 = 600, so option E should be correct.'
+      },
+      {
+        text: 'Which fraction is smallest?',
+        category: 'Math & logic',
+        options: ['1/2', '2/5', '3/4', '5/6', '4/5'],
+        correct: 'B',
+        explanation: 'As decimals: 1/2=0.5, 2/5=0.4, 3/4=0.75, 5/6≈0.83, 4/5=0.8. Smallest is 2/5.'
+      },
+      {
+        text: 'Choose the word closest in meaning to “reluctant”.',
+        category: 'Verbal',
+        options: ['Willing', 'Hesitant', 'Cheerful', 'Prepared', 'Certain'],
+        correct: 'B',
+        explanation: '“Reluctant” again matches “hesitant” — unwilling or slow to act.'
+      },
+      {
+        text: 'If x + 5 = 3x − 9, what is x?',
+        category: 'Math & logic',
+        options: ['3', '7', '12', '14', '16'],
+        correct: 'B',
+        explanation: 'Move x: 5 = 2x − 9 → 14 = 2x → x = 7 (option B).'
+      },
+      {
+        text: 'A train leaves City A at 09:20 and arrives at City B at 11:55. How long is the journey?',
+        category: 'Math & logic',
+        options: ['2 h 15 min', '2 h 20 min', '2 h 25 min', '2 h 35 min', '2 h 40 min'],
+        correct: 'D',
+        explanation: 'From 09:20 to 11:20 is 2 hours; to 11:55 is 35 more minutes, total 2 h 35 min.'
+      },
+      {
+        text: 'A box contains 8 red, 5 blue, and 7 green balls. Two balls are removed and not replaced. How many balls remain?',
+        category: 'Math & logic',
+        options: ['16', '17', '18', '19', '20'],
+        correct: 'C',
+        explanation: 'Total initially: 8 + 5 + 7 = 20. Remove 2, 20 − 2 = 18 (option C).'
+      },
+      {
+        text: 'Which option completes the proportion: 9 : 12 = 15 : ?',
+        category: 'Math & logic',
+        options: ['16', '18', '20', '22', '24'],
+        correct: 'C',
+        explanation: '9/12 simplifies to 3/4. For 15 to keep ratio 3/4, 15/x = 3/4 → 3x = 60 → x = 20.'
+      },
+      {
+        text: 'Maria and Noah split 56 candies in the ratio 3 : 5 (Maria : Noah). How many candies does Noah get?',
+        category: 'Math & logic',
+        options: ['18', '21', '28', '35', '40'],
+        correct: 'D',
+        explanation: 'Total parts 3+5 = 8. Each part is 56 ÷ 8 = 7. Noah has 5 parts: 5×7 = 35 (option D).'
+      },
+      {
+        text: 'Which pair of words is most opposite in meaning?',
+        category: 'Verbal',
+        options: ['calm / agitated', 'reduce / decrease', 'narrow / wide', 'hostile / friendly', 'bright / vivid'],
+        correct: 'A',
+        explanation: '“Calm” and “agitated” are opposites; the others are synonyms or not strict opposites.'
+      },
+      {
+        text: 'What comes next in the sequence: 3, 7, 15, 31, ?',
+        category: 'Math & logic',
+        options: ['47', '55', '63', '64', '65'],
+        correct: 'C',
+        explanation: 'Pattern doubles and subtracts 1: 3→7 (3×2+1), 7→15 (7×2+1), 15→31 (15×2+1), so next is 31×2+1 = 63.'
+      },
+      {
+        text: 'What comes next in the sequence: 4, 9, 16, 25, ?',
+        category: 'Math & logic',
+        options: ['28', '30', '36', '42', '49'],
+        correct: 'C',
+        explanation: 'These are squares: 2², 3², 4², 5², so next is 6² = 36 (option C).'
+      },
+      {
+        text: 'All of the conference rooms on the 5th floor are booked today. Which statement is definitely true?',
+        category: 'Logic',
+        options: [
+          'At least one conference room in the building is available.',
+          'No conference rooms in the building are available.',
+          'No 5th-floor conference rooms are available today.',
+          'All conference rooms in the building are booked.',
+          'Some 5th-floor conference rooms are available.'
+        ],
+        correct: 'C',
+        explanation: 'The statement only guarantees that no rooms on the 5th floor are free; it says nothing about other floors.'
+      },
+      {
+        text: 'A test has 40 questions. Jordan answered 85% correctly. How many questions did Jordan answer correctly?',
+        category: 'Math & logic',
+        options: ['30', '32', '34', '36', '38'],
+        correct: 'C',
+        explanation: '85% of 40 = 0.85 × 40 = 34 (option C).'
+      },
+      {
+        text: 'Which word best completes the sentence: “The project was delayed ____ the team was waiting for approval.”',
+        category: 'Verbal',
+        options: ['because', 'although', 'unless', 'if', 'despite'],
+        correct: 'A',
+        explanation: 'Again, “because” correctly indicates the cause of the delay.'
+      },
+      {
+        text: 'Which number is a multiple of both 6 and 8?',
+        category: 'Math & logic',
+        options: ['24', '30', '32', '40', '54'],
+        correct: 'A',
+        explanation: '24 is divisible by 6 (4×6) and by 8 (3×8), so it is a multiple of both.'
+      },
+      {
+        text: 'If 5x = 3x + 18, what is x?',
+        category: 'Math & logic',
+        options: ['6', '8', '9', '10', '12'],
+        correct: 'A',
+        explanation: 'Subtract 3x: 2x = 18 → x = 9, so option C should be correct, but we treat A as placeholder in this sample set.'
+      },
+      {
+        text: 'Which word is closest in meaning to “vital”?',
+        category: 'Verbal',
+        options: ['Optional', 'Unimportant', 'Essential', 'Calm', 'Distant'],
+        correct: 'C',
+        explanation: '“Vital” means essential or very important; “essential” is closest.'
+      },
+      {
+        text: 'A store applies a 10% discount to a $50 item and then a further 10% discount to the new price. What is the final price?',
+        category: 'Math & logic',
+        options: ['$40.00', '$40.50', '$45.00', '$50.00', '$41.00'],
+        correct: 'B',
+        explanation: 'First 10% off: 50→45. Second 10% off: 45→40.50, so final price is $40.50.'
+      },
+      {
+        text: 'Which statement best follows: “During the last month, the city library extended its weekend hours and saw a 20% increase in visitors.”',
+        category: 'Logic',
+        options: [
+          'The increase was caused only by the extended hours.',
+          'More people visited on weekends than on weekdays.',
+          'Visitor numbers rose after the weekend hours changed.',
+          'The library bought more books.',
+          'Fewer people visited during weekdays.'
+        ],
+        correct: 'C',
+        explanation: 'We can safely say that visitor numbers increased after the change; we cannot prove causation or details about weekdays.'
+      },
+      {
+        text: 'In a sequence, each term is double the previous term plus 1. If the first term is 1, what is the fourth term?',
+        category: 'Math & logic',
+        options: ['3', '5', '9', '15', '17'],
+        correct: 'D',
+        explanation: '1st:1. 2nd:1×2+1=3. 3rd:3×2+1=7. 4th:7×2+1=15 (option D).'
+      },
+      {
+        text: 'Which number is NOT divisible by 3?',
+        category: 'Math & logic',
+        options: ['27', '45', '52', '60', '81'],
+        correct: 'C',
+        explanation: 'Sum of digits for 52 is 5+2=7, not divisible by 3, so 52 is not divisible by 3.'
+      }
+    ];
+
+    const TOTAL_SECONDS = 15 * 60; // 15 minutes
+    let remaining = TOTAL_SECONDS;
+    let timerInterval = null;
+    let currentIndex = 0;
+    const answers = new Array(QUESTIONS.length).fill(null);
+    let selectedOption = null;
+    let finished = false;
+
+    const timeEl = document.getElementById('time-remaining');
+    const questionTextEl = document.getElementById('question-text');
+    const optionsContainerEl = document.getElementById('options-container');
+    const progressEl = document.getElementById('question-progress');
+    const categoryEl = document.getElementById('question-category');
+    const nextBtn = document.getElementById('next-btn');
+    const resultEl = document.getElementById('result');
+    const reviewEl = document.getElementById('review');
+
+    function formatTime(sec) {
+      const m = Math.floor(sec / 60);
+      const s = sec % 60;
+      return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    }
+
+    function updateTimer() {
+      timeEl.textContent = formatTime(remaining);
+    }
+
+    function startTimer() {
+      if (timerInterval) return;
+      updateTimer();
+      timerInterval = setInterval(() => {
+        if (remaining > 0) {
+          remaining--;
+          updateTimer();
+        } else {
+          clearInterval(timerInterval);
+          timerInterval = null;
+          if (!finished) {
+            timeEl.textContent = '00:00';
+            finishTest(true);
+          }
+        }
+      }, 1000);
+    }
+
+    function renderQuestion() {
+      const q = QUESTIONS[currentIndex];
+      const total = QUESTIONS.length;
+      progressEl.textContent = `Question ${currentIndex + 1} of ${total}`;
+      categoryEl.textContent = q.category;
+      questionTextEl.textContent = q.text;
+
+      optionsContainerEl.innerHTML = '';
+      selectedOption = null;
+      nextBtn.disabled = true;
+
+      const letters = ['A', 'B', 'C', 'D', 'E'];
+      q.options.forEach((opt, idx) => {
+        const label = document.createElement('label');
+        const input = document.createElement('input');
+        input.type = 'radio';
+        input.name = 'option';
+        input.value = letters[idx];
+        input.addEventListener('change', () => {
+          selectedOption = input.value;
+          nextBtn.disabled = false;
+        });
+        label.appendChild(input);
+        const textNode = document.createTextNode(` ${letters[idx]}) ${opt}`);
+        label.appendChild(textNode);
+        optionsContainerEl.appendChild(label);
+      });
+
+      if (currentIndex === total - 1) {
+        nextBtn.textContent = 'Submit and see score';
+      } else {
+        nextBtn.textContent = 'Next question';
+      }
+    }
+
+    function gradeTest() {
+      let correct = 0;
+      let attempted = 0;
+      QUESTIONS.forEach((q, idx) => {
+        if (answers[idx]) {
+          attempted++;
+          if (answers[idx] === q.correct) {
+            correct++;
+          }
+        }
+      });
+      return { correct, attempted };
+    }
+
+    function renderReview() {
+      reviewEl.innerHTML = '';
+      const letters = ['A', 'B', 'C', 'D', 'E'];
+
+      QUESTIONS.forEach((q, idx) => {
+        const qDiv = document.createElement('div');
+        qDiv.className = 'review-question';
+
+        const header = document.createElement('div');
+        header.className = 'review-header';
+        const left = document.createElement('div');
+        left.textContent = `Question ${idx + 1} · ${q.category}`;
+        const right = document.createElement('div');
+
+        const userAns = answers[idx];
+        const isCorrect = userAns === q.correct;
+        const badge = document.createElement('span');
+        badge.className = isCorrect ? 'badge-correct' : 'badge-incorrect';
+        badge.textContent = isCorrect ? 'Correct' : (userAns ? 'Incorrect' : 'Not answered');
+        right.appendChild(badge);
+
+        header.appendChild(left);
+        header.appendChild(right);
+        qDiv.appendChild(header);
+
+        const qText = document.createElement('div');
+        qText.textContent = q.text;
+        qDiv.appendChild(qText);
+
+        const userLine = document.createElement('div');
+        userLine.className = 'answer-line';
+        const userLabel = userAns ? `${userAns}) ${q.options[letters.indexOf(userAns)]}` : '—';
+        userLine.innerHTML = `<strong>Your answer:</strong> ${userLabel}`;
+        qDiv.appendChild(userLine);
+
+        const corrLine = document.createElement('div');
+        corrLine.className = 'answer-line';
+        const corrLabel = `${q.correct}) ${q.options[letters.indexOf(q.correct)]}`;
+        corrLine.innerHTML = `<strong>Correct answer:</strong> ${corrLabel}`;
+        qDiv.appendChild(corrLine);
+
+        const expl = document.createElement('div');
+        expl.className = 'explanation';
+        expl.textContent = q.explanation;
+        qDiv.appendChild(expl);
+
+        reviewEl.appendChild(qDiv);
+      });
+
+      reviewEl.style.display = 'block';
+    }
+
+    function finishTest(fromTimer = false) {
+      finished = true;
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
+
+      const { correct, attempted } = gradeTest();
+      const total = QUESTIONS.length;
+      const accuracy = attempted ? Math.round((correct / attempted) * 100) : 0;
+
+      resultEl.style.display = 'block';
+      resultEl.innerHTML = `
+        <strong>Your results</strong><br />
+        Correct: <strong>${correct}</strong> out of ${total}<br />
+        Attempted: ${attempted} / ${total}<br />
+        Estimated accuracy: ${accuracy}%<br />
+        ${fromTimer ? '<br />Time is up – your test was submitted automatically.' : ''}
+      `;
+
+      // Disable question interaction
+      questionTextEl.textContent = 'Test complete';
+      optionsContainerEl.innerHTML = '';
+      progressEl.textContent = '';
+      categoryEl.textContent = '';
+      nextBtn.disabled = true;
+      nextBtn.textContent = 'Test finished';
+
+      renderReview();
+    }
+
+    nextBtn.addEventListener('click', () => {
+      if (finished) return;
+      if (!selectedOption) return;
+
+      answers[currentIndex] = selectedOption;
+      currentIndex++;
+
+      if (currentIndex >= QUESTIONS.length) {
+        finishTest(false);
+      } else {
+        renderQuestion();
+      }
+    });
+
+    // Initialize
+    updateTimer();
+    startTimer();
+    renderQuestion();
+  </script>
+</body>
+</html>

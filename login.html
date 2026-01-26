@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login · CCAT Mastery</title>
+  <style>
+    :root {
+      --bg: #020617;
+      --card: #0b1120;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56,189,248,0.18);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #1f2937;
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+      --shadow-soft: 0 22px 60px rgba(15,23,42,0.85);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      background:
+        radial-gradient(circle at top, #0b1120 0, #020617 40%, #000 100%);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(20px);
+      background: linear-gradient(to bottom,
+        rgba(15,23,42,0.96),
+        rgba(15,23,42,0.8),
+        transparent);
+      border-bottom: 1px solid rgba(15,23,42,0.95);
+    }
+
+    .nav-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0.55rem 1.25rem 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      color: #e5f3ff;
+    }
+
+    .logo-mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%,
+        #e0f2fe,
+        #38bdf8 40%,
+        #0ea5e9 60%,
+        #0369a1 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 12px 30px rgba(56,189,248,0.55);
+      font-size: 0.8rem;
+    }
+
+    .nav-main {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .nav-links a {
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: all 0.18s ease-out;
+      font-size: 0.84rem;
+      cursor: pointer;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover {
+      color: #e5f3ff;
+      border-color: rgba(148,163,184,0.45);
+      background: radial-gradient(circle at top, rgba(56,189,248,0.14), transparent 55%);
+    }
+
+    .nav-cta {
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      background: rgba(15,23,42,0.9);
+      color: #e5f3ff;
+      font-size: 0.84rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.18s ease-out;
+    }
+
+    .nav-cta:hover {
+      border-color: rgba(56,189,248,0.8);
+      background: radial-gradient(circle at top,
+        rgba(56,189,248,0.25),
+        rgba(15,23,42,0.98));
+      box-shadow: 0 10px 28px rgba(56,189,248,0.45);
+    }
+
+    main.page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 1.8rem 1.25rem 3.2rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.95);
+      border: 1px solid rgba(148,163,184,0.6);
+      font-size: 0.76rem;
+      color: var(--muted);
+      margin-bottom: 0.7rem;
+    }
+
+    .badge span.icon {
+      font-size: 0.9rem;
+    }
+
+    h1 {
+      font-size: clamp(1.9rem, 3vw, 2.2rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.45rem;
+    }
+
+    .subtitle {
+      font-size: 0.94rem;
+      color: var(--muted);
+      max-width: 40rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .auth-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1.1fr);
+      gap: 1.4rem;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 860px) {
+      .auth-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .card {
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top,
+        rgba(15,23,42,0.98),
+        rgba(15,23,42,0.98));
+      border: 1px solid rgba(31,41,55,0.95);
+      padding: 1rem 1rem 1.1rem;
+      box-shadow: 0 16px 40px rgba(15,23,42,0.8);
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .card h2 {
+      font-size: 1.1rem;
+      margin-bottom: 0.3rem;
+      color: #e5f3ff;
+    }
+
+    .card small {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .form-group {
+      margin-top: 0.65rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    label {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    input[type="email"],
+    input[type="password"] {
+      border-radius: 0.6rem;
+      border: 1px solid rgba(31,41,55,0.9);
+      background: #020617;
+      color: var(--text);
+      padding: 0.5rem 0.55rem;
+      font-size: 0.86rem;
+      outline: none;
+      transition: border-color 0.15s ease-out, box-shadow 0.15s ease-out;
+    }
+
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+      border-color: rgba(56,189,248,0.9);
+      box-shadow: 0 0 0 1px rgba(56,189,248,0.5);
+    }
+
+    .form-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.4rem;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+    }
+
+    .form-row label {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .btn-primary {
+      margin-top: 0.8rem;
+      padding: 0.6rem 1.4rem;
+      border-radius: 999px;
+      border: none;
+      background: radial-gradient(circle at 20% 0,
+        #e0f2fe,
+        #38bdf8 48%,
+        #0ea5e9 100%);
+      color: #020617;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      box-shadow: 0 16px 36px rgba(56,189,248,0.75);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .btn-secondary {
+      margin-top: 0.6rem;
+      padding: 0.55rem 1.2rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      background: rgba(15,23,42,0.95);
+      color: var(--muted);
+      font-size: 0.84rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .helper-text {
+      margin-top: 0.4rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .side-card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+      color: #e5f3ff;
+    }
+
+    .side-card p {
+      font-size: 0.86rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .side-card ul {
+      font-size: 0.84rem;
+      color: var(--muted);
+      padding-left: 1.05rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .side-card li + li {
+      margin-top: 0.2rem;
+    }
+
+    .side-highlight {
+      margin-top: 0.5rem;
+      padding: 0.55rem 0.65rem;
+      border-radius: 0.8rem;
+      border: 1px solid rgba(56,189,248,0.7);
+      background: rgba(15,23,42,0.98);
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .side-highlight strong {
+      color: #e5f3ff;
+    }
+
+    footer {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 1.9rem 1.25rem 1.6rem;
+      border-top: 1px solid rgba(31,41,55,0.9);
+      font-size: 0.78rem;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer a {
+      text-decoration: underline;
+      text-decoration-style: dotted;
+    }
+
+    @media (max-width: 720px) {
+      .nav-inner {
+        padding-inline: 1rem;
+      }
+      main.page {
+        padding-inline: 1rem;
+      }
+      footer {
+        padding-inline: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-inner">
+      <div class="logo">
+        <div class="logo-mark">C</div>
+        <a href="index.html#overview">CCAT Mastery</a>
+      </div>
+      <div class="nav-main">
+        <nav class="nav-links">
+          <a href="index.html#overview">Overview</a>
+          <a href="index.html#format">Format</a>
+          <a href="index.html#tips">Tips</a>
+          <a href="index.html#package">Pricing</a>
+        </nav>
+        <button class="nav-cta" type="button" disabled>
+          Login
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <span class="badge"><span class="icon">🔐</span>Access your CCAT practice portal</span>
+    <h1>Login or create your account</h1>
+    <p class="subtitle">
+      Use your account to unlock and access the 5 additional CCAT-style practice tests for a one-time $9.99.
+      Your first full simulated test is free and does not require login.
+    </p>
+
+    <div class="auth-layout">
+      <!-- Login card -->
+      <section class="card">
+        <h2>Login</h2>
+        <small>Sign in with your email and password to continue your practice.</small>
+
+        <form onsubmit="event.preventDefault(); alert('This is a static demo. Connect this form to your backend or auth provider.');">
+          <div class="form-group">
+            <label for="login-email">Email</label>
+            <input type="email" id="login-email" name="email" autocomplete="email" required />
+          </div>
+
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" name="password" autocomplete="current-password" required />
+          </div>
+
+          <div class="form-row">
+            <label>
+              <input type="checkbox" name="remember" />
+              <span>Remember me on this device</span>
+            </label>
+            <a href="#" style="font-size:0.78rem;">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="btn-primary">
+            Login
+          </button>
+
+          <p class="helper-text">
+            New here? Scroll down to create a free account and unlock the 5 additional tests.
+          </p>
+        </form>
+      </section>
+
+      <!-- Sign up / info card -->
+      <aside class="card side-card" id="signup">
+        <h3>Create an account</h3>
+        <p>
+          Your account lets you unlock the 5 additional CCAT-style practice tests, save your attempts,
+          and revisit explanations later. You only pay once and keep access to your practice bundle.
+        </p>
+
+        <form onsubmit="event.preventDefault(); alert('This is a static demo. Connect sign-up to your backend.');">
+          <div class="form-group">
+            <label for="signup-email">Email</label>
+            <input type="email" id="signup-email" name="email" autocomplete="email" required />
+          </div>
+
+          <div class="form-group">
+            <label for="signup-password">Create password</label>
+            <input type="password" id="signup-password" name="password" autocomplete="new-password" required />
+          </div>
+
+          <div class="form-group">
+            <label for="signup-password-confirm">Confirm password</label>
+            <input type="password" id="signup-password-confirm" name="password_confirm" autocomplete="new-password" required />
+          </div>
+
+          <button type="submit" class="btn-secondary">
+            Sign up (then unlock 5 tests for $9.99)
+          </button>
+        </form>
+
+        <div class="side-highlight">
+          <strong>What you get after signup:</strong>
+          <ul>
+            <li>Access to 5 additional full 50-question, 15-minute simulations.</li>
+            <li>Score summaries with correct/incorrect breakdown and explanations.</li>
+            <li>A consistent interface that mirrors your free full test experience.</li>
+          </ul>
+          <p style="margin-top:0.35rem;font-size:0.78rem;">
+            Your very first full practice test remains completely free and does not require an account —
+            this login page is only for unlocking and managing the extended practice bundle.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> CCAT Mastery. All rights reserved.</p>
+    <p>CCAT® is a registered trademark of Criteria Corp. This site is for independent preparation only.</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
