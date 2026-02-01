@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment successful · CCAT Mastery</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      background: radial-gradient(circle at top, #0b1120 0, #020617 40%, #000 100%);
+      color: #e5e7eb;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card {
+      max-width: 420px;
+      margin: 1rem;
+      border-radius: 18px;
+      background: rgba(15,23,42,0.98);
+      border: 1px solid rgba(148,163,184,0.7);
+      padding: 1.2rem 1.3rem 1.3rem;
+      box-shadow: 0 18px 40px rgba(15,23,42,0.9);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    h1 {
+      font-size: 1.3rem;
+      margin-bottom: 0.4rem;
+    }
+    p {
+      color: #9ca3af;
+      margin-bottom: 0.4rem;
+    }
+    .btn {
+      margin-top: 0.6rem;
+      padding: 0.6rem 1.4rem;
+      border-radius: 999px;
+      border: none;
+      background: radial-gradient(circle at 20% 0,
+        #e0f2fe,
+        #38bdf8 48%,
+        #0ea5e9 100%);
+      color: #020617;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      box-shadow: 0 16px 36px rgba(56,189,248,0.75);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .status {
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+    .status strong { color: #e5e7eb; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Payment successful 🎉</h1>
+    <p>Thank you for unlocking the 5 additional CCAT practice tests.</p>
+    <p id="status-text" class="status">Updating your account...</p>
+    <button class="btn" onclick="window.location.href='my-tests.html'">
+      Go to my tests
+    </button>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import {
+      getAuth,
+      onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import {
+      getFirestore,
+      doc,
+      setDoc
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBmzy47td8xUSSAVEGkkjGWJd8IrHKYrF4",
+      authDomain: "ccat-mastery.firebaseapp.com",
+      projectId: "ccat-mastery",
+      storageBucket: "ccat-mastery.firebasestorage.app",
+      messagingSenderId: "178388911839",
+      appId: "1:178388911839:web:8fa4126e67fd007dd1cb6a"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const statusText = document.getElementById('status-text');
+
+    function setStatus(msg) {
+      statusText.innerHTML = msg;
+    }
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        setStatus('You are not logged in. Please log in again to access your tests.');
+        return;
+      }
+
+      try {
+        await setDoc(doc(db, 'users', user.uid), { hasPaid: true }, { merge: true });
+        setStatus('<strong>Your account has been updated.</strong> You now have access to the 5 extra tests.');
+      } catch (err) {
+        console.error(err);
+        setStatus('We could not update your account automatically. Please contact support or try again later.');
+      }
+    });
+  </script>
+</body>
+</html>
