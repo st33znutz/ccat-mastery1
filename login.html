@@ -337,6 +337,12 @@
       color: #e5f3ff;
     }
 
+    .error-text {
+      margin-top: 0.4rem;
+      font-size: 0.78rem;
+      color: #fecaca;
+    }
+
     footer {
       max-width: 960px;
       margin: 0 auto;
@@ -404,7 +410,7 @@
         <h2>Login</h2>
         <small>Sign in with your email and password to continue your practice.</small>
 
-        <form onsubmit="event.preventDefault(); alert('This is a static demo. Connect this form to your backend or auth provider.');">
+        <form id="login-form">
           <div class="form-group">
             <label for="login-email">Email</label>
             <input type="email" id="login-email" name="email" autocomplete="email" required />
@@ -420,15 +426,17 @@
               <input type="checkbox" name="remember" />
               <span>Remember me on this device</span>
             </label>
-            <a href="#" style="font-size:0.78rem;">Forgot password?</a>
+            <span style="font-size:0.78rem;opacity:0.7;">Forgot password? (coming soon)</span>
           </div>
 
           <button type="submit" class="btn-primary">
             Login
           </button>
 
+          <div id="login-error" class="error-text" style="display:none;"></div>
+
           <p class="helper-text">
-            New here? Scroll down to create a free account and unlock the 5 additional tests.
+            New here? Use the Sign Up form on the right to create your account.
           </p>
         </form>
       </section>
@@ -441,7 +449,7 @@
           and revisit explanations later. You only pay once and keep access to your practice bundle.
         </p>
 
-        <form onsubmit="event.preventDefault(); alert('This is a static demo. Connect sign-up to your backend.');">
+        <form id="signup-form">
           <div class="form-group">
             <label for="signup-email">Email</label>
             <input type="email" id="signup-email" name="email" autocomplete="email" required />
@@ -460,6 +468,8 @@
           <button type="submit" class="btn-secondary">
             Sign up (then unlock 5 tests for $9.99)
           </button>
+
+          <div id="signup-error" class="error-text" style="display:none;"></div>
         </form>
 
         <div class="side-highlight">
@@ -485,6 +495,103 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+  <!-- Firebase auth wiring -->
+  <script type="module">
+    // 1) Import Firebase SDKs from CDN
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import {
+      getFirestore,
+      doc,
+      setDoc
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    // 2) Your Firebase config – PASTE YOUR VALUES HERE
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY_HERE",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    // 3) Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // 4) Helpers
+    const loginForm = document.getElementById('login-form');
+    const signupForm = document.getElementById('signup-form');
+    const loginErrorEl = document.getElementById('login-error');
+    const signupErrorEl = document.getElementById('signup-error');
+
+    function showError(el, message) {
+      el.textContent = message;
+      el.style.display = 'block';
+    }
+    function clearError(el) {
+      el.textContent = '';
+      el.style.display = 'none';
+    }
+
+    // 5) Login handler
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearError(loginErrorEl);
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        // On success, go to tests portal
+        window.location.href = 'my-tests.html';
+      } catch (err) {
+        console.error(err);
+        showError(loginErrorEl, 'Login failed. Check your email and password.');
+      }
+    });
+
+    // 6) Signup handler
+    signupForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearError(signupErrorEl);
+      const email = document.getElementById('signup-email').value.trim();
+      const password = document.getElementById('signup-password').value;
+      const confirm = document.getElementById('signup-password-confirm').value;
+
+      if (password !== confirm) {
+        showError(signupErrorEl, 'Passwords do not match.');
+        return;
+      }
+
+      try {
+        const cred = await createUserWithEmailAndPassword(auth, email, password);
+        const uid = cred.user.uid;
+        // Create user doc with hasPaid false
+        await setDoc(doc(db, 'users', uid), { hasPaid: false }, { merge: true });
+        window.location.href = 'my-tests.html';
+      } catch (err) {
+        console.error(err);
+        showError(signupErrorEl, 'Sign up failed. Try a different email or try again later.');
+      }
+    });
+
+    // 7) If user is already logged in, redirect them
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // Optionally auto-forward logged-in users to tests page
+        // window.location.href = 'my-tests.html';
+      }
+    });
   </script>
 </body>
 </html>
