@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My CCAT Practice Tests · CCAT Mastery</title>
+  <style>
+    :root {
+      --bg: #020617;
+      --card: #0b1120;
+      --accent: #38bdf8;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #1f2937;
+      --radius-lg: 18px;
+      --shadow-soft: 0 22px 60px rgba(15,23,42,0.85);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      background: radial-gradient(circle at top, #0b1120 0, #020617 40%, #000 100%);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(20px);
+      background: linear-gradient(to bottom,
+        rgba(15,23,42,0.96),
+        rgba(15,23,42,0.8),
+        transparent);
+      border-bottom: 1px solid rgba(15,23,42,0.95);
+    }
+
+    .nav-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0.55rem 1.25rem 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      color: #e5f3ff;
+    }
+
+    .logo-mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%,
+        #e0f2fe,
+        #38bdf8 40%,
+        #0ea5e9 60%,
+        #0369a1 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 12px 30px rgba(56,189,248,0.55);
+      font-size: 0.8rem;
+    }
+
+    .nav-main {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .nav-links a {
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: all 0.18s ease-out;
+      font-size: 0.84rem;
+      cursor: pointer;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover {
+      color: #e5f3ff;
+      border-color: rgba(148,163,184,0.45);
+      background: radial-gradient(circle at top, rgba(56,189,248,0.14), transparent 55%);
+    }
+
+    .nav-cta {
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      background: rgba(15,23,42,0.9);
+      color: #e5f3ff;
+      font-size: 0.84rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.18s ease-out;
+    }
+
+    .nav-cta:hover {
+      border-color: rgba(248,113,113,0.9);
+      background: rgba(127,29,29,0.95);
+    }
+
+    main.page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 1.8rem 1.25rem 3.2rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.95);
+      border: 1px solid rgba(148,163,184,0.6);
+      font-size: 0.76rem;
+      color: var(--muted);
+      margin-bottom: 0.7rem;
+    }
+
+    h1 {
+      font-size: clamp(1.9rem, 3vw, 2.2rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.45rem;
+    }
+
+    .subtitle {
+      font-size: 0.94rem;
+      color: var(--muted);
+      max-width: 40rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .card {
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top,
+        rgba(15,23,42,0.98),
+        rgba(15,23,42,0.98));
+      border: 1px solid rgba(31,41,55,0.95);
+      padding: 1rem 1rem 1.1rem;
+      box-shadow: 0 16px 40px rgba(15,23,42,0.8);
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .card h2 {
+      font-size: 1.1rem;
+      margin-bottom: 0.3rem;
+      color: #e5f3ff;
+    }
+
+    .tests-list ul {
+      padding-left: 1.1rem;
+      font-size: 0.86rem;
+    }
+
+    .tests-list li + li {
+      margin-top: 0.25rem;
+    }
+
+    .tests-list a {
+      text-decoration: underline;
+      text-decoration-style: dotted;
+    }
+
+    .btn-primary {
+      margin-top: 0.6rem;
+      padding: 0.6rem 1.4rem;
+      border-radius: 999px;
+      border: none;
+      background: radial-gradient(circle at 20% 0,
+        #e0f2fe,
+        #38bdf8 48%,
+        #0ea5e9 100%);
+      color: #020617;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      box-shadow: 0 16px 36px rgba(56,189,248,0.75);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .btn-primary.full {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .info {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 0.4rem;
+    }
+
+    .error-text {
+      margin-top: 0.4rem;
+      font-size: 0.8rem;
+      color: #fecaca;
+    }
+
+    footer {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 1.9rem 1.25rem 1.6rem;
+      border-top: 1px solid rgba(31,41,55,0.9);
+      font-size: 0.78rem;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    @media (max-width: 720px) {
+      .nav-inner, main.page, footer { padding-inline: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-inner">
+      <div class="logo">
+        <div class="logo-mark">C</div>
+        <a href="index.html#overview">CCAT Mastery</a>
+      </div>
+      <div class="nav-main">
+        <nav class="nav-links">
+          <a href="index.html#overview">Overview</a>
+          <a href="index.html#package">Pricing</a>
+        </nav>
+        <button class="nav-cta" id="logout-btn" type="button">
+          Logout
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <span class="badge">Your practice dashboard</span>
+    <h1>My CCAT practice tests</h1>
+    <p class="subtitle">
+      Start with your free full simulation, then unlock 5 additional tests for a one-time $9.99.
+      You must be logged in to access your extra tests.
+    </p>
+
+    <section class="card tests-list">
+      <h2>Always available</h2>
+      <ul>
+        <li><a href="free-test.html">Free full CCAT-style practice test (50 questions, 15 minutes)</a></li>
+      </ul>
+      <p class="info">
+        This test is always free and does not require payment. Use it to establish your baseline score.
+      </p>
+    </section>
+
+    <section id="locked-section" class="card">
+      <h2>5 additional full practice tests</h2>
+      <p>
+        Unlock 5 more 50-question, 15-minute simulations. They use the same interface and timing as your free test,
+        with new questions each time.
+      </p>
+      <button id="unlock-btn" class="btn-primary full">
+        Unlock 5 more tests for $9.99
+      </button>
+      <p class="info">
+        You’ll be redirected to a secure Stripe checkout page. After payment, you’ll come back to this site and your
+        account will be marked as having full access.
+      </p>
+      <div id="locked-error" class="error-text" style="display:none;"></div>
+    </section>
+
+    <section id="paid-section" class="card tests-list" style="display:none;">
+      <h2>Your extra practice tests</h2>
+      <ul>
+        <li><a href="test-2.html">Practice Test 2</a></li>
+        <li><a href="test-3.html">Practice Test 3</a></li>
+        <li><a href="test-4.html">Practice Test 4</a></li>
+        <li><a href="test-5.html">Practice Test 5</a></li>
+        <li><a href="test-6.html">Practice Test 6</a></li>
+      </ul>
+      <p class="info">
+        You have unlocked access. You can return to this page any time while logged in to retake tests and review your performance.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> CCAT Mastery. All rights reserved.</p>
+    <p>CCAT® is a registered trademark of Criteria Corp. This site is for independent preparation only.</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import {
+      getAuth,
+      onAuthStateChanged,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import {
+      getFirestore,
+      doc,
+      getDoc
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    // Same Firebase config as login.html
+    const firebaseConfig = {
+      apiKey: "REPLACE_WITH_YOUR_FIREBASE_API_KEY",
+      authDomain: "REPLACE_WITH_YOUR_PROJECT_ID.firebaseapp.com",
+      projectId: "REPLACE_WITH_YOUR_PROJECT_ID",
+      storageBucket: "REPLACE_WITH_YOUR_PROJECT_ID.appspot.com",
+      messagingSenderId: "REPLACE_WITH_YOUR_SENDER_ID",
+      appId: "REPLACE_WITH_YOUR_APP_ID"
+    };
+
+    // Stripe Payment Link URL – paste from your Stripe dashboard
+    const STRIPE_PAYMENT_LINK_URL = "https://buy.stripe.com/REPLACE_WITH_YOUR_LINK";
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const lockedSection = document.getElementById('locked-section');
+    const paidSection = document.getElementById('paid-section');
+    const unlockBtn = document.getElementById('unlock-btn');
+    const lockedError = document.getElementById('locked-error');
+    const logoutBtn = document.getElementById('logout-btn');
+
+    function showLocked() {
+      lockedSection.style.display = 'block';
+      paidSection.style.display = 'none';
+    }
+
+    function showPaid() {
+      lockedSection.style.display = 'none';
+      paidSection.style.display = 'block';
+    }
+
+    function showLockedError(msg) {
+      lockedError.textContent = msg;
+      lockedError.style.display = 'block';
+    }
+
+    unlockBtn.addEventListener('click', () => {
+      lockedError.style.display = 'none';
+      const user = auth.currentUser;
+      if (!user) {
+        showLockedError('Please log in again before purchasing.');
+        window.location.href = 'login.html';
+        return;
+      }
+      window.location.href = STRIPE_PAYMENT_LINK_URL;
+    });
+
+    logoutBtn.addEventListener('click', async () => {
+      await signOut(auth);
+      window.location.href = 'index.html';
+    });
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      try {
+        const snap = await getDoc(doc(db, 'users', user.uid));
+        const data = snap.exists() ? snap.data() : {};
+        if (data.hasPaid) {
+          showPaid();
+        } else {
+          showLocked();
+        }
+      } catch (err) {
+        console.error(err);
+        showLockedError('Could not load your account status. Try refreshing the page.');
+      }
+    });
+  </script>
+</body>
+</html>
