@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Free CCAT Practice Test · CCAT Mastery</title>
+  <title>CCAT Practice Test 2 · CCAT Mastery</title>
   <style>
     :root {
       --bg: #0f172a;
@@ -407,7 +407,6 @@
 
     /* === Visual pattern & spatial questions === */
 
-    /* Side-by-side mismatch table (left / right columns) */
     .mismatch-table {
       width: 100%;
       border-collapse: collapse;
@@ -432,7 +431,6 @@
       background: rgba(15,23,42,0.94);
     }
 
-    /* Pattern-sequence layout (top row + options row like the screenshots) */
     .pattern-grid {
       margin-top: 0.75rem;
     }
@@ -488,7 +486,6 @@
       margin: 0.6rem 0 0.4rem;
     }
 
-    /* Shape primitives used inside pattern boxes */
     .pattern-shape {
       width: 64%;
       height: 64%;
@@ -589,10 +586,10 @@
   </header>
 
   <main class="page">
-    <span class="badge"><span class="icon">⏱</span>Full 50-question CCAT-style simulation</span>
-    <h1>Free CCAT practice test</h1>
+    <span class="badge"><span class="icon">⏱</span>Practice Test 2 · 50 questions in 15 minutes</span>
+    <h1>CCAT practice test 2</h1>
     <p class="subtitle">
-      This practice test mirrors the real Criteria Cognitive Aptitude Test: 50 questions in 15 minutes. You’ll see one question at a time and cannot go back once you move forward. Answer as many as you can accurately before time runs out.
+      A second full-length CCAT-style simulation. Same timing and structure as the real CCAT, with a new mix of math, verbal, logic, and spatial questions.
     </p>
 
     <div class="test-layout">
@@ -624,22 +621,16 @@
       </section>
 
       <aside class="card side-card">
-        <h2>How this simulation works</h2>
+        <h2>Using this test</h2>
         <p>
-          This is a full-length CCAT-style simulation. The real CCAT also uses 50 questions in 15 minutes with a similar mix of verbal, numerical, logic, and spatial items.
+          Treat this as if it were your real CCAT sitting. Work quickly but carefully, don’t get stuck on any one question, and remember there is no penalty for guessing.
         </p>
         <ul>
-          <li>You cannot go back to previous questions once you click <strong>Next</strong>.</li>
-          <li>There is no penalty for wrong answers – guessing is better than leaving blanks.</li>
-          <li>The test will automatically end when the 15-minute timer reaches zero.</li>
-          <li>Your score report shows how many questions you answered and how many were correct, plus detailed explanations.</li>
+          <li>50 questions, 15 minutes total.</li>
+          <li>One question per screen; no going back.</li>
+          <li>Automatic submit when time runs out.</li>
+          <li>Full answer review with explanations when you finish.</li>
         </ul>
-        <p style="margin-top:0.6rem;">
-          To keep practicing, log in or sign up from the main site to unlock 5 additional full CCAT-style tests for a one-time $9.99.
-        </p>
-        <button class="btn-secondary" style="margin-top:0.5rem;" onclick="window.location.href='index.html#package'">
-          View full practice bundle
-        </button>
       </aside>
     </div>
   </main>
@@ -653,162 +644,162 @@
     document.getElementById('year').textContent = new Date().getFullYear();
 
     const QUESTIONS = [
-      // 1–17: MATH
+      // MATH (1–17)
       {
-        text: 'A factory produces 480 widgets in 8 hours at a constant rate. How many widgets does it produce per hour?',
+        text: 'A factory produces 360 units in 8 hours at a constant rate. How many units does it produce per hour?',
         category: 'Math',
-        options: ['50', '55', '60', '65', '70'],
+        options: ['40', '42', '45', '48', '50'],
         correct: 'C',
-        explanation: '480 ÷ 8 = 60 widgets per hour.'
+        explanation: '360 ÷ 8 = 45 units per hour.'
       },
       {
-        text: 'Solve for x: 5x − 7 = 3x + 9',
+        text: 'Solve for x: 4x − 9 = 3x + 11',
         category: 'Math',
-        options: ['6', '7', '8', '9', '10'],
+        options: ['16', '18', '20', '22', '24'],
         correct: 'C',
-        explanation: '5x − 7 = 3x + 9 → 2x = 16 → x = 8.'
+        explanation: '4x − 9 = 3x + 11 → x = 20.'
       },
       {
-        text: 'The average of 12, 18, 20, and x is 17. What is x?',
+        text: 'The average of 10, 14, 18, and x is 16. What is x?',
         category: 'Math',
-        options: ['14', '16', '18', '20', '22'],
+        options: ['18', '20', '22', '24', '26'],
         correct: 'C',
-        explanation: 'Average 17 over 4 numbers → sum 68. 12 + 18 + 20 = 50, so x = 18.'
+        explanation: 'Average 16 → sum 64. 10+14+18=42 → x=22.'
       },
       {
-        text: 'A jacket costs $80 and is discounted by 15%. What is the sale price?',
+        text: 'A jacket costs $120 and is discounted by 30%. What is the sale price?',
         category: 'Math',
-        options: ['$64', '$66', '$68', '$70', '$72'],
+        options: ['$72', '$80', '$84', '$90', '$96'],
         correct: 'C',
-        explanation: '15% of 80 is 12. 80 − 12 = 68.'
+        explanation: '30% of 120 is 36 → 120 − 36 = 84.'
       },
       {
-        text: 'A company\'s revenue increased from $1,200 to $1,500. What was the percentage increase?',
+        text: 'A company’s revenue increased from $900,000 to $1,170,000. What was the percentage increase?',
         category: 'Math',
         options: ['15%', '20%', '25%', '30%', '35%'],
-        correct: 'C',
-        explanation: 'Increase 300 on base 1,200 → 300 ÷ 1,200 = 0.25 = 25%.'
+        correct: 'D',
+        explanation: 'Increase 270,000 on 900,000 → 270,000 ÷ 900,000 = 0.30 = 30%.'
       },
       {
-        text: 'A car travels at 90 km/h for 2.5 hours. How far does it travel?',
+        text: 'A car travels at 90 km/h for 3.5 hours. How far does it travel?',
         category: 'Math',
-        options: ['180 km', '200 km', '210 km', '225 km', '240 km'],
+        options: ['260 km', '270 km', '300 km', '315 km', '330 km'],
         correct: 'D',
-        explanation: 'Distance = 90 × 2.5 = 225 km.'
+        explanation: 'Distance = 90 × 3.5 = 315 km.'
       },
       {
         text: 'Which fraction is greatest?',
         category: 'Math',
-        options: ['3/5', '2/3', '5/8', '3/4', '7/10'],
-        correct: 'D',
-        explanation: 'Decimals: 3/5=0.60, 2/3≈0.67, 5/8=0.625, 3/4=0.75, 7/10=0.70 → 3/4 is largest.'
+        options: ['3/4', '5/8', '7/10', '2/3', '4/5'],
+        correct: 'E',
+        explanation: 'Decimals: 3/4=0.75, 5/8=0.625, 7/10=0.7, 2/3≈0.67, 4/5=0.8 → 4/5 is greatest.'
       },
       {
-        text: 'Six identical machines produce 240 parts in 4 hours. How many parts will 4 machines produce in 5 hours at the same rate?',
+        text: 'Six machines produce 240 parts in 4 hours. How many parts will 4 machines produce in 5 hours at the same rate?',
         category: 'Math',
         options: ['160', '180', '200', '220', '240'],
         correct: 'C',
-        explanation: '6×4=24 machine-hours → 240 parts → 10 parts per machine-hour. 4×5=20 machine-hours → 200 parts.'
+        explanation: '6×4=24 machine-hours → 240 parts → 10 per machine-hour. 4×5=20 → 200 parts.'
       },
       {
-        text: 'In a class of 30 students, the ratio of boys to girls is 2:3. How many girls are there?',
+        text: 'In a class of 30 students, the ratio of boys to girls is 2 : 3. How many girls are there?',
         category: 'Math',
         options: ['10', '12', '15', '18', '20'],
         correct: 'D',
-        explanation: '2+3=5 parts; each is 30 ÷ 5 = 6. Girls = 3×6 = 18.'
+        explanation: '2+3=5 parts → each=6 → girls=3×6=18.'
       },
       {
-        text: 'The sum of three consecutive even integers is 90. What is the middle integer?',
+        text: 'The sum of three consecutive odd integers is 75. What is the middle integer?',
         category: 'Math',
-        options: ['26', '28', '30', '32', '34'],
+        options: ['21', '23', '25', '27', '29'],
         correct: 'C',
-        explanation: 'Let integers be (n−2), n, (n+2). Sum 3n = 90 → n = 30.'
+        explanation: 'Let n, n+2, n+4 sum to 75 → 3n+6=75 → n=23 → middle=25.'
       },
       {
-        text: 'What is the next number in the sequence: 7, 11, 19, 35, ?',
+        text: '$600 is invested at 5% simple annual interest for 3 years. What is the total amount at the end?',
         category: 'Math',
-        options: ['51', '59', '63', '67', '71'],
+        options: ['$630', '$660', '$690', '$705', '$720'],
+        correct: 'C',
+        explanation: 'Interest = 600×0.05×3 = 90 → total=690.'
+      },
+      {
+        text: 'Eight pencils cost $2. At the same rate, how much do 20 pencils cost?',
+        category: 'Math',
+        options: ['$3.00', '$4.00', '$4.50', '$5.00', '$6.00'],
         correct: 'D',
-        explanation: 'Differences double: 4, 8, 16, 32 → 35 + 32 = 67.'
+        explanation: 'Price per pencil=2 ÷ 8=0.25 → 20×0.25=$5.'
       },
       {
-        text: 'You invest $500 at 6% simple annual interest for 2 years. What is the value at the end?',
+        text: 'A rectangle has perimeter 26 cm and length 7 cm. What is its area?',
         category: 'Math',
-        options: ['$530', '$540', '$560', '$580', '$600'],
-        correct: 'C',
-        explanation: 'Interest = 500×0.06×2 = 60; final value = 560.'
-      },
-      {
-        text: 'Five pencils cost $3. At the same rate, how much do 20 pencils cost?',
-        category: 'Math',
-        options: ['$9.00', '$10.00', '$11.00', '$12.00', '$15.00'],
+        options: ['32 cm²', '36 cm²', '40 cm²', '42 cm²', '48 cm²'],
         correct: 'D',
-        explanation: 'Price per pencil = 3 ÷ 5 = 0.60. For 20: 20×0.60 = $12.'
+        explanation: '26=2(L+W) → 13=7+W → W=6 → area=7×6=42.'
       },
       {
-        text: 'A rectangle has perimeter 30 cm and length 8 cm. What is its area?',
+        text: 'A team has 50 employees. 40% are engineers, and 30% of the engineers work remotely. How many remote engineers are there?',
         category: 'Math',
-        options: ['40 cm²', '48 cm²', '52 cm²', '56 cm²', '64 cm²'],
+        options: ['4', '5', '6', '8', '10'],
+        correct: 'C',
+        explanation: 'Engineers:0.4×50=20; remote:0.3×20=6.'
+      },
+      {
+        text: '0.625 is equal to which percentage?',
+        category: 'Math',
+        options: ['25%', '37.5%', '50%', '62.5%', '75%'],
         correct: 'D',
-        explanation: 'Perimeter = 2(L+W) → 30 = 2(8+W) → W=7 → area=8×7=56.'
+        explanation: '0.625×100% = 62.5%.'
       },
       {
-        text: 'A team has 40 employees. Thirty percent are engineers, and 25% of the engineers work remotely. How many remote engineers are there?',
+        text: 'A car uses 10 liters of fuel to travel 150 km. How far can it travel on 25 liters at the same rate?',
         category: 'Math',
-        options: ['2', '3', '4', '5', '6'],
-        correct: 'B',
-        explanation: 'Engineers: 0.30×40 = 12; remote: 0.25×12 = 3.'
+        options: ['300 km', '330 km', '360 km', '375 km', '400 km'],
+        correct: 'D',
+        explanation: 'Fuel per km=10/150=1/15; distance on 25 L:25×15=375 km.'
       },
       {
-        text: '0.375 is equal to which percentage?',
+        text: 'What is the next number in the sequence: 5, 11, 23, 47, ?',
         category: 'Math',
-        options: ['25%', '33⅓%', '37.5%', '40%', '75%'],
-        correct: 'C',
-        explanation: '0.375 × 100% = 37.5%.'
-      },
-      {
-        text: 'A car uses 8 liters of fuel to travel 120 km. How many liters are needed to travel 300 km at the same rate?',
-        category: 'Math',
-        options: ['15', '18', '20', '22', '24'],
-        correct: 'C',
-        explanation: 'Fuel per km = 8 ÷ 120 = 1/15. For 300 km → 300 ÷ 15 = 20 liters.'
+        options: ['71', '91', '93', '95', '99'],
+        correct: 'D',
+        explanation: 'Each term = previous×2+1 → 47×2+1=95.'
       },
 
-      // 18–34: VERBAL
+      // VERBAL (18–34)
       {
         text: 'Choose the word most similar in meaning to “brief”.',
         category: 'Verbal',
-        options: ['quick', 'long', 'short', 'detailed', 'permanent'],
-        correct: 'C',
-        explanation: '“Brief” refers to short length; “short” is closest.'
+        options: ['long', 'short', 'slow', 'quiet', 'late'],
+        correct: 'B',
+        explanation: '“Brief” means short.'
       },
       {
         text: 'Choose the word most opposite in meaning to “scarce”.',
         category: 'Verbal',
-        options: ['rare', 'limited', 'plentiful', 'precious', 'few'],
+        options: ['rare', 'limited', 'plentiful', 'precious', 'fragile'],
         correct: 'C',
         explanation: 'Opposite of “scarce” is “plentiful”.'
       },
       {
-        text: '“Puppy” is to “dog” as “kitten” is to —.',
+        text: '“Puppy” is to “dog” as “foal” is to —.',
         category: 'Verbal',
-        options: ['fur', 'lion', 'cat', 'pet', 'mouse'],
-        correct: 'C',
-        explanation: 'A puppy is a young dog; a kitten is a young cat.'
+        options: ['cow', 'horse', 'sheep', 'cat', 'pig'],
+        correct: 'B',
+        explanation: 'A foal is a young horse.'
       },
       {
         text: 'She was ____ to start the new job, not nervous at all.',
         category: 'Verbal',
-        options: ['reluctant', 'eager', 'hesitant', 'bored', 'unsure'],
+        options: ['reluctant', 'eager', 'hesitant', 'unsure', 'bored'],
         correct: 'B',
-        explanation: 'Someone not nervous and looking forward to it is “eager”.'
+        explanation: '“Eager” fits someone keen to start.'
       },
       {
         text: 'Which word does NOT belong with the others?',
         category: 'Verbal',
         options: ['big', 'huge', 'enormous', 'tiny', 'large'],
         correct: 'D',
-        explanation: 'All except “tiny” mean large in size.'
+        explanation: 'All others describe large size.'
       },
       {
         text: 'Which pair has the same relationship as “teacher : school”?',
@@ -816,9 +807,9 @@
         options: [
           'doctor : hospital',
           'chef : hammer',
-          'painter : book',
           'pilot : kitchen',
-          'nurse : desk'
+          'student : homework',
+          'dentist : tooth'
         ],
         correct: 'A',
         explanation: 'A teacher works in a school; a doctor works in a hospital.'
@@ -826,12 +817,12 @@
       {
         text: '____ he studied hard, he still failed the exam.',
         category: 'Verbal',
-        options: ['Because', 'Although', 'Unless', 'If', 'So'],
+        options: ['Because', 'Although', 'If', 'Unless', 'Since'],
         correct: 'B',
         explanation: '“Although he studied hard...” shows contrast.'
       },
       {
-        text: 'In the sentence “The policy was transparent,” “transparent” most nearly means —.',
+        text: 'In “The policy was transparent,” “transparent” most nearly means —.',
         category: 'Verbal',
         options: ['confusing', 'secretive', 'clear', 'expensive', 'traditional'],
         correct: 'C',
@@ -840,63 +831,63 @@
       {
         text: 'Which spelling is correct?',
         category: 'Verbal',
-        options: ['acommodate', 'accommodate', 'accomodate', 'acomadate', 'accomadate'],
-        correct: 'B',
-        explanation: '“Accommodate” is the only correct spelling.'
+        options: ['definately', 'definetely', 'definitely', 'definatly', 'definetly'],
+        correct: 'C',
+        explanation: '“Definitely” is correctly spelled.'
       },
       {
         text: '“Hot” is to “cold” as “tall” is to —.',
         category: 'Verbal',
-        options: ['short', 'thin', 'skinny', 'wide', 'old'],
-        correct: 'A',
+        options: ['thin', 'short', 'wide', 'old', 'deep'],
+        correct: 'B',
         explanation: '“Tall” and “short” are opposites.'
       },
       {
         text: 'Choose the word most similar in meaning to “generic”.',
         category: 'Verbal',
-        options: ['common', 'rare', 'expensive', 'polished', 'urgent'],
+        options: ['common', 'rare', 'expensive', 'urgent', 'polished'],
         correct: 'A',
         explanation: '“Generic” means common or not specific.'
       },
       {
         text: 'Choose the word most opposite in meaning to “expand”.',
         category: 'Verbal',
-        options: ['grow', 'enlarge', 'stretch', 'shrink', 'extend'],
+        options: ['grow', 'extend', 'stretch', 'shrink', 'spread'],
         correct: 'D',
-        explanation: 'The opposite of “expand” is “shrink”.'
+        explanation: 'Opposite of “expand” is “shrink”.'
       },
       {
         text: 'Which word best describes someone who avoids causing offense and chooses words carefully?',
         category: 'Verbal',
         options: ['noisy', 'tactful', 'stubborn', 'casual', 'hostile'],
         correct: 'B',
-        explanation: '“Tactful” means careful and sensitive in dealing with others.'
+        explanation: '“Tactful” means careful and sensitive in speech.'
       },
       {
         text: 'The instructions were so ____ that no one was confused.',
         category: 'Verbal',
         options: ['ambiguous', 'vague', 'clear', 'random', 'secretive'],
         correct: 'C',
-        explanation: 'If no one was confused, the instructions were “clear”.'
+        explanation: 'If no one was confused, they were “clear”.'
       },
       {
         text: 'Which of the following is a complete sentence?',
         category: 'Verbal',
         options: [
-          'Because the train was late',
-          'Running quickly down the street',
-          'We finished the project on time',
-          'After we left the office',
-          'Although tired and hungry'
+          'Because we were late',
+          'Even though tired',
+          'While walking home',
+          'The meeting started on time',
+          'After the movie ended'
         ],
-        correct: 'C',
-        explanation: '“We finished the project on time” expresses a complete thought.'
+        correct: 'D',
+        explanation: '“The meeting started on time” is a complete sentence.'
       },
       {
         text: 'Choose the word most similar in meaning to “beneficial”.',
         category: 'Verbal',
-        options: ['harmful', 'funny', 'useful', 'uncertain', 'narrow'],
-        correct: 'C',
+        options: ['harmful', 'useful', 'uncertain', 'narrow', 'funny'],
+        correct: 'B',
         explanation: '“Beneficial” means helpful or useful.'
       },
       {
@@ -904,54 +895,54 @@
         category: 'Verbal',
         options: ['concise', 'distant', 'fragile', 'random', 'hostile'],
         correct: 'A',
-        explanation: 'A short and to-the-point summary is “concise”.'
+        explanation: 'Short and to-the-point → “concise”.'
       },
 
-      // 35–45: SPATIAL / ABSTRACT
+      // SPATIAL / ABSTRACT (35–45)
       {
-        text: 'Which of the following boxes should replace the question mark (?) to complete the pattern?',
+        text: 'Which box should replace the question mark to complete the pattern?',
         category: 'Spatial / abstract',
         patternTop: ['circle', 'diamond', 'circle', 'diamond', 'question'],
-        patternOptions: ['sunburst', 'circle', 'diamond', 'hex', 'star8'],
+        patternOptions: ['star8', 'diamond', 'hex', 'circle', 'sunburst'],
         options: ['Option A', 'Option B', 'Option C', 'Option D', 'Option E'],
-        correct: 'B',
-        explanation: 'The sequence alternates circle, diamond, circle, diamond, so the fifth box must be a circle (option B).'
+        correct: 'D',
+        explanation: 'The sequence alternates circle, diamond; after diamond comes circle (option D).'
       },
       {
-        text: 'Which of the following boxes should replace the question mark (?) to complete the pattern?',
+        text: 'Which box should replace the question mark to complete the pattern?',
         category: 'Spatial / abstract',
         patternTop: ['star8', 'diamond', 'star8', 'diamond', 'question'],
         patternOptions: ['star8', 'circle', 'hex', 'diamond', 'sunburst'],
         options: ['Option A', 'Option B', 'Option C', 'Option D', 'Option E'],
         correct: 'A',
-        explanation: 'The pattern alternates star, diamond, star, diamond, so the missing shape is a star (option A).'
+        explanation: 'Star, diamond, star, diamond → next is star (option A).'
       },
       {
-        text: 'Which of the following boxes should replace the question mark (?) to complete the pattern?',
+        text: 'Which box should replace the question mark to complete the pattern?',
         category: 'Spatial / abstract',
         patternTop: ['circle', 'hex', 'circle', 'hex', 'question'],
         patternOptions: ['hex', 'circle', 'star8', 'sunburst', 'diamond'],
         options: ['Option A', 'Option B', 'Option C', 'Option D', 'Option E'],
         correct: 'B',
-        explanation: 'The shapes alternate circle, hexagon, so the next in the sequence is circle (option B).'
+        explanation: 'The pattern alternates circle and hexagon; the fifth is a circle.'
       },
       {
-        text: 'Which of the following boxes should replace the question mark (?) to complete the pattern?',
+        text: 'Which box should replace the question mark to complete the pattern?',
         category: 'Spatial / abstract',
         patternTop: ['ring', 'circle', 'ring', 'circle', 'question'],
         patternOptions: ['ring', 'star8', 'hex', 'circle', 'sunburst'],
         options: ['Option A', 'Option B', 'Option C', 'Option D', 'Option E'],
         correct: 'A',
-        explanation: 'The pattern alternates a hollow ring and a filled circle, so the fifth box should be a ring (option A).'
+        explanation: 'Ring, circle, ring, circle → next is ring (option A).'
       },
       {
-        text: 'Which of the following boxes should replace the question mark (?) to complete the pattern?',
+        text: 'Which box should replace the question mark to complete the pattern?',
         category: 'Spatial / abstract',
-        patternTop: ['circle', 'diamond', 'hex', 'star8', 'question'],
-        patternOptions: ['circle', 'diamond', 'hex', 'star8', 'sunburst'],
+        patternTop: ['star8', 'hex', 'star8', 'hex', 'question'],
+        patternOptions: ['star8', 'diamond', 'hex', 'circle', 'sunburst'],
         options: ['Option A', 'Option B', 'Option C', 'Option D', 'Option E'],
-        correct: 'E',
-        explanation: 'The sequence shows shapes adding more points / edges each time; the next most complex is the sunburst (option E).'
+        correct: 'A',
+        explanation: 'Star, hex, star, hex → next is star again (option A).'
       },
       {
         text: 'How many of the five items are different between the left-hand and right-hand columns?',
@@ -965,7 +956,7 @@
         ],
         options: ['0', '1', '2', '3', '4'],
         correct: 'C',
-        explanation: 'Pairs 2 and 5 do not match exactly (“Supply” vs “Supplies” and “Improvements” vs “Improvement”), so there are 2 mismatches.'
+        explanation: 'Pairs 2 and 5 differ, so there are 2 mismatches.'
       },
       {
         text: 'Compare the left-hand and right-hand columns. How many pairs do NOT match exactly?',
@@ -979,7 +970,7 @@
         ],
         options: ['0', '1', '2', '3', '4'],
         correct: 'C',
-        explanation: 'BT72 vs BT27 and EP90 vs EP09 are mismatched, so there are 2 pairs that do not match.'
+        explanation: 'BT72 vs BT27 and EP90 vs EP09 are mismatched → 2 pairs.'
       },
       {
         text: 'How many of these five item pairs are NOT identical?',
@@ -993,31 +984,31 @@
         ],
         options: ['0', '1', '2', '3', '4'],
         correct: 'C',
-        explanation: 'T7UV vs T7VU and 7742 vs 7743 differ, so there are 2 mismatches.'
+        explanation: 'Pairs 3 and 5 differ → 2 mismatches.'
       },
       {
-        text: 'In a 3×3 grid, the third number in each row is the sum of the first two.\nRow 1: 2, 5, 7\nRow 2: 3, 4, 7\nRow 3: 4, ?, 11\nWhat number should replace the question mark?',
+        text: 'In a 3×3 grid, the third number in each row is the sum of the first two.\nRow 1: 2, 5, 7\nRow 2: 3, 6, 9\nRow 3: 4, ?, 11\nWhat number should replace the question mark?',
         category: 'Spatial / abstract',
         options: ['5', '6', '7', '8', '9'],
         correct: 'C',
-        explanation: 'Row 3 must satisfy 4 + ? = 11 → ? = 7.'
+        explanation: 'Row 3: 4 + ? = 11 → ? = 7.'
       },
       {
         text: 'A 3×3 grid has numbers that increase by 2 from left to right in each row. Each new row starts 1 higher than the previous row.\nRow 1: 1, 3, 5\nRow 2: 2, 4, 6\nRow 3: ?, ?, ?  What is the middle number in Row 3?',
         category: 'Spatial / abstract',
         options: ['3', '4', '5', '6', '7'],
         correct: 'C',
-        explanation: 'Row 3 starts at 3, so the row is 3, 5, 7 and the middle number is 5.'
+        explanation: 'Row 3: 3, 5, 7 → middle is 5.'
       },
       {
-        text: 'Imagine a row of squares. In figure 1, 1 square is shaded. In figure 2, 3 squares are shaded. In figure 3, 5 squares are shaded. In figure 4, 7 squares are shaded. How many squares are shaded in figure 5?',
+        text: 'Imagine a row of squares. In figure 1, 1 square is shaded. In figure 2, 3 are shaded. In figure 3, 5 are shaded. In figure 4, 7 are shaded. How many squares are shaded in figure 5?',
         category: 'Spatial / abstract',
         options: ['7', '8', '9', '10', '11'],
         correct: 'C',
-        explanation: 'The count increases by 2 each time: 1, 3, 5, 7, so the next is 9.'
+        explanation: 'Numbers increase by 2 → next is 9.'
       },
 
-      // 46–50: LOGIC
+      // LOGIC (46–50)
       {
         text: 'All managers are employees. Some employees are part-time. Which statement must be true?',
         category: 'Logic',
@@ -1029,7 +1020,7 @@
           'All employees are managers.'
         ],
         correct: 'C',
-        explanation: '“Some employees are part-time” is directly stated and must be true.'
+        explanation: '“Some employees are part-time” is given directly.'
       },
       {
         text: 'Whenever the store is open, the main lights are on. Right now, the main lights are off. What can you conclude?',
@@ -1042,7 +1033,7 @@
           'Nothing can be concluded.'
         ],
         correct: 'B',
-        explanation: 'If open ⇒ lights on, and lights are not on, the store cannot be open.'
+        explanation: 'If open ⇒ lights on and lights are off, the store cannot be open.'
       },
       {
         text: 'Anna always finishes work before Ben. Ben always finishes before Carla. Which statement must be true?',
@@ -1058,7 +1049,7 @@
         explanation: 'If Anna < Ben and Ben < Carla, then Anna < Carla.'
       },
       {
-        text: 'Last year, 60% of employees completed an online course. This year, 70% did. Which statement is best supported by this information?',
+        text: 'Last year, 60% of employees completed an online course. This year, 70% did. Which statement is best supported?',
         category: 'Logic',
         options: [
           'Employees enjoyed the course more this year.',
@@ -1068,7 +1059,7 @@
           'Fewer employees completed the course this year.'
         ],
         correct: 'C',
-        explanation: 'The only guaranteed fact is that the percentage increased from 60% to 70%.'
+        explanation: 'We only know the percentage rose from 60% to 70%.'
       },
       {
         text: 'No emails are handwritten. Some letters are handwritten. Which statement must be true?',
@@ -1081,11 +1072,11 @@
           'Some emails are handwritten.'
         ],
         correct: 'A',
-        explanation: 'Handwritten letters cannot be emails if no emails are handwritten, so at least some letters are not emails.'
+        explanation: 'Any handwritten letters cannot be emails, so some letters are not emails.'
       }
     ];
 
-    // Shuffle so question types are mixed like the real test
+    // Shuffle for CCAT-like mix
     (function shuffleQuestions(arr) {
       for (let i = arr.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -1093,7 +1084,7 @@
       }
     })(QUESTIONS);
 
-    const TOTAL_SECONDS = 15 * 60; // 15 minutes
+    const TOTAL_SECONDS = 15 * 60;
     let remaining = TOTAL_SECONDS;
     let timerInterval = null;
     let currentIndex = 0;
@@ -1138,7 +1129,6 @@
       }, 1000);
     }
 
-    // Visual helpers for spatial / abstract questions
     function createPatternBox(code, isTopRow = false, isQuestion = false) {
       const box = document.createElement('div');
       box.className = 'pattern-box ' + (isTopRow ? 'pattern-box-top ' : 'pattern-box-option ');
@@ -1180,7 +1170,6 @@
     }
 
     function renderVisualElements(q, container) {
-      // Column-mismatch table
       if (q.pairs && Array.isArray(q.pairs)) {
         const table = document.createElement('table');
         table.className = 'mismatch-table';
@@ -1212,7 +1201,6 @@
         container.appendChild(table);
       }
 
-      // Visual shape patterns
       if (q.patternTop && q.patternOptions) {
         const grid = document.createElement('div');
         grid.className = 'pattern-grid';
@@ -1258,16 +1246,13 @@
       progressEl.textContent = `Question ${currentIndex + 1} of ${total}`;
       categoryEl.textContent = q.category;
 
-      // Clear question area and add prompt
       questionTextEl.innerHTML = '';
       const promptDiv = document.createElement('div');
       promptDiv.textContent = q.text;
       questionTextEl.appendChild(promptDiv);
 
-      // Visuals (if any)
       renderVisualElements(q, questionTextEl);
 
-      // Options
       optionsContainerEl.innerHTML = '';
       selectedOption = null;
       nextBtn.disabled = true;
@@ -1405,7 +1390,6 @@
       }
     });
 
-    // Initialize
     updateTimer();
     startTimer();
     renderQuestion();
