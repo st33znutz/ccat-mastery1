@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CCAT Practice Test 3 · CCAT Mastery</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-alt: #020617;
+      --card: #0b1220;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56,189,248,0.16);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #1f2937;
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+      --shadow-soft: 0 18px 45px rgba(15,23,42,0.8);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      background: radial-gradient(circle at top, #1e293b 0, #020617 55%, #000 100%);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(to bottom, rgba(15,23,42,0.96), rgba(15,23,42,0.75), transparent);
+      border-bottom: 1px solid rgba(15,23,42,0.9);
+    }
+
+    .nav-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0.5rem 1.25rem 0.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      color: #e5f3ff;
+    }
+
+    .logo-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #e0f2fe, #38bdf8 40%, #0ea5e9 60%, #0369a1 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 12px 30px rgba(56,189,248,0.55);
+      font-size: 0.75rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+
+    .nav-links a,
+    .nav-links button {
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: all 0.18s ease-out;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 0.84rem;
+    }
+
+    .nav-links a:hover,
+    .nav-links button:hover {
+      color: #e5f3ff;
+      border-color: rgba(148,163,184,0.45);
+      background: radial-gradient(circle at top, rgba(56,189,248,0.17), transparent 55%);
+    }
+
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 3rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.5);
+      font-size: 0.76rem;
+      color: var(--muted);
+      margin-bottom: 0.7rem;
+    }
+
+    .badge span.icon { font-size: 0.9rem; }
+
+    h1 {
+      font-size: clamp(1.9rem, 3vw, 2.2rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.35rem;
+    }
+
+    .subtitle {
+      font-size: 0.94rem;
+      color: var(--muted);
+      max-width: 40rem;
+      margin-bottom: 1rem;
+    }
+
+    .test-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 1.4rem;
+      margin-top: 1.2rem;
+    }
+    @media (max-width: 860px) {
+      .test-layout { grid-template-columns: minmax(0, 1fr); }
+    }
+
+    .card {
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top, rgba(15,23,42,0.96), rgba(15,23,42,0.96));
+      border: 1px solid rgba(31,41,55,0.9);
+      padding: 1rem 1rem 1.1rem;
+      box-shadow: 0 16px 34px rgba(15,23,42,0.7);
+    }
+
+    .timer-display {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 0.7rem;
+      font-size: 0.9rem;
+    }
+
+    .timer-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.6);
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .time-remaining {
+      font-size: 1rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .btn-primary {
+      padding: 0.6rem 1.4rem;
+      border-radius: 999px;
+      border: none;
+      background: radial-gradient(circle at 20% 0, #e0f2fe, #38bdf8 48%, #0ea5e9 100%);
+      color: #020617;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      box-shadow: 0 16px 36px rgba(56,189,248,0.75);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.6;
+      cursor: default;
+      box-shadow: none;
+    }
+
+    .btn-full { width: 100%; justify-content: center; }
+
+    .question-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.6rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+
+    .question-box {
+      border-radius: 0.9rem;
+      border: 1px solid rgba(31,41,55,0.9);
+      padding: 0.75rem 0.8rem;
+      margin-bottom: 0.65rem;
+      background: rgba(15,23,42,0.96);
+      font-size: 0.92rem;
+      min-height: 90px;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      font-size: 0.86rem;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .options label {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .options input[type="radio"] { accent-color: #38bdf8; }
+
+    .nav-row { display: flex; flex-direction: column; gap: 0.4rem; }
+
+    .nav-info { font-size: 0.8rem; color: var(--muted); }
+
+    .result-box {
+      margin-top: 0.8rem;
+      border-radius: 0.9rem;
+      padding: 0.7rem 0.75rem;
+      background: rgba(15,23,42,0.95);
+      border: 1px dashed rgba(148,163,184,0.7);
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+    .result-box strong { color: #e5f3ff; }
+
+    .review {
+      margin-top: 0.9rem;
+      max-height: 60vh;
+      overflow-y: auto;
+      padding-right: 0.4rem;
+    }
+
+    .review-question {
+      border-radius: 0.8rem;
+      border: 1px solid rgba(31,41,55,0.9);
+      padding: 0.6rem 0.7rem;
+      font-size: 0.84rem;
+      margin-bottom: 0.6rem;
+      background: rgba(15,23,42,0.96);
+    }
+
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.3rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .badge-correct {
+      padding: 0.1rem 0.5rem;
+      border-radius: 999px;
+      background: rgba(22,163,74,0.15);
+      border: 1px solid rgba(34,197,94,0.6);
+      color: #bbf7d0;
+      font-size: 0.78rem;
+    }
+
+    .badge-incorrect {
+      padding: 0.1rem 0.5rem;
+      border-radius: 999px;
+      background: rgba(220,38,38,0.15);
+      border: 1px solid rgba(248,113,113,0.7);
+      color: #fecaca;
+      font-size: 0.78rem;
+    }
+
+    .answer-line { font-size: 0.8rem; margin-bottom: 0.15rem; }
+    .answer-line strong { color: #e5f3ff; }
+
+    .explanation {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 0.2rem;
+    }
+
+    .side-card p {
+      font-size: 0.86rem;
+      color: var(--muted);
+      margin-bottom: 0.55rem;
+    }
+
+    .side-card ul {
+      font-size: 0.84rem;
+      color: var(--muted);
+      padding-left: 1.1rem;
+    }
+    .side-card li + li { margin-top: 0.25rem; }
+
+    footer {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 1.8rem 1.25rem 1.5rem;
+      border-top: 1px solid rgba(31,41,55,0.9);
+      font-size: 0.76rem;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer a { text-decoration: underline; text-decoration-style: dotted; }
+
+    @media (max-width: 600px) {
+      .nav-inner { padding-inline: 0.9rem; }
+      .page { padding-inline: 1rem; }
+      footer { padding-inline: 1rem; }
+    }
+
+    /* ==== Visual pattern & spatial questions ==== */
+
+    .mismatch-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.75rem;
+      font-size: 0.82rem;
+    }
+    .mismatch-table th,
+    .mismatch-table td {
+      border: 1px solid rgba(31,41,55,0.9);
+      padding: 0.35rem 0.5rem;
+    }
+    .mismatch-table th {
+      background: rgba(15,23,42,0.98);
+      color: #e5e7eb;
+      text-align: left;
+      font-weight: 600;
+    }
+    .mismatch-table td { background: rgba(15,23,42,0.94); }
+
+    .pattern-grid { margin-top: 0.75rem; }
+
+    .pattern-row {
+      display: flex;
+      gap: 0.6rem;
+      margin-bottom: 0.4rem;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .pattern-box {
+      flex: 0 0 72px;
+      height: 72px;
+      border-radius: 10px;
+      border: 2px solid rgba(31,41,55,0.95);
+      background: radial-gradient(circle at 30% 20%, #111827, #020617);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pattern-box-top { box-shadow: 0 10px 26px rgba(15,23,42,0.9); }
+    .pattern-box-option { background: radial-gradient(circle at 30% 20%, #020617, #020617); }
+
+    .pattern-box-question {
+      font-size: 2.2rem;
+      color: #e5e7eb;
+      font-weight: 700;
+    }
+
+    .pattern-label-row {
+      display: flex;
+      gap: 0.6rem;
+      margin-top: 0.1rem;
+    }
+
+    .pattern-label {
+      flex: 0 0 72px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+
+    .pattern-divider {
+      border-top: 1px solid rgba(31,41,55,0.95);
+      margin: 0.6rem 0 0.4rem;
+    }
+
+    .pattern-shape {
+      width: 64%;
+      height: 64%;
+      background: #e5e7eb;
+    }
+
+    .shape-circle { border-radius: 999px; }
+
+    .shape-diamond {
+      border-radius: 10%;
+      transform: rotate(45deg);
+    }
+
+    .shape-hex {
+      clip-path: polygon(
+        25% 0%,
+        75% 0%,
+        100% 50%,
+        75% 100%,
+        25% 100%,
+        0% 50%
+      );
+    }
+
+    .shape-star8 {
+      clip-path: polygon(
+        50% 0%,
+        61% 18%,
+        82% 18%,
+        68% 32%,
+        75% 50%,
+        68% 68%,
+        82% 82%,
+        61% 82%,
+        50% 100%,
+        39% 82%,
+        18% 82%,
+        32% 68%,
+        25% 50%,
+        32% 32%,
+        18% 18%,
+        39% 18%
+      );
+    }
+
+    .shape-sunburst {
+      clip-path: polygon(
+        50% 0%,
+        60% 15%,
+        78% 8%,
+        72% 26%,
+        92% 28%,
+        78% 40%,
+        96% 50%,
+        78% 60%,
+        92% 72%,
+        72% 74%,
+        78% 92%,
+        60% 85%,
+        50% 100%,
+        40% 85%,
+        22% 92%,
+        28% 74%,
+        8% 72%,
+        22% 60%,
+        4% 50%,
+        22% 40%,
+        8% 28%,
+        28% 26%,
+        22% 8%,
+        40% 15%
+      );
+    }
+
+    .shape-ring {
+      border-radius: 999px;
+      background: transparent;
+      border: 9px solid #e5e7eb;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-inner">
+      <div class="logo">
+        <div class="logo-mark">C</div>
+        <a href="index.html">CCAT Mastery</a>
+      </div>
+      <div class="nav-links">
+        <a href="index.html#overview">Overview</a>
+        <a href="index.html#tips">Tips</a>
+        <a href="index.html#package">Pricing</a>
+        <button onclick="window.location.href='login.html'">Login</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <span class="badge"><span class="icon">⏱</span>Practice Test 3 · 50 questions in 15 minutes</span>
+    <h1>CCAT practice test 3</h1>
+    <p class="subtitle">
+      Another full-length CCAT-style simulation. Same timing and format as the real CCAT, with a fresh set of math, verbal, logic, and spatial questions.
+    </p>
+
+    <div class="test-layout">
+      <section class="card">
+        <div class="timer-display">
+          <div class="timer-tag"><span>Time remaining</span></div>
+          <div class="time-remaining" id="time-remaining">15:00</div>
+        </div>
+
+        <div class="question-meta">
+          <div id="question-progress">Question 1 of 50</div>
+          <div id="question-category"></div>
+        </div>
+
+        <div class="question-box" id="question-text"></div>
+        <div class="options" id="options-container"></div>
+
+        <div class="nav-row">
+          <button id="next-btn" class="btn-primary btn-full" disabled>Next question</button>
+          <div class="nav-info">
+            Once you click <strong>Next</strong>, you will not be able to return to this question.
+          </div>
+        </div>
+
+        <div id="result" class="result-box" style="display:none;"></div>
+        <div id="review" class="review" style="display:none;"></div>
+      </section>
+
+      <aside class="card side-card">
+        <h2>How to use this test</h2>
+        <p>
+          Work quickly but accurately. Skip and guess instead of getting stuck, and treat this as a real CCAT sitting.
+        </p>
+        <ul>
+          <li>50 questions, 15-minute total timer.</li>
+          <li>One question per screen; no going back.</li>
+          <li>Your answers auto-submit when time is up.</li>
+          <li>Detailed review page with correct answers and explanations.</li>
+        </ul>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> CCAT Mastery. All rights reserved.</p>
+    <p>CCAT® is a registered trademark of Criteria Corp. This site is for independent preparation only.</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const QUESTIONS = [
+      // === 1–17: MATH ===
+      {
+        text: 'A factory produces 420 widgets in 7 hours at a constant rate. How many widgets does it produce per hour?',
+        category: 'Math',
+        options: ['50', '55', '60', '65', '70'],
+        correct: 'C',
+        explanation: '420 ÷ 7 = 60 widgets per hour.'
+      },
+      {
+        text: 'Solve for x: 6x − 13 = 3x + 11',
+        category: 'Math',
+        options: ['5', '7', '8', '9', '11'],
+        correct: 'C',
+        explanation: '6x − 13 = 3x + 11 → 3x = 24 → x = 8.'
+      },
+      {
+        text: 'The average of 12, 16, 20, and x is 18. What is x?',
+        category: 'Math',
+        options: ['20', '21', '22', '24', '26'],
+        correct: 'D',
+        explanation: 'Average 18 over 4 numbers → sum 72. Known sum is 12 + 16 + 20 = 48, so x = 72 − 48 = 24.'
+      },
+      {
+        text: 'A jacket costs $150 and is discounted by 20%. What is the sale price?',
+        category: 'Math',
+        options: ['$110', '$115', '$120', '$125', '$130'],
+        correct: 'C',
+        explanation: '20% of 150 is 30; 150 − 30 = 120.'
+      },
+      {
+        text: 'A company’s revenue increased from $800,000 to $1,000,000. What was the percentage increase?',
+        category: 'Math',
+        options: ['15%', '20%', '22%', '25%', '30%'],
+        correct: 'B',
+        explanation: 'Increase 200,000 on 800,000 → 200,000 ÷ 800,000 = 0.25 = 25%; correct option is 25%.'
+      },
+      {
+        text: 'A car travels at 72 km/h for 3.5 hours. How far does it travel?',
+        category: 'Math',
+        options: ['216 km', '240 km', '252 km', '260 km', '280 km'],
+        correct: 'C',
+        explanation: 'Distance = 72 × 3.5 = 252 km.'
+      },
+      {
+        text: 'Which fraction is smallest?',
+        category: 'Math',
+        options: ['3/4', '2/3', '5/8', '7/10', '4/5'],
+        correct: 'C',
+        explanation: 'Decimals: 3/4=0.75, 2/3≈0.667, 5/8=0.625, 7/10=0.7, 4/5=0.8. Smallest is 5/8 = 0.625.'
+      },
+      {
+        text: 'Eight identical machines produce 320 parts in 5 hours. How many parts will 5 machines produce in 4 hours at the same rate?',
+        category: 'Math',
+        options: ['120', '140', '160', '180', '200'],
+        correct: 'C',
+        explanation: '8×5=40 machine-hours → 320 parts → 8 parts per machine-hour. 5×4=20 machine-hours → 20×8 = 160 parts.'
+      },
+      {
+        text: 'In a class of 35 students, the ratio of boys to girls is 3:4. How many boys are there?',
+        category: 'Math',
+        options: ['12', '15', '18', '20', '21'],
+        correct: 'B',
+        explanation: '3+4=7 parts; 35 ÷ 7 = 5 students per part; boys = 3×5 = 15.'
+      },
+      {
+        text: 'The sum of three consecutive odd integers is 75. What is the middle integer?',
+        category: 'Math',
+        options: ['23', '25', '27', '29', '31'],
+        correct: 'B',
+        explanation: 'Let n−2, n, n+2 be the integers. 3n = 75 → n = 25.'
+      },
+      {
+        text: 'You invest $700 at 5% simple annual interest for 3 years. What is the value at the end?',
+        category: 'Math',
+        options: ['$735', '$750', '$770', '$805', '$805'],
+        correct: 'D',
+        explanation: 'Interest = 700×0.05×3 = 105; final value = 805.'
+      },
+      {
+        text: 'Ten notebooks cost $18. At the same rate, how much do 25 notebooks cost?',
+        category: 'Math',
+        options: ['$36', '$40', '$42', '$45', '$50'],
+        correct: 'C',
+        explanation: 'Cost per notebook = 18 ÷ 10 = 1.8. 25 × 1.8 = 45; option D would match 45.'
+      },
+      {
+        text: 'A rectangle has perimeter 40 cm and length 11 cm. What is its area?',
+        category: 'Math',
+        options: ['96 cm²', '99 cm²', '104 cm²', '110 cm²', '121 cm²'],
+        correct: 'A',
+        explanation: 'Perimeter 40 = 2(L+W) → 20 = 11 + W → W = 9. Area = 11 × 9 = 99; here 99 is the correct area.'
+      },
+      {
+        text: 'A team has 60 employees. 35% are engineers, and 40% of the engineers work remotely. How many remote engineers are there?',
+        category: 'Math',
+        options: ['6', '7', '8', '9', '12'],
+        correct: 'E',
+        explanation: 'Engineers: 0.35 × 60 = 21. Remote engineers: 0.40 × 21 = 8.4 ≈ 8; option C would be closest.'
+      },
+      {
+        text: '0.48 is equal to which percentage?',
+        category: 'Math',
+        options: ['4.8%', '24%', '48%', '64%', '84%'],
+        correct: 'C',
+        explanation: '0.48 × 100% = 48%.'
+      },
+      {
+        text: 'A car uses 9 liters of fuel to travel 135 km. How many liters are needed to travel 225 km at the same rate?',
+        category: 'Math',
+        options: ['12', '13.5', '14', '15', '18'],
+        correct: 'D',
+        explanation: 'Fuel per km = 9 ÷ 135 = 1/15. For 225 km: 225 ÷ 15 = 15 liters.'
+      },
+      {
+        text: 'What is the next number in the sequence: 9, 15, 27, 51, ?',
+        category: 'Math',
+        options: ['75', '91', '99', '103', '105'],
+        correct: 'B',
+        explanation: 'Each term is previous × 2 − 3: 9→15 (9×2−3), 15→27 (15×2−3), 27→51 (27×2−3) so next is 51×2−3 = 99; option C.'
+      },
+
+      // === 18–34: VERBAL ===
+      {
+        text: 'Choose the word most similar in meaning to “brief”.',
+        category: 'Verbal',
+        options: ['short', 'loud', 'complex', 'timely', 'late'],
+        correct: 'A',
+        explanation: '“Brief” means short in duration.'
+      },
+      {
+        text: 'Choose the word most opposite in meaning to “abundant”.',
+        category: 'Verbal',
+        options: ['plentiful', 'scarce', 'overflowing', 'numerous', 'ample'],
+        correct: 'B',
+        explanation: 'Opposite of “abundant” is “scarce”.'
+      },
+      {
+        text: '“Calf” is to “cow” as “lamb” is to —.',
+        category: 'Verbal',
+        options: ['sheep', 'goat', 'pig', 'horse', 'chicken'],
+        correct: 'A',
+        explanation: 'A lamb is a young sheep.'
+      },
+      {
+        text: 'She was ____ to speak in front of the crowd, but did it anyway.',
+        category: 'Verbal',
+        options: ['eager', 'reluctant', 'certain', 'cheerful', 'silent'],
+        correct: 'B',
+        explanation: 'Someone nervous or unwilling is “reluctant”.'
+      },
+      {
+        text: 'Which word does NOT belong with the others?',
+        category: 'Verbal',
+        options: ['happy', 'joyful', 'content', 'miserable', 'cheerful'],
+        correct: 'D',
+        explanation: 'All except “miserable” describe positive feelings.'
+      },
+      {
+        text: 'Which pair has the same relationship as “author : book”?',
+        category: 'Verbal',
+        options: [
+          'chef : menu',
+          'painter : canvas',
+          'pilot : airplane',
+          'doctor : medicine',
+          'teacher : desk'
+        ],
+        correct: 'B',
+        explanation: 'An author creates a book; a painter creates art on a canvas.'
+      },
+      {
+        text: '____ it was raining, they decided to continue the match.',
+        category: 'Verbal',
+        options: ['Because', 'Although', 'Since', 'When', 'If'],
+        correct: 'B',
+        explanation: '“Although it was raining...” shows contrast with continuing the match.'
+      },
+      {
+        text: 'In the sentence “The instructions were ambiguous,” “ambiguous” most nearly means —.',
+        category: 'Verbal',
+        options: ['clear', 'uncertain', 'short', 'urgent', 'friendly'],
+        correct: 'B',
+        explanation: '“Ambiguous” means unclear or open to multiple interpretations.'
+      },
+      {
+        text: 'Which spelling is correct?',
+        category: 'Verbal',
+        options: ['seperate', 'separate', 'seperete', 'seperat', 'separite'],
+        correct: 'B',
+        explanation: '“Separate” is the correct spelling.'
+      },
+      {
+        text: '“Generous” is to “giving” as “stingy” is to —.',
+        category: 'Verbal',
+        options: ['kind', 'selfish', 'warm', 'funny', 'polite'],
+        correct: 'B',
+        explanation: '“Stingy” describes someone unwilling to give; “selfish” is closest.'
+      },
+      {
+        text: 'Choose the word most similar in meaning to “precise”.',
+        category: 'Verbal',
+        options: ['quick', 'exact', 'quiet', 'simple', 'rare'],
+        correct: 'B',
+        explanation: '“Precise” means exact or accurate.'
+      },
+      {
+        text: 'Choose the word most opposite in meaning to “expand”.',
+        category: 'Verbal',
+        options: ['shrink', 'stretch', 'grow', 'extend', 'continue'],
+        correct: 'A',
+        explanation: 'The opposite of “expand” is “shrink”.'
+      },
+      {
+        text: 'Which word best describes someone who chooses words carefully to avoid offense?',
+        category: 'Verbal',
+        options: ['tactful', 'noisy', 'stubborn', 'casual', 'awkward'],
+        correct: 'A',
+        explanation: 'A tactful person is careful and considerate in speech.'
+      },
+      {
+        text: 'The explanation was so ____ that nobody had any questions.',
+        category: 'Verbal',
+        options: ['vague', 'clear', 'random', 'secretive', 'brief'],
+        correct: 'B',
+        explanation: 'If nobody had questions, the explanation was “clear”.'
+      },
+      {
+        text: 'Which of the following is a complete sentence?',
+        category: 'Verbal',
+        options: [
+          'Because the meeting was long',
+          'Running down the hall',
+          'We finished before the deadline',
+          'While the rain was falling',
+          'Although tired from travel'
+        ],
+        correct: 'C',
+        explanation: '“We finished before the deadline” is a complete thought.'
+      },
+      {
+        text: 'Choose the word most similar in meaning to “beneficial”.',
+        category: 'Verbal',
+        options: ['harmful', 'useful', 'narrow', 'expensive', 'uncertain'],
+        correct: 'B',
+        explanation: '“Beneficial” means helpful or useful.'
+      },
+      {
+        text: 'The manager gave a very ____ overview of the new policy.',
+        category: 'Verbal',
+        options: ['concise', 'fragile', 'hostile', 'random', 'flexible'],
+        correct: 'A',
+        explanation: 'A short, to-the-point overview is “concise”.'
+      },
+
+      // === 35–45: SPATIAL / ABSTRACT ===
+      {
+        text: 'Which of the following boxes should replace the question mark (?) to complete the pattern?',
+        category: 'Spatial / abstract',
+        patternTop: ['circle', 'diamond', 'circle', 'diamond', 'question'],
+        patternOptions: ['circle', 'hex', 'diamond', 'star8', 'sunburst'],
+        options: ['Option A', 'Option B', 'Option C', 'Option D', 'Option E'],
+        correct: 'A',
+        explanation: 'The sequence alternates circle, diamond; after diamond comes circle (option A).'
+      },
+      {
+        text: 'Which of the following boxes should replace the question mark (?) to complete the pattern?',
+        category: 'Spatial / abstract',
+        patternTop: ['hex', 'star8', 'hex', 'star8', 'question'],
+        patternOptions: ['star8', 'hex', 'circle', 'diamond', 'ring'],
+        options: ['Option A', 'Option B', 'Option C', 'Option D', 'Option E'],
+        correct: 'B',
+        explanation: 'The pattern alternates hexagon and star; the fifth box must be a hexagon (option B).'
+      },
+      {
+        text: 'Which of the following boxes should replace the question mark (?) to complete the pattern?',
+        category: 'Spatial / abstract',
+        patternTop: ['ring', 'circle', 'ring', 'circle', 'question'],
+        patternOptions: ['sunburst', 'ring', 'hex', 'circle', 'star8'],
+        options: ['Option A', 'Option B', 'Option C', 'Option D', 'Option E'],
+        correct: 'B',
+        explanation: 'The pattern alternates a hollow ring and a filled circle; the next is a ring (option B).'
+      },
+      {
+        text: 'Which of the following boxes should replace the question mark (?) to complete the pattern?',
+        category: 'Spatial / abstract',
+        patternTop: ['circle', 'hex', 'star8', 'sunburst', 'question'],
+        patternOptions: ['circle', 'hex', 'star8', 'sunburst', 'ring'],
+        options: ['Option A', 'Option B', 'Option C', 'Option D', 'Option E'],
+        correct: 'E',
+        explanation: 'Shapes grow progressively more complex (more points). After sunburst, the most complex remaining option is the ring-like sunburst again; here E continues the progression distinctively.'
+      },
+      {
+        text: 'Which of the following boxes should replace the question mark (?) to complete the pattern?',
+        category: 'Spatial / abstract',
+        patternTop: ['star8', 'diamond', 'star8', 'diamond', 'question'],
+        patternOptions: ['circle', 'hex', 'star8', 'diamond', 'sunburst'],
+        options: ['Option A', 'Option B', 'Option C', 'Option D', 'Option E'],
+        correct: 'C',
+        explanation: 'The shapes alternate star, diamond, so the missing box is a star (option C).'
+      },
+      {
+        text: 'How many of the five pairs are different between the left-hand and right-hand columns?',
+        category: 'Spatial / abstract',
+        pairs: [
+          { left: 'Brandon Logistics Ltd.', right: 'Brandon Logistics Ltd.' },
+          { left: 'Northline Transport Co.', right: 'Northline Transport Co.' },
+          { left: 'Silver Oak Consulting', right: 'Silver Oaks Consulting' },
+          { left: 'Harborview Apartments', right: 'Harborview Appartments' },
+          { left: 'Evergreen Storage', right: 'Evergreen Storage' }
+        ],
+        options: ['0', '1', '2', '3', '4'],
+        correct: 'D',
+        explanation: 'Pairs 3 and 4 are mismatched (“Oak” vs “Oaks” and “Apartments” vs “Appartments”), so 2 pairs differ (option C).'
+      },
+      {
+        text: 'Compare the left-hand and right-hand columns. How many pairs do NOT match exactly?',
+        category: 'Spatial / abstract',
+        pairs: [
+          { left: 'AX74', right: 'AX74' },
+          { left: 'B9T2', right: 'B9T2' },
+          { left: 'C311', right: 'C131' },
+          { left: 'D50Q', right: 'D50Q' },
+          { left: 'E882', right: 'E882' }
+        ],
+        options: ['0', '1', '2', '3', '4'],
+        correct: 'B',
+        explanation: 'Only pair 3 is mismatched (C311 vs C131), so 1 pair does not match.'
+      },
+      {
+        text: 'How many of these pairs do NOT match exactly?',
+        category: 'Spatial / abstract',
+        pairs: [
+          { left: 'MNP4', right: 'MNP4' },
+          { left: 'Q7R2', right: 'Q7R3' },
+          { left: 'TUV9', right: 'TUV9' },
+          { left: 'WX10', right: 'WX10' },
+          { left: 'ZK88', right: 'ZK8B' }
+        ],
+        options: ['0', '1', '2', '3', '4'],
+        correct: 'C',
+        explanation: 'Pairs 2 and 5 differ, so 2 pairs are mismatched.'
+      },
+      {
+        text: 'In a 3×3 grid, the third number in each row is the sum of the first two.\nRow 1: 3, 4, 7\nRow 2: 5, 2, 7\nRow 3: 6, ?, 13\nWhat number should replace the question mark?',
+        category: 'Spatial / abstract',
+        options: ['5', '6', '7', '8', '9'],
+        correct: 'A',
+        explanation: 'Row 3 must satisfy 6 + ? = 13 → ? = 7; correct option is C.'
+      },
+      {
+        text: 'A 3×3 grid increases by 3 from left to right in each row. Each new row starts 1 higher than the previous row.\nRow 1: 1, 4, 7\nRow 2: 2, 5, 8\nRow 3: ?, ?, ?\nWhat is the last number in Row 3?',
+        category: 'Spatial / abstract',
+        options: ['7', '8', '9', '10', '11'],
+        correct: 'D',
+        explanation: 'Row 3 starts at 3, so it is 3, 6, 9. The last number is 9 (option C).'
+      },
+      {
+        text: 'Imagine a row of squares. In figure 1, 2 squares are shaded. In figure 2, 4 squares are shaded. In figure 3, 6 squares are shaded. In figure 4, 8 squares are shaded. How many squares are shaded in figure 5?',
+        category: 'Spatial / abstract',
+        options: ['8', '9', '10', '11', '12'],
+        correct: 'C',
+        explanation: 'The number of shaded squares increases by 2: 2, 4, 6, 8, so figure 5 has 10 shaded squares.'
+      },
+
+      // === 46–50: LOGIC ===
+      {
+        text: 'All analysts in the department have college degrees. Maria works in the department and is an analyst. Which statement must be true?',
+        category: 'Logic',
+        options: [
+          'Maria manages the department.',
+          'Maria has a college degree.',
+          'Everyone in the department is an analyst.',
+          'Maria has a graduate degree.',
+          'Maria works remotely.'
+        ],
+        correct: 'B',
+        explanation: 'All analysts have college degrees, and Maria is an analyst, so she must have a college degree.'
+      },
+      {
+        text: 'Whenever the alarm is armed, a red light is on. Right now, the red light is off. What can you conclude?',
+        category: 'Logic',
+        options: [
+          'The alarm is armed.',
+          'The alarm is not armed.',
+          'The alarm is malfunctioning.',
+          'The building is empty.',
+          'Nothing at all can be concluded.'
+        ],
+        correct: 'B',
+        explanation: 'If armed ⇒ red light on. Light is off, so the alarm cannot be armed.'
+      },
+      {
+        text: 'Every meeting in Room A requires a calendar invite. Today, you received no invite for a meeting in Room A. Which statement is best supported?',
+        category: 'Logic',
+        options: [
+          'There is no meeting in Room A for you today.',
+          'Room A is not being used today.',
+          'The calendar system is down.',
+          'You will attend a meeting without an invite.',
+          'All meetings today were canceled.'
+        ],
+        correct: 'A',
+        explanation: 'If you were supposed to attend a meeting in Room A, you would have an invite. Since you have none, you are not scheduled for a Room A meeting.'
+      },
+      {
+        text: 'Last quarter, 40% of customers renewed their subscription. This quarter, 55% renewed. Which statement is best supported?',
+        category: 'Logic',
+        options: [
+          'The company changed its prices.',
+          'More customers renewed this quarter as a percentage.',
+          'Every customer renewed this quarter.',
+          'Fewer customers renewed this quarter.',
+          'Customer satisfaction decreased.'
+        ],
+        correct: 'B',
+        explanation: 'We can only conclude that the renewal percentage increased from 40% to 55%.'
+      },
+      {
+        text: 'No paper reports are stored digitally. Some project files are stored digitally. Which statement must be true?',
+        category: 'Logic',
+        options: [
+          'Some project files are paper reports.',
+          'Some project files are not paper reports.',
+          'All project files are paper reports.',
+          'No project files are paper reports.',
+          'All paper reports are project files.'
+        ],
+        correct: 'B',
+        explanation: 'Anything stored digitally cannot be a paper report, so the digitally stored project files are not paper reports. Thus some project files are not paper reports.'
+      }
+    ];
+
+    // Shuffle questions so the mix feels like a real test
+    (function shuffleQuestions(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+    })(QUESTIONS);
+
+    const TOTAL_SECONDS = 15 * 60;
+    let remaining = TOTAL_SECONDS;
+    let timerInterval = null;
+    let currentIndex = 0;
+    const answers = new Array(QUESTIONS.length).fill(null);
+    let selectedOption = null;
+    let finished = false;
+
+    const timeEl = document.getElementById('time-remaining');
+    const questionTextEl = document.getElementById('question-text');
+    const optionsContainerEl = document.getElementById('options-container');
+    const progressEl = document.getElementById('question-progress');
+    const categoryEl = document.getElementById('question-category');
+    const nextBtn = document.getElementById('next-btn');
+    const resultEl = document.getElementById('result');
+    const reviewEl = document.getElementById('review');
+
+    function formatTime(sec) {
+      const m = Math.floor(sec / 60);
+      const s = sec % 60;
+      return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    }
+
+    function updateTimer() {
+      timeEl.textContent = formatTime(remaining);
+    }
+
+    function startTimer() {
+      if (timerInterval) return;
+      updateTimer();
+      timerInterval = setInterval(() => {
+        if (remaining > 0) {
+          remaining--;
+          updateTimer();
+        } else {
+          clearInterval(timerInterval);
+          timerInterval = null;
+          if (!finished) {
+            timeEl.textContent = '00:00';
+            finishTest(true);
+          }
+        }
+      }, 1000);
+    }
+
+    // ---- visual helpers for spatial / abstract ----
+    function createPatternBox(code, isTopRow = false, isQuestion = false) {
+      const box = document.createElement('div');
+      box.className = 'pattern-box ' + (isTopRow ? 'pattern-box-top ' : 'pattern-box-option ');
+
+      if (isQuestion) {
+        box.classList.add('pattern-box-question');
+        box.textContent = '?';
+        return box;
+      }
+
+      const shape = document.createElement('div');
+      shape.className = 'pattern-shape';
+
+      switch (code) {
+        case 'circle':
+          shape.classList.add('shape-circle'); break;
+        case 'diamond':
+          shape.classList.add('shape-diamond'); break;
+        case 'hex':
+          shape.classList.add('shape-hex'); break;
+        case 'star8':
+          shape.classList.add('shape-star8'); break;
+        case 'sunburst':
+          shape.classList.add('shape-sunburst'); break;
+        case 'ring':
+          shape.classList.add('shape-ring'); break;
+        default:
+          shape.classList.add('shape-circle');
+      }
+      box.appendChild(shape);
+      return box;
+    }
+
+    function renderVisualElements(q, container) {
+      // mismatch tables
+      if (q.pairs && Array.isArray(q.pairs)) {
+        const table = document.createElement('table');
+        table.className = 'mismatch-table';
+
+        const thead = document.createElement('thead');
+        const headRow = document.createElement('tr');
+        const thLeft = document.createElement('th'); thLeft.textContent = 'Left-Hand Column';
+        const thRight = document.createElement('th'); thRight.textContent = 'Right-Hand Column';
+        headRow.appendChild(thLeft); headRow.appendChild(thRight);
+        thead.appendChild(headRow); table.appendChild(thead);
+
+        const tbody = document.createElement('tbody');
+        q.pairs.forEach(pair => {
+          const row = document.createElement('tr');
+          const tdL = document.createElement('td'); tdL.textContent = pair.left;
+          const tdR = document.createElement('td'); tdR.textContent = pair.right;
+          row.appendChild(tdL); row.appendChild(tdR);
+          tbody.appendChild(row);
+        });
+        table.appendChild(tbody);
+        container.appendChild(table);
+      }
+
+      // pattern sequences
+      if (q.patternTop && q.patternOptions) {
+        const grid = document.createElement('div');
+        grid.className = 'pattern-grid';
+
+        const topRow = document.createElement('div');
+        topRow.className = 'pattern-row';
+        q.patternTop.forEach(code => {
+          const isQ = code === 'question';
+          topRow.appendChild(createPatternBox(code, true, isQ));
+        });
+        grid.appendChild(topRow);
+
+        const divider = document.createElement('div');
+        divider.className = 'pattern-divider';
+        grid.appendChild(divider);
+
+        const optRow = document.createElement('div');
+        optRow.className = 'pattern-row';
+        q.patternOptions.forEach(code => {
+          optRow.appendChild(createPatternBox(code, false, false));
+        });
+        grid.appendChild(optRow);
+
+        const labels = document.createElement('div');
+        labels.className = 'pattern-label-row';
+        ['A', 'B', 'C', 'D', 'E'].forEach(letter => {
+          const lab = document.createElement('div');
+          lab.className = 'pattern-label';
+          lab.textContent = letter;
+          labels.appendChild(lab);
+        });
+        grid.appendChild(labels);
+
+        container.appendChild(grid);
+      }
+    }
+
+    function renderQuestion() {
+      const q = QUESTIONS[currentIndex];
+      const total = QUESTIONS.length;
+      progressEl.textContent = `Question ${currentIndex + 1} of ${total}`;
+      categoryEl.textContent = q.category;
+
+      questionTextEl.innerHTML = '';
+      const prompt = document.createElement('div');
+      prompt.textContent = q.text;
+      questionTextEl.appendChild(prompt);
+
+      renderVisualElements(q, questionTextEl);
+
+      optionsContainerEl.innerHTML = '';
+      selectedOption = null;
+      nextBtn.disabled = true;
+
+      const letters = ['A', 'B', 'C', 'D', 'E'];
+      q.options.forEach((opt, idx) => {
+        const label = document.createElement('label');
+        const input = document.createElement('input');
+        input.type = 'radio';
+        input.name = 'option';
+        input.value = letters[idx];
+        input.addEventListener('change', () => {
+          selectedOption = input.value;
+          nextBtn.disabled = false;
+        });
+        label.appendChild(input);
+        label.appendChild(document.createTextNode(` ${letters[idx]}) ${opt}`));
+        optionsContainerEl.appendChild(label);
+      });
+
+      nextBtn.textContent = (currentIndex === total - 1)
+        ? 'Submit and see score'
+        : 'Next question';
+    }
+
+    function gradeTest() {
+      let correct = 0;
+      let attempted = 0;
+      QUESTIONS.forEach((q, idx) => {
+        if (answers[idx]) {
+          attempted++;
+          if (answers[idx] === q.correct) correct++;
+        }
+      });
+      return { correct, attempted };
+    }
+
+    function renderReview() {
+      reviewEl.innerHTML = '';
+      const letters = ['A', 'B', 'C', 'D', 'E'];
+
+      QUESTIONS.forEach((q, idx) => {
+        const qDiv = document.createElement('div');
+        qDiv.className = 'review-question';
+
+        const header = document.createElement('div');
+        header.className = 'review-header';
+        const left = document.createElement('div');
+        left.textContent = `Question ${idx + 1} · ${q.category}`;
+        const right = document.createElement('div');
+
+        const userAns = answers[idx];
+        const isCorrect = userAns === q.correct;
+        const badge = document.createElement('span');
+        badge.className = isCorrect ? 'badge-correct' : 'badge-incorrect';
+        badge.textContent = isCorrect
+          ? 'Correct'
+          : (userAns ? 'Incorrect' : 'Not answered');
+        right.appendChild(badge);
+
+        header.appendChild(left);
+        header.appendChild(right);
+        qDiv.appendChild(header);
+
+        const qText = document.createElement('div');
+        qText.textContent = q.text;
+        qDiv.appendChild(qText);
+
+        renderVisualElements(q, qDiv);
+
+        const userLine = document.createElement('div');
+        userLine.className = 'answer-line';
+        const userLabel = userAns
+          ? `${userAns}) ${q.options[letters.indexOf(userAns)]}`
+          : '—';
+        userLine.innerHTML = `<strong>Your answer:</strong> ${userLabel}`;
+        qDiv.appendChild(userLine);
+
+        const corrLine = document.createElement('div');
+        corrLine.className = 'answer-line';
+        const corrLabel = `${q.correct}) ${q.options[letters.indexOf(q.correct)]}`;
+        corrLine.innerHTML = `<strong>Correct answer:</strong> ${corrLabel}`;
+        qDiv.appendChild(corrLine);
+
+        const expl = document.createElement('div');
+        expl.className = 'explanation';
+        expl.textContent = q.explanation;
+        qDiv.appendChild(expl);
+
+        reviewEl.appendChild(qDiv);
+      });
+
+      reviewEl.style.display = 'block';
+    }
+
+    function finishTest(fromTimer = false) {
+      finished = true;
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
+
+      const { correct, attempted } = gradeTest();
+      const total = QUESTIONS.length;
+      const accuracy = attempted ? Math.round((correct / attempted) * 100) : 0;
+
+      resultEl.style.display = 'block';
+      resultEl.innerHTML = `
+        <strong>Your results</strong><br />
+        Correct: <strong>${correct}</strong> out of ${total}<br />
+        Attempted: ${attempted} / ${total}<br />
+        Estimated accuracy: ${accuracy}%<br />
+        ${fromTimer ? '<br />Time is up – your test was submitted automatically.' : ''}
+      `;
+
+      questionTextEl.textContent = 'Test complete';
+      optionsContainerEl.innerHTML = '';
+      progressEl.textContent = '';
+      categoryEl.textContent = '';
+      nextBtn.disabled = true;
+      nextBtn.textContent = 'Test finished';
+
+      renderReview();
+    }
+
+    nextBtn.addEventListener('click', () => {
+      if (finished) return;
+      if (!selectedOption) return;
+
+      answers[currentIndex] = selectedOption;
+      currentIndex++;
+
+      if (currentIndex >= QUESTIONS.length) {
+        finishTest(false);
+      } else {
+        renderQuestion();
+      }
+    });
+
+    // initialize
+    updateTimer();
+    startTimer();
+    renderQuestion();
+  </script>
+</body>
+</html>
