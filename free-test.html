@@ -570,6 +570,77 @@
       background: transparent;
       border: 9px solid #e5e7eb;
     }
+    /* === Spatial / abstract: grid pattern visuals === */
+
+.grid-pattern-wrapper {
+  margin-top: 0.8rem;
+}
+
+.grid-sequence-row,
+.grid-options-row {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.grid-box {
+  flex: 0 0 72px;
+  height: 72px;
+  border-radius: 10px;
+  border: 2px solid rgba(31,41,55,0.95);
+  background: radial-gradient(circle at 30% 20%, #111827, #020617);
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 10px 26px rgba(15,23,42,0.9);
+}
+
+.grid-box-question {
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: #e5e7eb;
+  font-weight: 700;
+}
+
+.grid-cell-row {
+  flex: 1;
+  display: flex;
+  gap: 2px;
+}
+
+.grid-cell {
+  flex: 1;
+  border-radius: 2px;
+  border: 1px solid rgba(55,65,81,0.9);
+  background: transparent;
+}
+
+.grid-cell.filled {
+  background: #e5e7eb;
+}
+
+/* labels under answer grids (reuse if you already have a pattern-label-row) */
+.pattern-label-row {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 0.2rem;
+}
+
+.pattern-label {
+  flex: 0 0 72px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+/* thin divider line between top-row sequence and options */
+.pattern-divider {
+  border-top: 1px solid rgba(31,41,55,0.95);
+  margin: 0.6rem 0 0.4rem;
+}
   </style>
 </head>
 <body>
@@ -655,11 +726,11 @@
     const QUESTIONS = [
       // 1–17: MATH
       {
-        text: 'A factory produces 480 widgets in 8 hours at a constant rate. How many widgets does it produce per hour?',
+        text: 'The number of graduate students applying for a tuition-and-fees waiver in a prestigious university in 2025 is 780. Out of these only 260 were ultimately granted the required waiver. This is an acceptance rate of _____.',
         category: 'Math',
-        options: ['50', '55', '60', '65', '70'],
+        options: ['1 in 3', '1 in 4', '1 in 5', '1 in 6', 'None of the above'],
         correct: 'C',
-        explanation: '480 ÷ 8 = 60 widgets per hour.'
+        explanation: '260 ÷ 780 = 1/3 or 1 in 3.'
       },
       {
         text: 'Solve for x: 5x − 7 = 3x + 9',
@@ -676,11 +747,11 @@
         explanation: 'Average 17 over 4 numbers → sum 68. 12 + 18 + 20 = 50, so x = 18.'
       },
       {
-        text: 'A jacket costs $80 and is discounted by 15%. What is the sale price?',
+        text: 'A jacket costs $75 after a 40% discount is applied. What is the original price before the discount?',
         category: 'Math',
-        options: ['$64', '$66', '$68', '$70', '$72'],
+        options: ['$90', '$105', '$125', '$135', '$180'],
         correct: 'C',
-        explanation: '15% of 80 is 12. 80 − 12 = 68.'
+        explanation: 'Solve for original price: $75 = 60% of original price. Original price = $75 / 60% = $125.'
       },
       {
         text: 'A company\'s revenue increased from $1,200 to $1,500. What was the percentage increase?',
@@ -732,7 +803,7 @@
         explanation: 'Differences double: 4, 8, 16, 32 → 35 + 32 = 67.'
       },
       {
-        text: 'You invest $500 at 6% simple annual interest for 2 years. What is the value at the end?',
+        text: 'You invest $500 at 6% simple annual interest for 2 years. What is the value of the investment after 2 years?',
         category: 'Math',
         options: ['$530', '$540', '$560', '$580', '$600'],
         correct: 'C',
@@ -760,11 +831,11 @@
         explanation: 'Engineers: 0.30×40 = 12; remote: 0.25×12 = 3.'
       },
       {
-        text: '0.375 is equal to which percentage?',
+        text: 'A large elevator can carry no more than 6 adults or no more than 14 children. What is the maximum number of children that can get into the elevator with 3 adults?',
         category: 'Math',
-        options: ['25%', '33⅓%', '37.5%', '40%', '75%'],
-        correct: 'C',
-        explanation: '0.375 × 100% = 37.5%.'
+        options: ['3', '4', '5', '6', '7'],
+        correct: 'E',
+        explanation: 'Max capacity of 6 adults or 14 children means that 3 adults make up half of the max capacity of the elevator. The equivalent number of children to make up the other half of the max capacity is half the max capacity of children or 7.'
       },
       {
         text: 'A car uses 8 liters of fuel to travel 120 km. How many liters are needed to travel 300 km at the same rate?',
@@ -926,15 +997,65 @@
         correct: 'A',
         explanation: 'The pattern alternates star, diamond, star, diamond, so the missing shape is a star (option A).'
       },
-      {
-        text: 'Which of the following boxes should replace the question mark (?) to complete the pattern?',
-        category: 'Spatial / abstract',
-        patternTop: ['circle', 'hex', 'circle', 'hex', 'question'],
-        patternOptions: ['hex', 'circle', 'star8', 'sunburst', 'diamond'],
-        options: ['Option A', 'Option B', 'Option C', 'Option D', 'Option E'],
-        correct: 'B',
-        explanation: 'The shapes alternate circle, hexagon, so the next in the sequence is circle (option B).'
-      },
+{
+  text: 'In each 3×3 grid in the top row, more border squares are shaded while the center stays blank. Which option shows the next stage of this pattern?',
+  category: 'Spatial / abstract',
+  gridSequence: [
+    // Grid 1: two opposite corners shaded
+    [
+      [1, 0, 0],
+      [0, 0, 0],
+      [0, 0, 1]
+    ],
+    // Grid 2: all four corners shaded
+    [
+      [1, 0, 1],
+      [0, 0, 0],
+      [1, 0, 1]
+    ],
+    // Grid 3: full top and bottom borders shaded (6 border squares)
+    [
+      [1, 1, 1],
+      [0, 0, 0],
+      [1, 1, 1]
+    ]
+  ],
+  gridOptions: [
+    // A: full border (8 shaded – correct)
+    [
+      [1, 1, 1],
+      [1, 0, 1],
+      [1, 1, 1]
+    ],
+    // B: diagonal only
+    [
+      [1, 0, 0],
+      [0, 1, 0],
+      [0, 0, 1]
+    ],
+    // C: center plus corners
+    [
+      [1, 0, 1],
+      [0, 1, 0],
+      [1, 0, 1]
+    ],
+    // D: left and right columns only
+    [
+      [1, 0, 1],
+      [1, 0, 1],
+      [1, 0, 1]
+    ],
+    // E: random
+    [
+      [0, 1, 0],
+      [1, 0, 1],
+      [0, 1, 0]
+    ]
+  ],
+  options: ['Option A', 'Option B', 'Option C', 'Option D', 'Option E'],
+  correct: 'A',
+  explanation: 'Each grid adds two shaded squares on the border while keeping the center blank: 2 corners → 4 corners → 6 border squares. The next step is all 8 border squares shaded, which is option A.'
+},
       {
         text: 'Which of the following boxes should replace the question mark (?) to complete the pattern?',
         category: 'Spatial / abstract',
@@ -944,15 +1065,65 @@
         correct: 'A',
         explanation: 'The pattern alternates a hollow ring and a filled circle, so the fifth box should be a ring (option A).'
       },
-      {
-        text: 'Which of the following boxes should replace the question mark (?) to complete the pattern?',
-        category: 'Spatial / abstract',
-        patternTop: ['circle', 'diamond', 'hex', 'star8', 'question'],
-        patternOptions: ['circle', 'diamond', 'hex', 'star8', 'sunburst'],
-        options: ['Option A', 'Option B', 'Option C', 'Option D', 'Option E'],
-        correct: 'E',
-        explanation: 'The sequence shows shapes adding more points / edges each time; the next most complex is the sunburst (option E).'
-      },
+{
+  text: 'Each 3×3 grid in the top row shows the same two shaded squares moving one step clockwise around the outer edge. Which option completes the sequence?',
+  category: 'Spatial / abstract',
+  gridSequence: [
+    // Grid 1: top-left & top-middle shaded
+    [
+      [1, 1, 0],
+      [0, 0, 0],
+      [0, 0, 0]
+    ],
+    // Grid 2: top-right & middle-right shaded
+    [
+      [0, 0, 1],
+      [0, 0, 1],
+      [0, 0, 0]
+    ],
+    // Grid 3: bottom-right & bottom-middle shaded
+    [
+      [0, 0, 0],
+      [0, 0, 0],
+      [0, 1, 1]
+    ]
+  ],
+  gridOptions: [
+    // A: bottom-left & middle-left (correct – continues clockwise)
+    [
+      [0, 0, 0],
+      [1, 0, 0],
+      [1, 0, 0]
+    ],
+    // B: main diagonal
+    [
+      [1, 0, 0],
+      [0, 1, 0],
+      [0, 0, 1]
+    ],
+    // C: cross shape
+    [
+      [0, 1, 0],
+      [1, 1, 1],
+      [0, 1, 0]
+    ],
+    // D: four corners
+    [
+      [1, 0, 1],
+      [0, 0, 0],
+      [1, 0, 1]
+    ],
+    // E: random alternative
+    [
+      [0, 1, 0],
+      [0, 0, 0],
+      [1, 0, 1]
+    ]
+  ],
+  options: ['Option A', 'Option B', 'Option C', 'Option D', 'Option E'],
+  correct: 'A',
+  explanation: 'The pair of shaded squares marches clockwise around the outer border: top edge → right edge → bottom edge → left edge. Option A has the two shaded squares on the left edge, which is the next step in the cycle.'
+},
       {
         text: 'How many of the five items are different between the left-hand and right-hand columns?',
         category: 'Spatial / abstract',
@@ -996,11 +1167,13 @@
         explanation: 'T7UV vs T7VU and 7742 vs 7743 differ, so there are 2 mismatches.'
       },
       {
-        text: 'In a 3×3 grid, the third number in each row is the sum of the first two.\nRow 1: 2, 5, 7\nRow 2: 3, 4, 7\nRow 3: 4, ?, 11\nWhat number should replace the question mark?',
+        text: 'Which of the following boxes does NOT belong?',
         category: 'Spatial / abstract',
-        options: ['5', '6', '7', '8', '9'],
-        correct: 'C',
-        explanation: 'Row 3 must satisfy 4 + ? = 11 → ? = 7.'
+        patternTop: ['circle', 'diamond', 'circle', 'diamond', 'circle'],
+        patternOptions: ['circle', 'diamond', 'circle', 'diamond', 'hex'],
+        options: ['Option A', 'Option B', 'Option C', 'Option D', 'Option E'],
+        correct: 'E',
+        explanation: 'In four options, the sequence strictly alternates circle and diamond. Option E introduces a hexagon instead of continuing the circle / diamond pattern, so it does not belong.'
       },
       {
         text: 'A 3×3 grid has numbers that increase by 2 from left to right in each row. Each new row starts 1 higher than the previous row.\nRow 1: 1, 3, 5\nRow 2: 2, 4, 6\nRow 3: ?, ?, ?  What is the middle number in Row 3?',
@@ -1010,11 +1183,55 @@
         explanation: 'Row 3 starts at 3, so the row is 3, 5, 7 and the middle number is 5.'
       },
       {
-        text: 'Imagine a row of squares. In figure 1, 1 square is shaded. In figure 2, 3 squares are shaded. In figure 3, 5 squares are shaded. In figure 4, 7 squares are shaded. How many squares are shaded in figure 5?',
+        text: 'Four of the answer grids follow this rule: exactly one shaded square in each row and each column. One grid breaks the rule. Which option is the odd one out?',
         category: 'Spatial / abstract',
-        options: ['7', '8', '9', '10', '11'],
-        correct: 'C',
-        explanation: 'The count increases by 2 each time: 1, 3, 5, 7, so the next is 9.'
+        gridSequence: [
+          [
+            [1, 0, 0],
+            [0, 0, 0],
+            [0, 0, 1]
+          ],
+          [
+            [1, 0, 1],
+            [0, 0, 0],
+            [1, 0, 1]
+          ],
+          [
+            [1, 1, 1],
+            [0, 0, 0],
+            [1, 1, 1]
+          ]
+        ],
+        gridOptions: [
+          [
+            [1, 1, 1],
+            [1, 0, 1],
+            [1, 1, 1]
+          ],
+          [
+            [1, 0, 0],
+            [0, 1, 0],
+            [0, 0, 1]
+          ],
+          [
+            [1, 0, 1],
+            [0, 1, 0],
+            [1, 0, 1]
+          ],
+          [
+            [1, 0, 1],
+            [1, 0, 1],
+            [1, 0, 1]
+          ],
+          [
+            [0, 1, 0],
+            [1, 0, 1],
+            [0, 1, 0]
+          ]
+        ],
+        options: ['Option A', 'Option B', 'Option C', 'Option D', 'Option E'],
+        correct: 'A',
+        explanation: 'Each grid adds two shaded border squares while the middle stays blank: 2 corners → 4 corners → 6 border squares. The next stage is all 8 border squares shaded (option A).'
       },
 
       // 46–50: LOGIC
@@ -1251,6 +1468,179 @@
         container.appendChild(grid);
       }
     }
+    // --- helpers for visual / spatial questions ---
+
+function createGridBox(matrix, isQuestion = false) {
+  const box = document.createElement('div');
+  box.className = 'grid-box' + (isQuestion ? ' grid-box-question' : '');
+
+  if (isQuestion) {
+    box.textContent = '?';
+    return box;
+  }
+
+  // matrix should be 3x3 array of 0/1 values
+  (matrix || []).forEach(rowArr => {
+    const row = document.createElement('div');
+    row.className = 'grid-cell-row';
+    rowArr.forEach(val => {
+      const cell = document.createElement('div');
+      cell.className = 'grid-cell';
+      if (val === 1) cell.classList.add('filled');
+      row.appendChild(cell);
+    });
+    box.appendChild(row);
+  });
+
+  return box;
+}
+
+function createPatternBox(code, isTopRow = false, isQuestion = false) {
+  const box = document.createElement('div');
+  box.className = 'pattern-box ' + (isTopRow ? 'pattern-box-top ' : 'pattern-box-option ');
+
+  if (isQuestion) {
+    box.classList.add('pattern-box-question');
+    box.textContent = '?';
+    return box;
+  }
+
+  const shape = document.createElement('div');
+  shape.className = 'pattern-shape';
+
+  switch (code) {
+    case 'circle':
+      shape.classList.add('shape-circle'); break;
+    case 'diamond':
+      shape.classList.add('shape-diamond'); break;
+    case 'hex':
+      shape.classList.add('shape-hex'); break;
+    case 'star8':
+      shape.classList.add('shape-star8'); break;
+    case 'sunburst':
+      shape.classList.add('shape-sunburst'); break;
+    case 'ring':
+      shape.classList.add('shape-ring'); break;
+    default:
+      shape.classList.add('shape-circle');
+  }
+
+  box.appendChild(shape);
+  return box;
+}
+
+function renderVisualElements(q, container) {
+  // clear any old visuals
+  // (container already has the text prompt when this is called)
+  // We only append visuals here.
+
+  // 1) side-by-side text / number mismatches (pairs)
+  if (q.pairs && Array.isArray(q.pairs)) {
+    const table = document.createElement('table');
+    table.className = 'mismatch-table';
+
+    const thead = document.createElement('thead');
+    const headRow = document.createElement('tr');
+    const thLeft = document.createElement('th'); thLeft.textContent = 'Left-Hand Column';
+    const thRight = document.createElement('th'); thRight.textContent = 'Right-Hand Column';
+    headRow.appendChild(thLeft);
+    headRow.appendChild(thRight);
+    thead.appendChild(headRow);
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    q.pairs.forEach(pair => {
+      const row = document.createElement('tr');
+      const tdL = document.createElement('td'); tdL.textContent = pair.left;
+      const tdR = document.createElement('td'); tdR.textContent = pair.right;
+      row.appendChild(tdL); row.appendChild(tdR);
+      tbody.appendChild(row);
+    });
+    table.appendChild(tbody);
+    container.appendChild(table);
+  }
+
+  // 2) large single-shape pattern sequences (circles / diamonds / etc.)
+  if (q.patternTop && q.patternOptions) {
+    const grid = document.createElement('div');
+    grid.className = 'pattern-grid';
+
+    const topRow = document.createElement('div');
+    topRow.className = 'pattern-row';
+    q.patternTop.forEach(code => {
+      const isQ = code === 'question';
+      topRow.appendChild(createPatternBox(code, true, isQ));
+    });
+    grid.appendChild(topRow);
+
+    const divider = document.createElement('div');
+    divider.className = 'pattern-divider';
+    grid.appendChild(divider);
+
+    const optRow = document.createElement('div');
+    optRow.className = 'pattern-row';
+    q.patternOptions.forEach(code => {
+      optRow.appendChild(createPatternBox(code, false, false));
+    });
+    grid.appendChild(optRow);
+
+    const labels = document.createElement('div');
+    labels.className = 'pattern-label-row';
+    ['A', 'B', 'C', 'D', 'E'].forEach(letter => {
+      const lab = document.createElement('div');
+      lab.className = 'pattern-label';
+      lab.textContent = letter;
+      labels.appendChild(lab);
+    });
+    grid.appendChild(labels);
+
+    container.appendChild(grid);
+  }
+
+  // 3) new shaded-grid patterns (3×3) with sequences and answer options
+  if (q.gridSequence || q.gridOptions) {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'grid-pattern-wrapper';
+
+    if (q.gridSequence) {
+      const seqRow = document.createElement('div');
+      seqRow.className = 'grid-sequence-row';
+
+      q.gridSequence.forEach(matrix => {
+        seqRow.appendChild(createGridBox(matrix, false));
+      });
+
+      // add a question-mark box at the end of the sequence
+      seqRow.appendChild(createGridBox(null, true));
+      wrapper.appendChild(seqRow);
+
+      const divider = document.createElement('div');
+      divider.className = 'pattern-divider';
+      wrapper.appendChild(divider);
+    }
+
+    if (q.gridOptions) {
+      const optRow = document.createElement('div');
+      optRow.className = 'grid-options-row';
+      q.gridOptions.forEach(matrix => {
+        optRow.appendChild(createGridBox(matrix, false));
+      });
+      wrapper.appendChild(optRow);
+
+      const labels = document.createElement('div');
+      labels.className = 'pattern-label-row';
+      ['A', 'B', 'C', 'D', 'E'].forEach(letter => {
+        const lab = document.createElement('div');
+        lab.className = 'pattern-label';
+        lab.textContent = letter;
+        labels.appendChild(lab);
+      });
+      wrapper.appendChild(labels);
+    }
+
+    container.appendChild(wrapper);
+  }
+}
 
     function renderQuestion() {
       const q = QUESTIONS[currentIndex];
