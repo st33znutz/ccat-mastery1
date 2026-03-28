@@ -4,544 +4,84 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CCAT Practice Test 4 · CCAT Mastery</title>
+  <meta name="robots" content="noindex" />
+  <link rel="stylesheet" href="shared.css" />
   <style>
-    :root {
-      --bg: #0f172a;
-      --bg-alt: #020617;
-      --card: #0b1220;
-      --accent: #38bdf8;
-      --accent-soft: rgba(56,189,248,0.16);
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-      --border: #1f2937;
-      --radius-lg: 18px;
-      --radius-xl: 24px;
-      --shadow-soft: 0 18px 45px rgba(15,23,42,0.8);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
-      background: radial-gradient(circle at top, #1e293b 0, #020617 55%, #000 100%);
-      color: var(--text);
-      line-height: 1.6;
-      min-height: 100vh;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(18px);
-      background: linear-gradient(to bottom, rgba(15,23,42,0.96), rgba(15,23,42,0.75), transparent);
-      border-bottom: 1px solid rgba(15,23,42,0.9);
-    }
-
-    .nav-inner {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 0.5rem 1.25rem 0.7rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.25rem;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      font-size: 0.85rem;
-      color: #e5f3ff;
-    }
-
-    .logo-mark {
-      width: 28px;
-      height: 28px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 20%, #e0f2fe, #38bdf8 40%, #0ea5e9 60%, #0369a1 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 12px 30px rgba(56,189,248,0.55);
-      font-size: 0.75rem;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-size: 0.84rem;
-      color: var(--muted);
-    }
-
-    .nav-links a,
-    .nav-links button {
-      padding: 0.25rem 0.7rem;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      transition: all 0.18s ease-out;
-      background: transparent;
-      color: var(--muted);
-      cursor: pointer;
-      font-size: 0.84rem;
-    }
-
-    .nav-links a:hover,
-    .nav-links button:hover {
-      color: #e5f3ff;
-      border-color: rgba(148,163,184,0.45);
-      background: radial-gradient(circle at top, rgba(56,189,248,0.17), transparent 55%);
-    }
-
-    .page {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 1.5rem 1.25rem 3rem;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.25rem 0.7rem;
-      border-radius: 999px;
-      background: rgba(15,23,42,0.9);
-      border: 1px solid rgba(148,163,184,0.5);
-      font-size: 0.76rem;
-      color: var(--muted);
-      margin-bottom: 0.7rem;
-    }
-
-    .badge span.icon {
-      font-size: 0.9rem;
-    }
-
-    h1 {
-      font-size: clamp(1.9rem, 3vw, 2.2rem);
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      margin-bottom: 0.35rem;
-    }
-
-    .subtitle {
-      font-size: 0.94rem;
-      color: var(--muted);
-      max-width: 40rem;
-      margin-bottom: 1rem;
-    }
-
-    .test-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-      gap: 1.4rem;
-      margin-top: 1.2rem;
-    }
-
-    @media (max-width: 860px) {
-      .test-layout {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .card {
-      border-radius: var(--radius-lg);
-      background: radial-gradient(circle at top, rgba(15,23,42,0.96), rgba(15,23,42,0.96));
-      border: 1px solid rgba(31,41,55,0.9);
-      padding: 1rem 1rem 1.1rem;
-      box-shadow: 0 16px 34px rgba(15,23,42,0.7);
-    }
-
-    .card h2 {
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .timer-display {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-      margin-bottom: 0.7rem;
-      font-size: 0.9rem;
-    }
-
-    .timer-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.25rem 0.7rem;
-      border-radius: 999px;
-      background: rgba(15,23,42,0.9);
-      border: 1px solid rgba(148,163,184,0.6);
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    .time-remaining {
-      font-size: 1rem;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .btn-primary {
-      padding: 0.6rem 1.4rem;
-      border-radius: 999px;
-      border: none;
-      background: radial-gradient(circle at 20% 0, #e0f2fe, #38bdf8 48%, #0ea5e9 100%);
-      color: #020617;
-      font-weight: 600;
-      font-size: 0.9rem;
-      cursor: pointer;
-      box-shadow: 0 16px 36px rgba(56,189,248,0.75);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-    }
-
-    .btn-secondary {
-      padding: 0.6rem 1.2rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.6);
-      background: rgba(15,23,42,0.95);
-      color: var(--muted);
-      font-size: 0.86rem;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-    }
-
-    .btn-full {
-      width: 100%;
-      justify-content: center;
-    }
-
-    .question-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.6rem;
-      margin-bottom: 0.5rem;
-      font-size: 0.84rem;
-      color: var(--muted);
-    }
-
-    .question-box {
-      border-radius: 0.9rem;
-      border: 1px solid rgba(31,41,55,0.9);
-      padding: 0.75rem 0.8rem;
-      margin-bottom: 0.65rem;
-      background: rgba(15,23,42,0.96);
-      font-size: 0.92rem;
-      min-height: 90px;
-    }
-
-    .options {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-      font-size: 0.86rem;
-      color: var(--muted);
-      margin-bottom: 0.8rem;
-    }
-
-    .options label {
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .options input[type="radio"] {
-      accent-color: #38bdf8;
-    }
-
-    .nav-row {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-    }
-
-    .nav-info {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    .result-box {
-      margin-top: 0.8rem;
-      border-radius: 0.9rem;
-      padding: 0.7rem 0.75rem;
-      background: rgba(15,23,42,0.95);
-      border: 1px dashed rgba(148,163,184,0.7);
-      font-size: 0.86rem;
-      color: var(--muted);
-    }
-
-    .result-box strong {
-      color: #e5f3ff;
-    }
-
-    .review {
-      margin-top: 0.9rem;
-      max-height: 60vh;
-      overflow-y: auto;
-      padding-right: 0.4rem;
-    }
-
-    .review-question {
-      border-radius: 0.8rem;
-      border: 1px solid rgba(31,41,55,0.9);
-      padding: 0.6rem 0.7rem;
-      font-size: 0.84rem;
-      margin-bottom: 0.6rem;
-      background: rgba(15,23,42,0.96);
-    }
-
-    .review-header {
-      display: flex;
-      justify-content: space-between;
-      gap: 0.5rem;
-      margin-bottom: 0.3rem;
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    .badge-correct {
-      padding: 0.1rem 0.5rem;
-      border-radius: 999px;
-      background: rgba(22,163,74,0.15);
-      border: 1px solid rgba(34,197,94,0.6);
-      color: #bbf7d0;
-      font-size: 0.78rem;
-    }
-
-    .badge-incorrect {
-      padding: 0.1rem 0.5rem;
-      border-radius: 999px;
-      background: rgba(220,38,38,0.15);
-      border: 1px solid rgba(248,113,113,0.7);
-      color: #fecaca;
-      font-size: 0.78rem;
-    }
-
-    .answer-line {
-      font-size: 0.8rem;
-      margin-bottom: 0.15rem;
-    }
-
-    .answer-line strong {
-      color: #e5f3ff;
-    }
-
-    .explanation {
-      font-size: 0.78rem;
-      color: var(--muted);
-      margin-top: 0.2rem;
-    }
-
-    .side-card p {
-      font-size: 0.86rem;
-      color: var(--muted);
-      margin-bottom: 0.55rem;
-    }
-
-    .side-card ul {
-      font-size: 0.84rem;
-      color: var(--muted);
-      padding-left: 1.1rem;
-    }
-
-    .side-card li + li {
-      margin-top: 0.25rem;
-    }
-
-    footer {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 1.8rem 1.25rem 1.5rem;
-      border-top: 1px solid rgba(31,41,55,0.9);
-      font-size: 0.76rem;
-      color: var(--muted);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    footer a {
-      text-decoration: underline;
-      text-decoration-style: dotted;
-    }
-
-    @media (max-width: 600px) {
-      .nav-inner {
-        padding-inline: 0.9rem;
-      }
-      .page {
-        padding-inline: 1rem;
-      }
-      footer {
-        padding-inline: 1rem;
-      }
-    }
-
-    /* ==== spatial / abstract visuals ==== */
-
-    .pattern-grid {
-      margin-top: 0.75rem;
-    }
-    .pattern-row {
-      display: flex;
-      gap: 0.6rem;
-      margin-bottom: 0.4rem;
-      justify-content: flex-start;
-      flex-wrap: wrap;
-    }
-    .pattern-box {
-      flex: 0 0 72px;
-      height: 72px;
-      border-radius: 10px;
-      border: 2px solid rgba(31,41,55,0.95);
-      background: radial-gradient(circle at 30% 20%, #111827, #020617);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .pattern-box-top {
-      box-shadow: 0 10px 26px rgba(15,23,42,0.9);
-    }
-    .pattern-box-option {
-      background: radial-gradient(circle at 30% 20%, #020617, #020617);
-    }
-    .pattern-box-question {
-      font-size: 2.2rem;
-      color: #e5e7eb;
-      font-weight: 700;
-    }
-    .pattern-label-row {
-      display: flex;
-      gap: 0.6rem;
-      margin-top: 0.2rem;
-    }
-    .pattern-label {
-      flex: 0 0 72px;
-      text-align: center;
-      font-size: 0.8rem;
-      color: #9ca3af;
-    }
-    .pattern-divider {
-      border-top: 1px solid rgba(31,41,55,0.95);
-      margin: 0.6rem 0 0.4rem;
-    }
-    .pattern-shape {
-      width: 64%;
-      height: 64%;
-      background: #e5e7eb;
-    }
-    .shape-circle {
-      border-radius: 999px;
-    }
-    .shape-diamond {
-      border-radius: 10%;
-      transform: rotate(45deg);
-    }
-    .shape-hex {
-      clip-path: polygon(
-        25% 0%,
-        75% 0%,
-        100% 50%,
-        75% 100%,
-        25% 100%,
-        0% 50%
-      );
-    }
-    .shape-star8 {
-      clip-path: polygon(
-        50% 0%,
-        61% 18%,
-        82% 18%,
-        68% 32%,
-        75% 50%,
-        68% 68%,
-        82% 82%,
-        61% 82%,
-        50% 100%,
-        39% 82%,
-        18% 82%,
-        32% 68%,
-        25% 50%,
-        32% 32%,
-        18% 18%,
-        39% 18%
-      );
-    }
-    .shape-ring {
-      border-radius: 999px;
-      background: transparent;
-      border: 9px solid #e5e7eb;
-    }
-
-    /* shaded 3×3 grid patterns */
-    .grid-pattern-wrapper {
-      margin-top: 0.8rem;
-    }
-    .grid-sequence-row,
-    .grid-options-row {
-      display: flex;
-      gap: 0.6rem;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-    }
-    .grid-box {
-      flex: 0 0 72px;
-      height: 72px;
-      border-radius: 10px;
-      border: 2px solid rgba(31,41,55,0.95);
-      background: radial-gradient(circle at 30% 20%, #111827, #020617);
-      padding: 6px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      box-shadow: 0 10px 26px rgba(15,23,42,0.9);
-    }
-    .grid-box-question {
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      color: #e5e7eb;
-      font-weight: 700;
-    }
-    .grid-cell-row {
-      flex: 1;
-      display: flex;
-      gap: 2px;
-    }
-    .grid-cell {
-      flex: 1;
-      border-radius: 2px;
-      border: 1px solid rgba(55,65,81,0.9);
-      background: transparent;
-    }
-    .grid-cell.filled {
-      background: #e5e7eb;
-    }
+    body { background: radial-gradient(circle at top, #1e293b 0, #020617 55%, #000 100%); }
+    .page { max-width: 960px; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
+    .test-layout { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 1.4rem; margin-top: 1.2rem; }
+    @media (max-width: 860px) { .test-layout { grid-template-columns: minmax(0, 1fr); } }
+    .timer-display { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.7rem; font-size: 0.9rem; }
+    .timer-tag { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.25rem 0.7rem; border-radius: 999px; background: rgba(15,23,42,0.9); border: 1px solid rgba(148,163,184,0.6); font-size: 0.8rem; color: var(--muted); }
+    .time-remaining { font-size: 1rem; font-variant-numeric: tabular-nums; }
+    .time-warning { color: #fca5a5; }
+    .question-meta { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; margin-bottom: 0.5rem; font-size: 0.84rem; color: var(--muted); }
+    .question-box { border-radius: 0.9rem; border: 1px solid rgba(31,41,55,0.9); padding: 0.75rem 0.8rem; margin-bottom: 0.65rem; background: rgba(15,23,42,0.96); font-size: 0.92rem; min-height: 90px; }
+    .options { display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.86rem; color: var(--muted); margin-bottom: 0.8rem; }
+    .options label { cursor: pointer; display: flex; align-items: center; gap: 0.4rem; }
+    .options input[type="radio"] { accent-color: #38bdf8; }
+    .nav-row { display: flex; flex-direction: column; gap: 0.4rem; }
+    .nav-info { font-size: 0.8rem; color: var(--muted); }
+    .result-box { margin-top: 0.8rem; border-radius: 0.9rem; padding: 0.7rem 0.75rem; background: rgba(15,23,42,0.95); border: 1px dashed rgba(148,163,184,0.7); font-size: 0.86rem; color: var(--muted); }
+    .result-box strong { color: #e5f3ff; }
+    .review { margin-top: 0.9rem; max-height: 60vh; overflow-y: auto; padding-right: 0.4rem; }
+    .review-question { border-radius: 0.8rem; border: 1px solid rgba(31,41,55,0.9); padding: 0.6rem 0.7rem; font-size: 0.84rem; margin-bottom: 0.6rem; background: rgba(15,23,42,0.96); }
+    .review-header { display: flex; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.3rem; font-size: 0.8rem; color: var(--muted); }
+    .badge-correct { padding: 0.1rem 0.5rem; border-radius: 999px; background: rgba(22,163,74,0.15); border: 1px solid rgba(34,197,94,0.6); color: #bbf7d0; font-size: 0.78rem; }
+    .badge-incorrect { padding: 0.1rem 0.5rem; border-radius: 999px; background: rgba(220,38,38,0.15); border: 1px solid rgba(248,113,113,0.7); color: #fecaca; font-size: 0.78rem; }
+    .answer-line { font-size: 0.8rem; margin-bottom: 0.15rem; }
+    .answer-line strong { color: #e5f3ff; }
+    .explanation { font-size: 0.78rem; color: var(--muted); margin-top: 0.2rem; }
+    .side-card p { font-size: 0.86rem; color: var(--muted); margin-bottom: 0.55rem; }
+    .side-card ul { font-size: 0.84rem; color: var(--muted); padding-left: 1.1rem; }
+    .side-card li + li { margin-top: 0.25rem; }
+    .mismatch-table { width: 100%; border-collapse: collapse; margin-top: 0.75rem; font-size: 0.82rem; }
+    .mismatch-table th, .mismatch-table td { border: 1px solid rgba(31,41,55,0.9); padding: 0.35rem 0.5rem; }
+    .mismatch-table th { background: rgba(15,23,42,0.98); color: #e5e7eb; text-align: left; font-weight: 600; }
+    .mismatch-table td { background: rgba(15,23,42,0.94); }
+    .pattern-grid { margin-top: 0.75rem; }
+    .pattern-row { display: flex; gap: 0.6rem; margin-bottom: 0.4rem; justify-content: flex-start; flex-wrap: wrap; }
+    .pattern-box { flex: 0 0 72px; height: 72px; border-radius: 10px; border: 2px solid rgba(31,41,55,0.95); background: radial-gradient(circle at 30% 20%, #111827, #020617); display: flex; align-items: center; justify-content: center; }
+    .pattern-box-top { box-shadow: 0 10px 26px rgba(15,23,42,0.9); }
+    .pattern-box-option { background: radial-gradient(circle at 30% 20%, #020617, #020617); }
+    .pattern-box-question { font-size: 2.2rem; color: #e5e7eb; font-weight: 700; }
+    .pattern-label-row { display: flex; gap: 0.6rem; margin-top: 0.1rem; }
+    .pattern-label { flex: 0 0 72px; text-align: center; font-size: 0.8rem; color: #9ca3af; }
+    .pattern-divider { border-top: 1px solid rgba(31,41,55,0.95); margin: 0.6rem 0 0.4rem; }
+    .pattern-shape { width: 64%; height: 64%; background: #e5e7eb; }
+    .shape-circle { border-radius: 999px; }
+    .shape-diamond { border-radius: 10%; transform: rotate(45deg); }
+    .shape-hex { clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); }
+    .shape-star8 { clip-path: polygon(50% 0%,61% 18%,82% 18%,68% 32%,75% 50%,68% 68%,82% 82%,61% 82%,50% 100%,39% 82%,18% 82%,32% 68%,25% 50%,32% 32%,18% 18%,39% 18%); }
+    .shape-sunburst { clip-path: polygon(50% 0%,60% 15%,78% 8%,72% 26%,92% 28%,78% 40%,96% 50%,78% 60%,92% 72%,72% 74%,78% 92%,60% 85%,50% 100%,40% 85%,22% 92%,28% 74%,8% 72%,22% 60%,4% 50%,22% 40%,8% 28%,28% 26%,22% 8%,40% 15%); }
+    .shape-ring { border-radius: 999px; background: transparent; border: 9px solid #e5e7eb; }
+    .grid-pattern-wrapper { margin-top: 0.8rem; }
+    .grid-sequence-row, .grid-options-row { display: flex; gap: 0.6rem; flex-wrap: wrap; justify-content: flex-start; }
+    .grid-box { flex: 0 0 72px; height: 72px; border-radius: 10px; border: 2px solid rgba(31,41,55,0.95); background: radial-gradient(circle at 30% 20%, #111827, #020617); padding: 6px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 10px 26px rgba(15,23,42,0.9); }
+    .grid-box-question { align-items: center; justify-content: center; font-size: 2rem; color: #e5e7eb; font-weight: 700; }
+    .grid-cell-row { flex: 1; display: flex; gap: 2px; }
+    .grid-cell { flex: 1; border-radius: 2px; border: 1px solid rgba(55,65,81,0.9); background: transparent; }
+    .grid-cell.filled { background: #e5e7eb; }
+    #auth-guard { display: none; position: fixed; inset: 0; background: rgba(2,6,23,0.97); z-index: 100; align-items: center; justify-content: center; }
+    #auth-guard.visible { display: flex; }
+    .guard-card { max-width: 380px; margin: 1rem; border-radius: 18px; border: 1px solid rgba(148,163,184,0.7); background: rgba(15,23,42,0.99); padding: 1.4rem 1.5rem; text-align: center; }
+    .guard-card h2 { font-size: 1.2rem; margin-bottom: 0.4rem; color: #e5f3ff; }
+    .guard-card p { font-size: 0.86rem; color: var(--muted); margin-bottom: 0.8rem; }
+    @media (max-width: 600px) { .page { padding-inline: 1rem; } }
   </style>
 </head>
 <body>
+
+  <div id="auth-guard" role="dialog" aria-modal="true">
+    <div class="guard-card">
+      <p style="font-size:1.6rem;margin-bottom:0.4rem;">🔒</p>
+      <h2>Access required</h2>
+      <p>Practice Test 4 is part of the paid bundle. Log in and unlock 5 additional tests for a one-time $9.99.</p>
+      <button class="btn-primary btn-full" onclick="window.location.href='login.html'">Log in / Sign up</button>
+      <button class="btn-secondary btn-full" style="margin-top:0.5rem;" onclick="window.location.href='my-tests.html'">Go to my tests</button>
+    </div>
+  </div>
+
   <header>
     <div class="nav-inner">
       <div class="logo">
@@ -551,64 +91,50 @@
       <div class="nav-links">
         <a href="index.html#overview">Overview</a>
         <a href="index.html#tips">Tips</a>
-        <a href="index.html#package">Pricing</a>
-        <button onclick="window.location.href='login.html'">Login</button>
+        <a href="my-tests.html">My Tests</a>
+        <button id="nav-logout-btn" style="display:none;">Logout</button>
       </div>
     </div>
   </header>
 
   <main class="page">
     <span class="badge"><span class="icon">⏱</span>Practice Test 4 · 50 questions in 15 minutes</span>
-    <h1>CCAT Practice Test 4</h1>
-    <p class="subtitle">
-      Another full CCAT-style simulation: 50 mixed questions in 15 minutes. You’ll see one question at a time and cannot go back once you move forward. Answer as many as you can accurately before time runs out.
-    </p>
+    <h1>CCAT practice test 4</h1>
+    <p class="subtitle">A full-length CCAT-style simulation with a fresh mix of math, verbal, logic, and spatial questions. Same 15-minute timer, same one-at-a-time format as the real test.</p>
 
     <div class="test-layout">
       <section class="card">
         <div class="timer-display">
-          <div class="timer-tag">
-            <span>Time remaining</span>
-          </div>
+          <div class="timer-tag"><span>Time remaining</span></div>
           <div class="time-remaining" id="time-remaining">15:00</div>
         </div>
-
         <div class="question-meta">
           <div id="question-progress">Question 1 of 50</div>
           <div id="question-category"></div>
         </div>
-
         <div class="question-box" id="question-text"></div>
         <div class="options" id="options-container"></div>
-
         <div class="nav-row">
           <button id="next-btn" class="btn-primary btn-full" disabled>Next question</button>
-          <div class="nav-info">
-            Once you click <strong>Next</strong>, you will not be able to return to this question.
-          </div>
+          <div class="nav-info">Once you click <strong>Next</strong>, you cannot return to this question.</div>
         </div>
-
         <div id="result" class="result-box" style="display:none;"></div>
+        <div id="back-to-tests" style="display:none;margin-top:0.7rem;">
+          <a href="my-tests.html" class="btn-secondary btn-full" style="text-decoration:none;justify-content:center;">← Back to my tests</a>
+        </div>
         <div id="review" class="review" style="display:none;"></div>
       </section>
 
       <aside class="card side-card">
-        <h2>How this simulation works</h2>
-        <p>
-          This is Practice Test 4 in the CCAT Mastery series. It matches the real CCAT format: 50 questions in 15 minutes with a mix of numerical, verbal, logic, and spatial questions.
-        </p>
+        <h2>Using this test</h2>
+        <p>Treat this as if it were your real CCAT sitting. Work quickly but carefully — don't get stuck on any one question, and remember there is no penalty for guessing.</p>
         <ul>
-          <li>You cannot go back to previous questions once you click <strong>Next</strong>.</li>
-          <li>No penalty for wrong answers – guessing is better than leaving blanks.</li>
-          <li>The test automatically ends when the 15-minute timer reaches zero.</li>
-          <li>Your score report shows correct answers, your answers, and explanations for every item.</li>
+          <li>50 questions, 15 minutes total.</li>
+          <li>One question per screen; no going back.</li>
+          <li>Automatic submit when time runs out.</li>
+          <li>Full answer review with explanations when you finish.</li>
         </ul>
-        <p style="margin-top:0.6rem;">
-          For even more practice, log in from the main site to access all 5 paid full-length simulations.
-        </p>
-        <button class="btn-secondary" style="margin-top:0.5rem;" onclick="window.location.href='index.html#package'">
-          View full practice bundle
-        </button>
+        <p style="margin-top:0.6rem;"><a href="my-tests.html" style="color:var(--accent);text-decoration:underline;font-size:0.84rem;">← Back to all my tests</a></p>
       </aside>
     </div>
   </main>
@@ -622,542 +148,74 @@
     document.getElementById('year').textContent = new Date().getFullYear();
 
     const QUESTIONS = [
-      // 1
-      {
-        text: 'A factory produced 240 units in 6 hours at a constant rate. How many units did it produce per hour?',
-        category: 'Math & logic',
-        options: ['30', '36', '40', '42', '45'],
-        correct: 'C',
-        explanation: 'Divide total units by hours: 240 ÷ 6 = 40 units per hour, which is option C.'
-      },
-      // 2
-      {
-        text: 'Solve for x: 5x − 12 = 3x + 8',
-        category: 'Math & logic',
-        options: ['6', '8', '10', '12', '14'],
-        correct: 'C',
-        explanation: 'Subtract 3x from both sides: 2x − 12 = 8 → 2x = 20 → x = 10 (option C).'
-      },
-      // 3
-      {
-        text: 'The average of 6, 10, 14, and x is 12. What is x?',
-        category: 'Math & logic',
-        options: ['14', '16', '18', '20', '22'],
-        correct: 'C',
-        explanation: 'Average of 4 numbers is 12, so the total is 48. 6 + 10 + 14 = 30, so x = 48 − 30 = 18 (option C).'
-      },
-      // 4
-      {
-        text: 'A jacket is priced at $80 and discounted by 15%. What is the sale price?',
-        category: 'Math & logic',
-        options: ['$62', '$64', '$68', '$70', '$72'],
-        correct: 'C',
-        explanation: '15% of 80 is 12. Subtract: 80 − 12 = 68, so the sale price is $68 (option C).'
-      },
-      // 5
-      {
-        text: 'Choose the word most similar in meaning to “obscure”.',
-        category: 'Verbal',
-        options: ['Unclear', 'Modern', 'Public', 'Narrow', 'Happy'],
-        correct: 'A',
-        explanation: '“Obscure” means not well-known or difficult to understand; “unclear” is closest in meaning.'
-      },
-      // 6
-      {
-        text: 'Choose the word most opposite in meaning to “abundant”.',
-        category: 'Verbal',
-        options: ['Plentiful', 'Scarce', 'Ample', 'Overflowing', 'Numerous'],
-        correct: 'B',
-        explanation: '“Abundant” means plenty; the opposite is “scarce”.'
-      },
-      // 7
-      {
-        text: '“Pen” is to “writer” as “scalpel” is to —.',
-        category: 'Verbal',
-        options: ['Mechanic', 'Artist', 'Surgeon', 'Pilot', 'Carpenter'],
-        correct: 'C',
-        explanation: 'A writer uses a pen; a surgeon uses a scalpel.'
-      },
-      // 8
-      {
-        text: 'A car travels 150 km in 2.5 hours at a constant speed. What is its speed in km/h?',
-        category: 'Math & logic',
-        options: ['50', '55', '60', '65', '75'],
-        correct: 'C',
-        explanation: 'Speed = distance ÷ time = 150 ÷ 2.5 = 60 km/h (option C).'
-      },
-      // 9
-      {
-        text: 'Which fraction is greatest?',
-        category: 'Math & logic',
-        options: ['3/4', '2/3', '5/8', '7/10', '4/5'],
-        correct: 'E',
-        explanation: 'As decimals: 3/4 = 0.75, 2/3 ≈ 0.67, 5/8 = 0.625, 7/10 = 0.7, 4/5 = 0.8. The largest is 4/5.'
-      },
-      // 10
-      {
-        text: 'Two consecutive odd integers sum to 52. What are they?',
-        category: 'Math & logic',
-        options: ['23 and 25', '24 and 26', '25 and 27', '26 and 28', '27 and 29'],
-        correct: 'C',
-        explanation: 'Let the smaller be n. n + (n + 2) = 52 → 2n + 2 = 52 → 2n = 50 → n = 25, so the numbers are 25 and 27 (option C).'
-      },
-      // 11
-      {
-        text: 'Which word is closest in meaning to “diligent”?',
-        category: 'Verbal',
-        options: ['Lazy', 'Careless', 'Hard-working', 'Tired', 'Bored'],
-        correct: 'C',
-        explanation: '“Diligent” describes someone who works carefully and steadily; “hard-working” is the best match.'
-      },
-      // 12
-      {
-        text: '“Ice” is to “cold” as “steam” is to —.',
-        category: 'Verbal',
-        options: ['Light', 'Solid', 'Heavy', 'Hot', 'Calm'],
-        correct: 'D',
-        explanation: 'Ice is cold; steam is hot.'
-      },
-      // 13
-      {
-        text: 'If y = 2x + 9, what is y when x = 4?',
-        category: 'Math & logic',
-        options: ['11', '13', '15', '17', '19'],
-        correct: 'D',
-        explanation: 'Substitute x = 4: y = 2·4 + 9 = 8 + 9 = 17 (option D).'
-      },
-      // 14
-      {
-        text: 'An employee’s monthly salary increased from $2,400 to $2,640. What was the percentage increase?',
-        category: 'Math & logic',
-        options: ['8%', '9%', '10%', '11%', '12%'],
-        correct: 'C',
-        explanation: 'Increase is 240 on a base of 2,400: 240 ÷ 2,400 = 0.10 = 10% (option C).'
-      },
-      // 15
-      {
-        text: 'Choose the word most opposite in meaning to “fragile”.',
-        category: 'Verbal',
-        options: ['Delicate', 'Brittle', 'Sturdy', 'Weak', 'Light'],
-        correct: 'C',
-        explanation: '“Fragile” means easily broken; the opposite is “sturdy”.'
-      },
-      // 16 – spatial grid, moving pair clockwise
-      {
-        text: 'Each 3×3 grid in the top row shows the same two shaded squares moving one step clockwise around the outer edge. Which option completes the sequence?',
-        category: 'Spatial / abstract',
-        gridSequence: [
-          [
-            [1, 1, 0],
-            [0, 0, 0],
-            [0, 0, 0]
-          ],
-          [
-            [0, 0, 1],
-            [0, 0, 1],
-            [0, 0, 0]
-          ],
-          [
-            [0, 0, 0],
-            [0, 0, 0],
-            [0, 1, 1]
-          ]
-        ],
-        gridOptions: [
-          [
-            [0, 0, 0],
-            [1, 0, 0],
-            [1, 0, 0]
-          ],
-          [
-            [1, 0, 0],
-            [0, 1, 0],
-            [0, 0, 1]
-          ],
-          [
-            [0, 1, 0],
-            [1, 1, 1],
-            [0, 1, 0]
-          ],
-          [
-            [1, 0, 1],
-            [0, 0, 0],
-            [1, 0, 1]
-          ],
-          [
-            [0, 1, 0],
-            [0, 0, 0],
-            [1, 0, 1]
-          ]
-        ],
-        options: ['Option A', 'Option B', 'Option C', 'Option D', 'Option E'],
-        correct: 'A',
-        explanation: 'The pair of shaded squares moves clockwise around the perimeter: top → right → bottom → left. Option A shows them on the left edge, the next step in the cycle.'
-      },
-      // 17
-      {
-        text: 'All painters are artists. Some artists are musicians. Which statement must be true?',
-        category: 'Logic',
-        options: [
-          'Some painters are musicians.',
-          'Some musicians are painters.',
-          'All musicians are artists.',
-          'Some musicians are artists.',
-          'No painters are musicians.'
-        ],
-        correct: 'D',
-        explanation: '“Some artists are musicians” means at least one artist is also a musician, so some musicians are artists. The other statements are not guaranteed.'
-      },
-      // 18
-      {
-        text: 'Mia is 3 years younger than Ben. Together they are 41 years old. How old is Mia?',
-        category: 'Math & logic',
-        options: ['17', '18', '19', '20', '21'],
-        correct: 'C',
-        explanation: 'Let Ben be B, so Mia is B − 3. B + (B − 3) = 41 → 2B − 3 = 41 → 2B = 44 → B = 22, so Mia is 19 (option C).'
-      },
-      // 19
-      {
-        text: 'In a certain code, each letter is shifted one place forward (A→B, B→C, …, Y→Z, Z→A). How is “PLAN” written in this code?',
-        category: 'Logic',
-        options: ['RKBO', 'QMBO', 'QMBP', 'ONAM', 'QLAO'],
-        correct: 'B',
-        explanation: 'P→Q, L→M, A→B, N→O, giving QMBO (option B).'
-      },
-      // 20
-      {
-        text: 'Evaluate: 4(3 − 5) + 10',
-        category: 'Math & logic',
-        options: ['−18', '−2', '2', '6', '14'],
-        correct: 'C',
-        explanation: '3 − 5 = −2, so 4(−2) = −8; −8 + 10 = 2 (option C).'
-      },
-      // 21
-      {
-        text: 'A bag contains red and blue marbles in the ratio 3 : 2. If there are 40 marbles in total, how many are red?',
-        category: 'Math & logic',
-        options: ['12', '16', '20', '24', '28'],
-        correct: 'D',
-        explanation: 'Total parts 3 + 2 = 5. Each part is 40 ÷ 5 = 8. Red marbles: 3 × 8 = 24 (option D).'
-      },
-      // 22 – spatial grid: growing border
-      {
-        text: 'In each 3×3 grid in the top row, more border squares are shaded while the center stays blank. Which option shows the next stage of the pattern?',
-        category: 'Spatial / abstract',
-        gridSequence: [
-          [
-            [1, 0, 0],
-            [0, 0, 0],
-            [0, 0, 1]
-          ],
-          [
-            [1, 0, 1],
-            [0, 0, 0],
-            [1, 0, 1]
-          ],
-          [
-            [1, 1, 1],
-            [0, 0, 0],
-            [1, 1, 1]
-          ]
-        ],
-        gridOptions: [
-          [
-            [1, 1, 1],
-            [1, 0, 1],
-            [1, 1, 1]
-          ],
-          [
-            [1, 0, 0],
-            [0, 1, 0],
-            [0, 0, 1]
-          ],
-          [
-            [1, 0, 1],
-            [0, 1, 0],
-            [1, 0, 1]
-          ],
-          [
-            [1, 0, 1],
-            [1, 0, 1],
-            [1, 0, 1]
-          ],
-          [
-            [0, 1, 0],
-            [1, 0, 1],
-            [0, 1, 0]
-          ]
-        ],
-        options: ['Option A', 'Option B', 'Option C', 'Option D', 'Option E'],
-        correct: 'A',
-        explanation: 'The pattern adds two shaded border squares each step while the center stays unshaded; the next grid has all 8 border squares shaded (option A).'
-      },
-      // 23
-      {
-        text: 'Order these from smallest to largest: 0.24, 1/4, 22%, 0.2',
-        category: 'Math & logic',
-        options: [
-          '0.2, 22%, 0.24, 1/4',
-          '22%, 0.2, 0.24, 1/4',
-          '0.2, 0.24, 22%, 1/4',
-          '22%, 0.24, 0.2, 1/4',
-          '0.24, 0.2, 22%, 1/4'
-        ],
-        correct: 'A',
-        explanation: 'Convert to decimals: 0.24, 1/4 = 0.25, 22% = 0.22, 0.2 = 0.20. Order: 0.20, 0.22, 0.24, 0.25 → 0.2, 22%, 0.24, 1/4 (option A).'
-      },
-      // 24
-      {
-        text: 'Choose the best word to complete the sentence: “He completed the task ____ he was feeling ill.”',
-        category: 'Verbal',
-        options: ['because', 'unless', 'even though', 'so', 'before'],
-        correct: 'C',
-        explanation: '“Even though” correctly shows contrast: he finished the task despite feeling ill.'
-      },
-      // 25
-      {
-        text: 'Which number is a common factor of both 72 and 90?',
-        category: 'Math & logic',
-        options: ['6', '8', '12', '18', '24'],
-        correct: 'D',
-        explanation: '18 divides 72 (4×18) and 90 (5×18), so 18 is a common factor.'
-      },
-      // 26
-      {
-        text: 'A store sold 200 apples on Monday and 160 apples on Tuesday. What was the percentage decrease from Monday to Tuesday?',
-        category: 'Math & logic',
-        options: ['10%', '15%', '20%', '25%', '30%'],
-        correct: 'C',
-        explanation: 'Decrease is 40 on a base of 200: 40 ÷ 200 = 0.20 = 20% (option C).'
-      },
-      // 27
-      {
-        text: 'Which word is spelled correctly?',
-        category: 'Verbal',
-        options: ['seperate', 'separate', 'seperete', 'sepparate', 'seperatte'],
-        correct: 'B',
-        explanation: '“Separate” is the correct spelling; the others are misspellings.'
-      },
-      // 28
-      {
-        text: 'All laptops are computers. Some computers are tablets. Which statement must be true?',
-        category: 'Logic',
-        options: [
-          'Some laptops are tablets.',
-          'All tablets are computers.',
-          'Some tablets are computers.',
-          'No laptops are tablets.',
-          'All computers are laptops.'
-        ],
-        correct: 'C',
-        explanation: '“Some computers are tablets” means at least one tablet is also a computer, so some tablets are computers. The other statements are not guaranteed.'
-      },
-      // 29
-      {
-        text: 'A machine produces 90 parts in 15 minutes at a constant rate. How many parts will it produce in 40 minutes?',
-        category: 'Math & logic',
-        options: ['180', '210', '220', '240', '270'],
-        correct: 'D',
-        explanation: 'Rate is 90 ÷ 15 = 6 parts per minute. In 40 minutes: 6 × 40 = 240 (option D).'
-      },
-      // 30
-      {
-        text: 'Which fraction is smallest?',
-        category: 'Math & logic',
-        options: ['3/5', '5/6', '2/3', '7/8', '4/9'],
-        correct: 'E',
-        explanation: 'As decimals: 3/5 = 0.6, 5/6 ≈ 0.83, 2/3 ≈ 0.67, 7/8 = 0.875, 4/9 ≈ 0.44. The smallest is 4/9.'
-      },
-      // 31
-      {
-        text: 'Choose the word most similar in meaning to “brief”.',
-        category: 'Verbal',
-        options: ['Long', 'Wordy', 'Short', 'Lazy', 'Complex'],
-        correct: 'C',
-        explanation: '“Brief” means short in duration or length.'
-      },
-      // 32
-      {
-        text: 'If 7x + 5 = 54, what is x?',
-        category: 'Math & logic',
-        options: ['5', '6', '7', '8', '9'],
-        correct: 'C',
-        explanation: '7x + 5 = 54 → 7x = 49 → x = 7 (option C).'
-      },
-      // 33
-      {
-        text: 'A train leaves at 13:45 and arrives at 16:05. How long is the journey?',
-        category: 'Math & logic',
-        options: ['1 h 50 min', '2 h 00 min', '2 h 20 min', '2 h 30 min', '3 h 00 min'],
-        correct: 'C',
-        explanation: 'From 13:45 to 15:45 is 2 hours; to 16:05 adds 20 minutes, total 2 h 20 min (option C).'
-      },
-      // 34
-      {
-        text: 'A box contains 5 red, 9 blue, and 6 green balls. If 3 balls are removed and not replaced, how many balls remain?',
-        category: 'Math & logic',
-        options: ['15', '16', '17', '18', '19'],
-        correct: 'C',
-        explanation: 'Total initially: 5 + 9 + 6 = 20. After removing 3, 20 − 3 = 17 (option C).'
-      },
-      // 35
-      {
-        text: 'Which number completes the proportion: 8 : 12 = ? : 21',
-        category: 'Math & logic',
-        options: ['12', '13', '14', '15', '16'],
-        correct: 'C',
-        explanation: '8 : 12 simplifies to 2 : 3. Let x : 21 = 2 : 3 → 3x = 42 → x = 14 (option C).'
-      },
-      // 36
-      {
-        text: 'Anna and Ben share 66 candies in the ratio 4 : 7 (Anna : Ben). How many candies does Anna receive?',
-        category: 'Math & logic',
-        options: ['18', '20', '24', '28', '30'],
-        correct: 'C',
-        explanation: 'Total parts 4 + 7 = 11. Each part is 66 ÷ 11 = 6. Anna gets 4 × 6 = 24 (option C).'
-      },
-      // 37
-      {
-        text: 'Choose the word most opposite in meaning to “expand”.',
-        category: 'Verbal',
-        options: ['Grow', 'Widen', 'Shrink', 'Enlarge', 'Stretch'],
-        correct: 'C',
-        explanation: '“Expand” means to grow or increase in size; the opposite is “shrink”.'
-      },
-      // 38
-      {
-        text: 'What comes next in the sequence: 5, 9, 17, 33, ?',
-        category: 'Math & logic',
-        options: ['49', '57', '65', '66', '69'],
-        correct: 'C',
-        explanation: 'The increments double: +4, +8, +16, so the next is +32. 33 + 32 = 65 (option C).'
-      },
-      // 39
-      {
-        text: 'What comes next in the sequence: 1, 4, 9, 16, ?',
-        category: 'Math & logic',
-        options: ['20', '21', '23', '25', '27'],
-        correct: 'D',
-        explanation: 'These are perfect squares: 1², 2², 3², 4²; next is 5² = 25 (option D).'
-      },
-      // 40 – spatial big shapes, odd one out
-      {
-        text: 'Which of the following boxes does NOT belong?',
-        category: 'Spatial / abstract',
-        patternTop: ['circle', 'diamond', 'circle', 'diamond', 'circle'],
-        patternOptions: ['circle', 'diamond', 'circle', 'diamond', 'hex'],
-        options: ['Option A', 'Option B', 'Option C', 'Option D', 'Option E'],
-        correct: 'E',
-        explanation: 'Four options continue an alternating circle / diamond pattern. Option E introduces a hexagon instead, so it does not belong.'
-      },
-      // 41
-      {
-        text: 'On a test with 60 questions, Alex answered 45 correctly. What percentage did Alex score?',
-        category: 'Math & logic',
-        options: ['60%', '65%', '70%', '75%', '80%'],
-        correct: 'D',
-        explanation: '45 ÷ 60 = 0.75 = 75% (option D).'
-      },
-      // 42
-      {
-        text: 'Choose the word that best completes the sentence: “The instructions were so ____ that everyone understood them immediately.”',
-        category: 'Verbal',
-        options: ['vague', 'complex', 'clear', 'confusing', 'hidden'],
-        correct: 'C',
-        explanation: '“Clear” fits the meaning: easy to understand.'
-      },
-      // 43
-      {
-        text: 'Which number is a multiple of both 9 and 12?',
-        category: 'Math & logic',
-        options: ['24', '30', '36', '42', '54'],
-        correct: 'C',
-        explanation: 'The least common multiple of 9 and 12 is 36, which is in the list (option C).'
-      },
-      // 44
-      {
-        text: 'In a sequence, each term is three times the previous term. If the first term is 2, what is the fifth term?',
-        category: 'Math & logic',
-        options: ['81', '90', '108', '162', '172'],
-        correct: 'D',
-        explanation: 'Terms: 2, 6, 18, 54, 162. The fifth term is 162 (option D).'
-      },
-      // 45
-      {
-        text: 'Which number is NOT divisible by 4?',
-        category: 'Math & logic',
-        options: ['24', '40', '44', '50', '64'],
-        correct: 'D',
-        explanation: '24, 40, 44, and 64 are divisible by 4; 50 ÷ 4 is not an integer, so 50 is not divisible by 4.'
-      },
-      // 46 – spatial grid odd one out
-      {
-        text: 'Four of the answer grids follow this rule: exactly one shaded square in each row and in each column. One grid breaks the rule. Which option is the odd one out?',
-        category: 'Spatial / abstract',
-        gridOptions: [
-          [
-            [1, 0, 0],
-            [0, 1, 0],
-            [0, 0, 1]
-          ],
-          [
-            [0, 0, 1],
-            [0, 1, 0],
-            [1, 0, 0]
-          ],
-          [
-            [0, 1, 0],
-            [1, 0, 0],
-            [0, 0, 1]
-          ],
-          [
-            [1, 0, 0],
-            [0, 0, 1],
-            [0, 1, 0]
-          ],
-          [
-            [1, 1, 0],
-            [0, 0, 1],
-            [0, 0, 1]
-          ]
-        ],
-        options: ['Option A', 'Option B', 'Option C', 'Option D', 'Option E'],
-        correct: 'E',
-        explanation: 'Options A–D have exactly one shaded square in each row and each column. Option E has two shaded squares in the top row and two in the last column, so it breaks the rule.'
-      },
-      // 47
-      {
-        text: 'A rectangle is 9 cm long and 7 cm wide. What is its area?',
-        category: 'Math & logic',
-        options: ['45 cm²', '54 cm²', '56 cm²', '63 cm²', '72 cm²'],
-        correct: 'D',
-        explanation: 'Area = length × width = 9 × 7 = 63 cm² (option D).'
-      },
-      // 48
-      {
-        text: 'Five numbers have an average of 12. Four of the numbers are 10, 11, 14, and 15. What is the fifth number?',
-        category: 'Math & logic',
-        options: ['8', '9', '10', '11', '12'],
-        correct: 'C',
-        explanation: 'Total of 5 numbers is 5 × 12 = 60. The four known numbers sum to 10 + 11 + 14 + 15 = 50, so the fifth number is 10 (option C).'
-      },
-      // 49
-      {
-        text: 'A company has 120 employees, of whom 30 are managers. What percentage of the employees are managers?',
-        category: 'Math & logic',
-        options: ['15%', '20%', '22%', '25%', '30%'],
-        correct: 'D',
-        explanation: '30 ÷ 120 = 0.25 = 25% (option D).'
-      },
-      // 50
-      {
-        text: 'Solve for x: x/3 + 4 = 10',
-        category: 'Math & logic',
-        options: ['9', '12', '15', '18', '21'],
-        correct: 'D',
-        explanation: 'x/3 + 4 = 10 → x/3 = 6 → x = 18 (option D).'
-      }
+      // MATH (1-17)
+      { text: 'A cyclist completes a 45 km route in 1.5 hours. What is her average speed?', category: 'Math', options: ['25 km/h','28 km/h','30 km/h','32 km/h','35 km/h'], correct: 'C', explanation: '45 ÷ 1.5 = 30 km/h.' },
+      { text: 'Solve: 7y − 4 = 5y + 10', category: 'Math', options: ['5','6','7','8','9'], correct: 'C', explanation: '7y − 5y = 10 + 4 → 2y = 14 → y = 7.' },
+      { text: 'What is 35% of 180?', category: 'Math', options: ['56','60','63','66','70'], correct: 'C', explanation: '10% of 180 = 18; 35% = 3.5 × 18 = 63.' },
+      { text: 'A $240 jacket is discounted by 25%. What is the sale price?', category: 'Math', options: ['$160','$170','$180','$190','$200'], correct: 'C', explanation: '25% of 240 = 60; 240 − 60 = $180.' },
+      { text: 'A company had 500 employees. It grew 8% this year. How many employees now?', category: 'Math', options: ['530','535','540','545','550'], correct: 'C', explanation: '8% of 500 = 40; 500 + 40 = 540.' },
+      { text: 'The sum of two consecutive odd integers is 76. What are the integers?', category: 'Math', options: ['35 and 37','37 and 39','37 and 41','39 and 41','33 and 43'], correct: 'B', explanation: 'Let them be n and n+2: 2n+2=76 → n=37; integers are 37 and 39.' },
+      { text: 'What is 5/6 − 1/4?', category: 'Math', options: ['7/12','8/12','9/12','10/12','11/12'], correct: 'A', explanation: 'LCD = 12: 10/12 − 3/12 = 7/12.' },
+      { text: 'A recipe for 4 people uses 320 g of flour. How much is needed for 7 people?', category: 'Math', options: ['520 g','540 g','560 g','580 g','600 g'], correct: 'C', explanation: '320 ÷ 4 × 7 = 560 g.' },
+      { text: 'What is the next number: 100, 91, 83, 76, ?', category: 'Math', options: ['68','70','72','74','76'], correct: 'B', explanation: 'Differences: −9, −8, −7, −6 → next = 76 − 6 = 70.' },
+      { text: 'Interest of $180 was earned on $2,000 at simple interest over 3 years. What is the annual rate?', category: 'Math', options: ['2%','3%','4%','5%','6%'], correct: 'B', explanation: 'Rate = 180 ÷ (2000 × 3) = 180 ÷ 6000 = 3%.' },
+      { text: 'A box holds 24 cans. How many boxes are needed to pack 300 cans?', category: 'Math', options: ['12','13','14','15','16'], correct: 'B', explanation: '300 ÷ 24 = 12.5 → need 13 boxes (round up).' },
+      { text: 'Which is the largest? 2/3, 3/4, 5/7, 7/10, 4/5', category: 'Math', options: ['2/3','3/4','5/7','7/10','4/5'], correct: 'E', explanation: 'Decimals: 0.667, 0.75, 0.714, 0.7, 0.8 → 4/5 = 0.8 is largest.' },
+      { text: 'A rectangle\'s length is 3× its width. Its perimeter is 64 cm. Find the area.', category: 'Math', options: ['180 cm²','192 cm²','204 cm²','210 cm²','220 cm²'], correct: 'B', explanation: '2(l+w)=64 → l+w=32; l=3w: 4w=32 → w=8, l=24; area=192 cm².' },
+      { text: 'A project is 60% complete after 18 days. How many more days to finish at the same rate?', category: 'Math', options: ['10','11','12','13','14'], correct: 'C', explanation: '60% in 18 days → 40% needs 18 × (40/60) = 12 days.' },
+      { text: 'Three people share $1,260 in the ratio 2:3:4. How much does the largest share receive?', category: 'Math', options: ['$420','$480','$520','$560','$600'], correct: 'D', explanation: 'Total parts = 9; each part = 140; largest = 4 × 140 = $560.' },
+      { text: 'What percentage of 750 is 225?', category: 'Math', options: ['25%','28%','30%','32%','35%'], correct: 'C', explanation: '225 ÷ 750 = 0.30 = 30%.' },
+      { text: 'A pump empties a 4,500 L tank in 90 minutes. How many litres per minute?', category: 'Math', options: ['45','48','50','52','55'], correct: 'C', explanation: '4500 ÷ 90 = 50 L/min.' },
+      // VERBAL (18-34)
+      { text: 'Choose the word most similar in meaning to "pragmatic".', category: 'Verbal', options: ['idealistic','practical','romantic','theoretical','optimistic'], correct: 'B', explanation: '"Pragmatic" means dealing with things practically.' },
+      { text: 'Choose the word most opposite in meaning to "concise".', category: 'Verbal', options: ['brief','short','wordy','clear','precise'], correct: 'C', explanation: 'Opposite of concise (brief) is wordy/verbose.' },
+      { text: '"Thermometer" is to "temperature" as "barometer" is to —.', category: 'Verbal', options: ['rainfall','altitude','pressure','humidity','wind'], correct: 'C', explanation: 'A thermometer measures temperature; a barometer measures air pressure.' },
+      { text: 'The athlete\'s performance was ____; she broke three world records in a single evening.', category: 'Verbal', options: ['mediocre','unremarkable','extraordinary','average','forgettable'], correct: 'C', explanation: 'Breaking three world records in one evening is "extraordinary".' },
+      { text: 'Which word does NOT belong with the others?', category: 'Verbal', options: ['whisper','shout','murmur','mumble','sprint'], correct: 'E', explanation: 'All others describe ways of speaking; "sprint" is a way of moving.' },
+      { text: 'Which pair has the same relationship as "map : navigator"?', category: 'Verbal', options: ['script : actor','hammer : nail','recipe : oven','ladder : window','key : door'], correct: 'A', explanation: 'A navigator uses a map as a tool; an actor uses a script as a tool.' },
+      { text: 'She refused to ____ her principles even when pressured by management.', category: 'Verbal', options: ['uphold','abandon','strengthen','promote','review'], correct: 'B', explanation: '"Refused to abandon" means she maintained them.' },
+      { text: 'In "the ambient temperature was comfortable," "ambient" most nearly means —.', category: 'Verbal', options: ['extreme','outdoor','surrounding','indoor','regulated'], correct: 'C', explanation: '"Ambient" means relating to the immediate surroundings.' },
+      { text: 'Which spelling is correct?', category: 'Verbal', options: ['definately','definitley','definitely','defenitely','definitaly'], correct: 'C', explanation: '"Definitely" — one of the most commonly misspelled words.' },
+      { text: '"Fast" is to "slow" as "bright" is to —.', category: 'Verbal', options: ['dark','warm','loud','soft','smooth'], correct: 'A', explanation: 'Fast and slow are antonyms; bright and dark are antonyms.' },
+      { text: 'Choose the word most similar in meaning to "tenacious".', category: 'Verbal', options: ['fragile','persistent','careless','gentle','passive'], correct: 'B', explanation: '"Tenacious" means keeping a firm hold; persistent is closest.' },
+      { text: 'Choose the word most opposite in meaning to "lenient".', category: 'Verbal', options: ['soft','easy','strict','gentle','relaxed'], correct: 'C', explanation: 'Opposite of lenient (permissive) is strict.' },
+      { text: 'Which word best describes a person who rarely speaks and keeps to themselves?', category: 'Verbal', options: ['gregarious','verbose','introverted','impulsive','arrogant'], correct: 'C', explanation: '"Introverted" describes someone reserved and quiet.' },
+      { text: 'The architect\'s design was ____; no two rooms had the same shape or size.', category: 'Verbal', options: ['uniform','predictable','unconventional','standard','simple'], correct: 'C', explanation: 'A design with no repeated shapes or sizes is unconventional.' },
+      { text: 'Which of the following is a complete sentence?', category: 'Verbal', options: ['Under the old bridge near the river bank','Despite all the evidence to the contrary','The committee approved the revised budget','After hearing the latest test results','Waiting for the next scheduled departure'], correct: 'C', explanation: '"The committee approved the revised budget" is a complete sentence.' },
+      { text: 'Choose the word most similar in meaning to "mitigate".', category: 'Verbal', options: ['worsen','ignore','reduce','celebrate','delay'], correct: 'C', explanation: '"Mitigate" means to make less severe; "reduce" is closest.' },
+      { text: 'The CEO\'s statement was deliberately ____; it could be interpreted several different ways.', category: 'Verbal', options: ['clear','unambiguous','direct','ambiguous','specific'], correct: 'D', explanation: 'A statement that can be interpreted multiple ways is ambiguous.' },
+      // SPATIAL/ABSTRACT (35-45)
+      { text: 'Which of the following boxes should replace the question mark (?) to complete the pattern?', category: 'Spatial / abstract', patternTop: ['sunburst','circle','sunburst','circle','question'], patternOptions: ['diamond','circle','sunburst','hex','ring'], options: ['Option A','Option B','Option C','Option D','Option E'], correct: 'C', explanation: 'The pattern alternates sunburst, circle — the missing item is a sunburst (option C).' },
+      { text: 'Which of the following boxes should replace the question mark (?) to complete the pattern?', category: 'Spatial / abstract', patternTop: ['ring','star8','ring','star8','question'], patternOptions: ['hex','ring','diamond','star8','circle'], options: ['Option A','Option B','Option C','Option D','Option E'], correct: 'B', explanation: 'The pattern alternates ring, star — the missing item is a ring (option B).' },
+      { text: 'Each 3×3 grid gains one shaded cell, filling row by row left to right. Which is the next grid?', category: 'Spatial / abstract',
+        gridSequence: [[[1,0,0],[0,0,0],[0,0,0]],[[1,1,0],[0,0,0],[0,0,0]],[[1,1,1],[0,0,0],[0,0,0]]],
+        gridOptions: [[[1,1,1],[1,0,0],[0,0,0]],[[0,0,0],[1,1,1],[0,0,0]],[[1,0,0],[1,0,0],[1,0,0]],[[0,1,0],[1,0,1],[0,1,0]],[[1,1,1],[1,1,0],[0,0,0]]],
+        options: ['Option A','Option B','Option C','Option D','Option E'], correct: 'A', explanation: 'After filling the top row, the next cell is the top-left of row 2, giving option A.' },
+      { text: 'How many of the five item pairs are NOT identical?', category: 'Spatial / abstract', pairs: [{left:'Fitzgerald & Sons Ltd',right:'Fitzgerald & Sons Ltd'},{left:'Monroe Capital Partners',right:'Monroe Capital Partners'},{left:'Blackwell Media Group',right:'Blackwell Media Group'},{left:'Thornton-Shaw Advisors',right:'Thornton-Shaw Advisory'},{left:'Pacific Rim Holdings',right:'Pacific Rim Holding'}], options: ['0','1','2','3','4'], correct: 'C', explanation: '"Advisors" vs "Advisory" and "Holdings" vs "Holding" differ — 2 mismatches.' },
+      { text: 'Compare left and right. How many pairs do NOT match?', category: 'Spatial / abstract', pairs: [{left:'WX44',right:'WX44'},{left:'PK71',right:'PK71'},{left:'MN28',right:'MN82'},{left:'ZR55',right:'ZR55'},{left:'GH03',right:'GH03'}], options: ['0','1','2','3','4'], correct: 'B', explanation: 'Only pair 3 differs: MN28 vs MN82 — 1 mismatch.' },
+      { text: 'Which of the following boxes should replace the question mark (?) to complete the pattern?', category: 'Spatial / abstract', patternTop: ['hex','diamond','hex','diamond','question'], patternOptions: ['star8','circle','hex','ring','diamond'], options: ['Option A','Option B','Option C','Option D','Option E'], correct: 'C', explanation: 'The pattern alternates hex, diamond — the missing item is a hex (option C).' },
+      { text: 'Each 3×3 grid has a shaded diagonal that shifts one step right. Which comes next?', category: 'Spatial / abstract',
+        gridSequence: [[[1,0,0],[0,1,0],[0,0,1]],[[0,1,0],[0,0,1],[0,0,0]],[[0,0,1],[0,0,0],[0,0,0]]],
+        gridOptions: [[[0,0,0],[0,0,0],[0,0,0]],[[1,0,0],[0,0,0],[0,0,0]],[[0,0,0],[1,0,0],[0,1,0]],[[0,0,0],[0,0,0],[1,0,0]],[[0,1,0],[1,0,0],[0,0,0]]],
+        options: ['Option A','Option B','Option C','Option D','Option E'], correct: 'A', explanation: 'The diagonal has moved fully off the grid — all cells are empty (option A).' },
+      { text: 'A 3×3 number grid increases by 3 across each row and by 2 down each column. If the top-left is 1, what is the centre cell?', category: 'Spatial / abstract', options: ['5','6','7','8','9'], correct: 'B', explanation: 'Row 1: 1,4,7. Row 2: 3,6,9. Row 3: 5,8,11. Centre = row 2 col 2 = 6.' },
+      { text: 'Which of the following does NOT belong?', category: 'Spatial / abstract', patternTop: ['circle','circle','circle','hex','circle'], patternOptions: ['circle','hex','circle','circle','circle'], options: ['Option A','Option B','Option C','Option D','Option E'], correct: 'B', explanation: 'All shapes are circles except option B, which is a hexagon.' },
+      { text: 'How many of these five pairs are NOT identical?', category: 'Spatial / abstract', pairs: [{left:'9923410',right:'9923410'},{left:'6657820',right:'6657820'},{left:'3341098',right:'3341089'},{left:'7780023',right:'7780023'},{left:'1154667',right:'1154676'}], options: ['0','1','2','3','4'], correct: 'C', explanation: 'Pair 3: 3341098 vs 3341089, and Pair 5: 1154667 vs 1154676 — 2 mismatches.' },
+      { text: 'In a 3×3 grid labelled 1–9 left-to-right top-to-bottom, which number is diagonally down-right from 5?', category: 'Spatial / abstract', options: ['6','7','8','9','10'], correct: 'D', explanation: 'Cell 5 is centre (row 2, col 2). Diagonally down-right is row 3, col 3 = cell 9.' },
+      // LOGIC (46-50)
+      { text: 'Every project over $10k needs board approval. This project costs $8k. What can you conclude?', category: 'Logic', options: ['It needs board approval.','It does not need board approval.','It may or may not need board approval.','All projects need approval.','The board will reject it.'], correct: 'C', explanation: 'The rule covers projects over $10k. At $8k, the rule doesn\'t apply — other rules could still require approval.' },
+      { text: 'If the alarm is on, the light flashes. The light is flashing. What can you conclude?', category: 'Logic', options: ['The alarm is on.','The alarm is off.','The alarm might or might not be on.','The light is broken.','Nothing can be concluded.'], correct: 'C', explanation: 'The flashing light could have another cause; we cannot confirm the alarm is on.' },
+      { text: 'Paula runs faster than Omar. Omar runs faster than Simone. Which must be true?', category: 'Logic', options: ['Simone runs faster than Paula.','Paula runs faster than Simone.','Omar is the fastest.','Paula and Simone run the same speed.','Omar is slower than Simone.'], correct: 'B', explanation: 'By transitivity: Paula > Omar > Simone, so Paula > Simone.' },
+      { text: 'Defect rates fell from 5.2% to 3.8% after the new process was introduced. Which is best supported?', category: 'Logic', options: ['The new process was the cause of the reduction.','The defect rate dropped after the new process was introduced.','All defects have been eliminated.','Workers became more careful.','The product was redesigned.'], correct: 'B', explanation: 'We can only confirm timing, not causation.' },
+      { text: 'Some athletes are vegetarians. All vegetarians avoid red meat. Which must be true?', category: 'Logic', options: ['All athletes avoid red meat.','Some athletes avoid red meat.','No athletes eat red meat.','All vegetarians are athletes.','Vegetarians eat fish.'], correct: 'B', explanation: 'The athletes who are vegetarians avoid red meat, so some athletes avoid red meat.' },
     ];
+
+    (function shuffleQuestions(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+    })(QUESTIONS);
 
     const TOTAL_SECONDS = 15 * 60; // 15 minutes
     let remaining = TOTAL_SECONDS;
@@ -1204,32 +262,7 @@
       }, 1000);
     }
 
-    // ===== helpers for spatial / abstract visuals =====
-
-    function createGridBox(matrix, isQuestion = false) {
-      const box = document.createElement('div');
-      box.className = 'grid-box' + (isQuestion ? ' grid-box-question' : '');
-
-      if (isQuestion) {
-        box.textContent = '?';
-        return box;
-      }
-
-      (matrix || []).forEach(rowArr => {
-        const row = document.createElement('div');
-        row.className = 'grid-cell-row';
-        rowArr.forEach(val => {
-          const cell = document.createElement('div');
-          cell.className = 'grid-cell';
-          if (val === 1) cell.classList.add('filled');
-          row.appendChild(cell);
-        });
-        box.appendChild(row);
-      });
-
-      return box;
-    }
-
+    // Visual helpers for spatial / abstract questions
     function createPatternBox(code, isTopRow = false, isQuestion = false) {
       const box = document.createElement('div');
       box.className = 'pattern-box ' + (isTopRow ? 'pattern-box-top ' : 'pattern-box-option ');
@@ -1256,6 +289,9 @@
         case 'star8':
           shape.classList.add('shape-star8');
           break;
+        case 'sunburst':
+          shape.classList.add('shape-sunburst');
+          break;
         case 'ring':
           shape.classList.add('shape-ring');
           break;
@@ -1268,7 +304,39 @@
     }
 
     function renderVisualElements(q, container) {
-      // Big shape sequences / odd-one-out
+      // Column-mismatch table
+      if (q.pairs && Array.isArray(q.pairs)) {
+        const table = document.createElement('table');
+        table.className = 'mismatch-table';
+
+        const thead = document.createElement('thead');
+        const headRow = document.createElement('tr');
+        const thLeft = document.createElement('th');
+        thLeft.textContent = 'Left-Hand Column';
+        const thRight = document.createElement('th');
+        thRight.textContent = 'Right-Hand Column';
+        headRow.appendChild(thLeft);
+        headRow.appendChild(thRight);
+        thead.appendChild(headRow);
+        table.appendChild(thead);
+
+        const tbody = document.createElement('tbody');
+        q.pairs.forEach(pair => {
+          const row = document.createElement('tr');
+          const tdL = document.createElement('td');
+          tdL.textContent = pair.left;
+          const tdR = document.createElement('td');
+          tdR.textContent = pair.right;
+          row.appendChild(tdL);
+          row.appendChild(tdR);
+          tbody.appendChild(row);
+        });
+        table.appendChild(tbody);
+
+        container.appendChild(table);
+      }
+
+      // Visual shape patterns
       if (q.patternTop && q.patternOptions) {
         const grid = document.createElement('div');
         grid.className = 'pattern-grid';
@@ -1277,7 +345,8 @@
         topRow.className = 'pattern-row';
         q.patternTop.forEach(code => {
           const isQuestion = code === 'question';
-          topRow.appendChild(createPatternBox(code, true, isQuestion));
+          const box = createPatternBox(code, true, isQuestion);
+          topRow.appendChild(box);
         });
         grid.appendChild(topRow);
 
@@ -1288,7 +357,8 @@
         const optRow = document.createElement('div');
         optRow.className = 'pattern-row';
         q.patternOptions.forEach(code => {
-          optRow.appendChild(createPatternBox(code, false, false));
+          const box = createPatternBox(code, false, false);
+          optRow.appendChild(box);
         });
         grid.appendChild(optRow);
 
@@ -1304,50 +374,180 @@
 
         container.appendChild(grid);
       }
+    }
+    // --- helpers for visual / spatial questions ---
 
-      // Shaded 3×3 grids
-      if (q.gridSequence || q.gridOptions) {
-        const wrapper = document.createElement('div');
-        wrapper.className = 'grid-pattern-wrapper';
+function createGridBox(matrix, isQuestion = false) {
+  const box = document.createElement('div');
+  box.className = 'grid-box' + (isQuestion ? ' grid-box-question' : '');
 
-        if (q.gridSequence) {
-          const seqRow = document.createElement('div');
-          seqRow.className = 'grid-sequence-row';
-          q.gridSequence.forEach(matrix => {
-            seqRow.appendChild(createGridBox(matrix, false));
-          });
-          seqRow.appendChild(createGridBox(null, true));
-          wrapper.appendChild(seqRow);
+  if (isQuestion) {
+    box.textContent = '?';
+    return box;
+  }
 
-          const divider = document.createElement('div');
-          divider.className = 'pattern-divider';
-          wrapper.appendChild(divider);
-        }
+  // matrix should be 3x3 array of 0/1 values
+  (matrix || []).forEach(rowArr => {
+    const row = document.createElement('div');
+    row.className = 'grid-cell-row';
+    rowArr.forEach(val => {
+      const cell = document.createElement('div');
+      cell.className = 'grid-cell';
+      if (val === 1) cell.classList.add('filled');
+      row.appendChild(cell);
+    });
+    box.appendChild(row);
+  });
 
-        if (q.gridOptions) {
-          const optRow = document.createElement('div');
-          optRow.className = 'grid-options-row';
-          q.gridOptions.forEach(matrix => {
-            optRow.appendChild(createGridBox(matrix, false));
-          });
-          wrapper.appendChild(optRow);
+  return box;
+}
 
-          const labels = document.createElement('div');
-          labels.className = 'pattern-label-row';
-          ['A', 'B', 'C', 'D', 'E'].forEach(letter => {
-            const lab = document.createElement('div');
-            lab.className = 'pattern-label';
-            lab.textContent = letter;
-            labels.appendChild(lab);
-          });
-          wrapper.appendChild(labels);
-        }
+function createPatternBox(code, isTopRow = false, isQuestion = false) {
+  const box = document.createElement('div');
+  box.className = 'pattern-box ' + (isTopRow ? 'pattern-box-top ' : 'pattern-box-option ');
 
-        container.appendChild(wrapper);
-      }
+  if (isQuestion) {
+    box.classList.add('pattern-box-question');
+    box.textContent = '?';
+    return box;
+  }
+
+  const shape = document.createElement('div');
+  shape.className = 'pattern-shape';
+
+  switch (code) {
+    case 'circle':
+      shape.classList.add('shape-circle'); break;
+    case 'diamond':
+      shape.classList.add('shape-diamond'); break;
+    case 'hex':
+      shape.classList.add('shape-hex'); break;
+    case 'star8':
+      shape.classList.add('shape-star8'); break;
+    case 'sunburst':
+      shape.classList.add('shape-sunburst'); break;
+    case 'ring':
+      shape.classList.add('shape-ring'); break;
+    default:
+      shape.classList.add('shape-circle');
+  }
+
+  box.appendChild(shape);
+  return box;
+}
+
+function renderVisualElements(q, container) {
+  // clear any old visuals
+  // (container already has the text prompt when this is called)
+  // We only append visuals here.
+
+  // 1) side-by-side text / number mismatches (pairs)
+  if (q.pairs && Array.isArray(q.pairs)) {
+    const table = document.createElement('table');
+    table.className = 'mismatch-table';
+
+    const thead = document.createElement('thead');
+    const headRow = document.createElement('tr');
+    const thLeft = document.createElement('th'); thLeft.textContent = 'Left-Hand Column';
+    const thRight = document.createElement('th'); thRight.textContent = 'Right-Hand Column';
+    headRow.appendChild(thLeft);
+    headRow.appendChild(thRight);
+    thead.appendChild(headRow);
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    q.pairs.forEach(pair => {
+      const row = document.createElement('tr');
+      const tdL = document.createElement('td'); tdL.textContent = pair.left;
+      const tdR = document.createElement('td'); tdR.textContent = pair.right;
+      row.appendChild(tdL); row.appendChild(tdR);
+      tbody.appendChild(row);
+    });
+    table.appendChild(tbody);
+    container.appendChild(table);
+  }
+
+  // 2) large single-shape pattern sequences (circles / diamonds / etc.)
+  if (q.patternTop && q.patternOptions) {
+    const grid = document.createElement('div');
+    grid.className = 'pattern-grid';
+
+    const topRow = document.createElement('div');
+    topRow.className = 'pattern-row';
+    q.patternTop.forEach(code => {
+      const isQ = code === 'question';
+      topRow.appendChild(createPatternBox(code, true, isQ));
+    });
+    grid.appendChild(topRow);
+
+    const divider = document.createElement('div');
+    divider.className = 'pattern-divider';
+    grid.appendChild(divider);
+
+    const optRow = document.createElement('div');
+    optRow.className = 'pattern-row';
+    q.patternOptions.forEach(code => {
+      optRow.appendChild(createPatternBox(code, false, false));
+    });
+    grid.appendChild(optRow);
+
+    const labels = document.createElement('div');
+    labels.className = 'pattern-label-row';
+    ['A', 'B', 'C', 'D', 'E'].forEach(letter => {
+      const lab = document.createElement('div');
+      lab.className = 'pattern-label';
+      lab.textContent = letter;
+      labels.appendChild(lab);
+    });
+    grid.appendChild(labels);
+
+    container.appendChild(grid);
+  }
+
+  // 3) new shaded-grid patterns (3×3) with sequences and answer options
+  if (q.gridSequence || q.gridOptions) {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'grid-pattern-wrapper';
+
+    if (q.gridSequence) {
+      const seqRow = document.createElement('div');
+      seqRow.className = 'grid-sequence-row';
+
+      q.gridSequence.forEach(matrix => {
+        seqRow.appendChild(createGridBox(matrix, false));
+      });
+
+      // add a question-mark box at the end of the sequence
+      seqRow.appendChild(createGridBox(null, true));
+      wrapper.appendChild(seqRow);
+
+      const divider = document.createElement('div');
+      divider.className = 'pattern-divider';
+      wrapper.appendChild(divider);
     }
 
-    // ===== rendering / grading =====
+    if (q.gridOptions) {
+      const optRow = document.createElement('div');
+      optRow.className = 'grid-options-row';
+      q.gridOptions.forEach(matrix => {
+        optRow.appendChild(createGridBox(matrix, false));
+      });
+      wrapper.appendChild(optRow);
+
+      const labels = document.createElement('div');
+      labels.className = 'pattern-label-row';
+      ['A', 'B', 'C', 'D', 'E'].forEach(letter => {
+        const lab = document.createElement('div');
+        lab.className = 'pattern-label';
+        lab.textContent = letter;
+        labels.appendChild(lab);
+      });
+      wrapper.appendChild(labels);
+    }
+
+    container.appendChild(wrapper);
+  }
+}
 
     function renderQuestion() {
       const q = QUESTIONS[currentIndex];
@@ -1355,14 +555,16 @@
       progressEl.textContent = `Question ${currentIndex + 1} of ${total}`;
       categoryEl.textContent = q.category;
 
+      // Clear question area and add prompt
       questionTextEl.innerHTML = '';
-      const prompt = document.createElement('div');
-      prompt.textContent = q.text;
-      questionTextEl.appendChild(prompt);
+      const promptDiv = document.createElement('div');
+      promptDiv.textContent = q.text;
+      questionTextEl.appendChild(promptDiv);
 
-      // Attach visual elements if needed
+      // Visuals (if any)
       renderVisualElements(q, questionTextEl);
 
+      // Options
       optionsContainerEl.innerHTML = '';
       selectedOption = null;
       nextBtn.disabled = true;
@@ -1379,14 +581,15 @@
           nextBtn.disabled = false;
         });
         label.appendChild(input);
-        const textNode = document.createTextNode(` ${letters[idx]}) ${opt}`);
-        label.appendChild(textNode);
+        label.appendChild(document.createTextNode(` ${letters[idx]}) ${opt}`));
         optionsContainerEl.appendChild(label);
       });
 
-      nextBtn.textContent = (currentIndex === total - 1)
-        ? 'Submit and see score'
-        : 'Next question';
+      if (currentIndex === total - 1) {
+        nextBtn.textContent = 'Submit and see score';
+      } else {
+        nextBtn.textContent = 'Next question';
+      }
     }
 
     function gradeTest() {
@@ -1395,9 +598,7 @@
       QUESTIONS.forEach((q, idx) => {
         if (answers[idx]) {
           attempted++;
-          if (answers[idx] === q.correct) {
-            correct++;
-          }
+          if (answers[idx] === q.correct) correct++;
         }
       });
       return { correct, attempted };
@@ -1428,11 +629,10 @@
         header.appendChild(right);
         qDiv.appendChild(header);
 
-        const qTextNode = document.createElement('div');
-        qTextNode.textContent = q.text;
-        qDiv.appendChild(qTextNode);
+        const qText = document.createElement('div');
+        qText.textContent = q.text;
+        qDiv.appendChild(qText);
 
-        // show visuals in review
         renderVisualElements(q, qDiv);
 
         const userLine = document.createElement('div');
@@ -1458,6 +658,7 @@
       reviewEl.style.display = 'block';
     }
 
+
     function finishTest(fromTimer = false) {
       finished = true;
       if (timerInterval) {
@@ -1466,7 +667,7 @@
       }
 
       const { correct, attempted } = gradeTest();
-      const total = QUESTIONS.length;
+      const total    = QUESTIONS.length;
       const accuracy = attempted ? Math.round((correct / attempted) * 100) : 0;
 
       resultEl.style.display = 'block';
@@ -1484,6 +685,8 @@
       categoryEl.textContent = '';
       nextBtn.disabled = true;
       nextBtn.textContent = 'Test finished';
+
+      document.getElementById('back-to-tests').style.display = 'block';
 
       renderReview();
     }
@@ -1506,6 +709,36 @@
     updateTimer();
     startTimer();
     renderQuestion();
+  </script>
+
+  <script type="module">
+    import { auth, db }                    from './shared.js';
+    import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { doc, getDoc }                 from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const guard     = document.getElementById('auth-guard');
+    const logoutBtn = document.getElementById('nav-logout-btn');
+
+    logoutBtn.addEventListener('click', async () => {
+      await signOut(auth);
+      window.location.href = 'index.html';
+    });
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) { guard.classList.add('visible'); return; }
+      try {
+        const snap = await getDoc(doc(db, 'users', user.uid));
+        const data = snap.exists() ? snap.data() : {};
+        if (!data.hasPaid) {
+          guard.classList.add('visible');
+        } else {
+          logoutBtn.style.display = 'inline-flex';
+        }
+      } catch (err) {
+        console.error('Auth check failed:', err);
+        guard.classList.add('visible');
+      }
+    });
   </script>
 </body>
 </html>

@@ -4,145 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free CCAT Practice Test · CCAT Mastery</title>
+  <meta name="description" content="Take a free full-length 50-question CCAT-style practice test in 15 minutes. No login required." />
+  <link rel="stylesheet" href="shared.css" />
   <style>
-    :root {
-      --bg: #0f172a;
-      --bg-alt: #020617;
-      --card: #0b1220;
-      --accent: #38bdf8;
-      --accent-soft: rgba(56,189,248,0.16);
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-      --border: #1f2937;
-      --radius-lg: 18px;
-      --radius-xl: 24px;
-      --shadow-soft: 0 18px 45px rgba(15,23,42,0.8);
-    }
+    body { background: radial-gradient(circle at top, #1e293b 0, #020617 55%, #000 100%); }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
-      background: radial-gradient(circle at top, #1e293b 0, #020617 55%, #000 100%);
-      color: var(--text);
-      line-height: 1.6;
-      min-height: 100vh;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(18px);
-      background: linear-gradient(to bottom, rgba(15,23,42,0.96), rgba(15,23,42,0.75), transparent);
-      border-bottom: 1px solid rgba(15,23,42,0.9);
-    }
-
-    .nav-inner {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 0.5rem 1.25rem 0.7rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.25rem;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      font-size: 0.85rem;
-      color: #e5f3ff;
-    }
-
-    .logo-mark {
-      width: 28px;
-      height: 28px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 20%, #e0f2fe, #38bdf8 40%, #0ea5e9 60%, #0369a1 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 12px 30px rgba(56,189,248,0.55);
-      font-size: 0.75rem;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-size: 0.84rem;
-      color: var(--muted);
-    }
-
-    .nav-links a,
-    .nav-links button {
-      padding: 0.25rem 0.7rem;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      transition: all 0.18s ease-out;
-      background: transparent;
-      color: var(--muted);
-      cursor: pointer;
-      font-size: 0.84rem;
-    }
-
-    .nav-links a:hover,
-    .nav-links button:hover {
-      color: #e5f3ff;
-      border-color: rgba(148,163,184,0.45);
-      background: radial-gradient(circle at top, rgba(56,189,248,0.17), transparent 55%);
-    }
-
-    .page {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 1.5rem 1.25rem 3rem;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.25rem 0.7rem;
-      border-radius: 999px;
-      background: rgba(15,23,42,0.9);
-      border: 1px solid rgba(148,163,184,0.5);
-      font-size: 0.76rem;
-      color: var(--muted);
-      margin-bottom: 0.7rem;
-    }
-
-    .badge span.icon {
-      font-size: 0.9rem;
-    }
-
-    h1 {
-      font-size: clamp(1.9rem, 3vw, 2.2rem);
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      margin-bottom: 0.35rem;
-    }
-
-    .subtitle {
-      font-size: 0.94rem;
-      color: var(--muted);
-      max-width: 40rem;
-      margin-bottom: 1rem;
-    }
+    .page { max-width: 960px; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
 
     .test-layout {
       display: grid;
@@ -150,497 +17,73 @@
       gap: 1.4rem;
       margin-top: 1.2rem;
     }
-
-    @media (max-width: 860px) {
-      .test-layout {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .card {
-      border-radius: var(--radius-lg);
-      background: radial-gradient(circle at top, rgba(15,23,42,0.96), rgba(15,23,42,0.96));
-      border: 1px solid rgba(31,41,55,0.9);
-      padding: 1rem 1rem 1.1rem;
-      box-shadow: 0 16px 34px rgba(15,23,42,0.7);
-    }
-
-    .card h2 {
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .timer-display {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-      margin-bottom: 0.7rem;
-      font-size: 0.9rem;
-    }
-
-    .timer-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.25rem 0.7rem;
-      border-radius: 999px;
-      background: rgba(15,23,42,0.9);
-      border: 1px solid rgba(148,163,184,0.6);
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    .time-remaining {
-      font-size: 1rem;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .btn-primary {
-      padding: 0.6rem 1.4rem;
-      border-radius: 999px;
-      border: none;
-      background: radial-gradient(circle at 20% 0, #e0f2fe, #38bdf8 48%, #0ea5e9 100%);
-      color: #020617;
-      font-weight: 600;
-      font-size: 0.9rem;
-      cursor: pointer;
-      box-shadow: 0 16px 36px rgba(56,189,248,0.75);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-    }
-
-    .btn-primary:disabled {
-      opacity: 0.6;
-      cursor: default;
-      box-shadow: none;
-    }
-
-    .btn-secondary {
-      padding: 0.6rem 1.2rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.6);
-      background: rgba(15,23,42,0.95);
-      color: var(--muted);
-      font-size: 0.86rem;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-    }
-
-    .btn-full {
-      width: 100%;
-      justify-content: center;
-    }
-
-    .question-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.6rem;
-      margin-bottom: 0.5rem;
-      font-size: 0.84rem;
-      color: var(--muted);
-    }
-
-    .question-box {
-      border-radius: 0.9rem;
-      border: 1px solid rgba(31,41,55,0.9);
-      padding: 0.75rem 0.8rem;
-      margin-bottom: 0.65rem;
-      background: rgba(15,23,42,0.96);
-      font-size: 0.92rem;
-      min-height: 90px;
-    }
-
-    .options {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-      font-size: 0.86rem;
-      color: var(--muted);
-      margin-bottom: 0.8rem;
-    }
-
-    .options label {
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .options input[type="radio"] {
-      accent-color: #38bdf8;
-    }
-
-    .nav-row {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-    }
-
-    .nav-info {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    .result-box {
-      margin-top: 0.8rem;
-      border-radius: 0.9rem;
-      padding: 0.7rem 0.75rem;
-      background: rgba(15,23,42,0.95);
-      border: 1px dashed rgba(148,163,184,0.7);
-      font-size: 0.86rem;
-      color: var(--muted);
-    }
-
-    .result-box strong {
-      color: #e5f3ff;
-    }
-
-    .review {
-      margin-top: 0.9rem;
-      max-height: 60vh;
-      overflow-y: auto;
-      padding-right: 0.4rem;
-    }
-
-    .review-question {
-      border-radius: 0.8rem;
-      border: 1px solid rgba(31,41,55,0.9);
-      padding: 0.6rem 0.7rem;
-      font-size: 0.84rem;
-      margin-bottom: 0.6rem;
-      background: rgba(15,23,42,0.96);
-    }
-
-    .review-header {
-      display: flex;
-      justify-content: space-between;
-      gap: 0.5rem;
-      margin-bottom: 0.3rem;
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    .badge-correct {
-      padding: 0.1rem 0.5rem;
-      border-radius: 999px;
-      background: rgba(22,163,74,0.15);
-      border: 1px solid rgba(34,197,94,0.6);
-      color: #bbf7d0;
-      font-size: 0.78rem;
-    }
-
-    .badge-incorrect {
-      padding: 0.1rem 0.5rem;
-      border-radius: 999px;
-      background: rgba(220,38,38,0.15);
-      border: 1px solid rgba(248,113,113,0.7);
-      color: #fecaca;
-      font-size: 0.78rem;
-    }
-
-    .answer-line {
-      font-size: 0.8rem;
-      margin-bottom: 0.15rem;
-    }
-
-    .answer-line strong {
-      color: #e5f3ff;
-    }
-
-    .explanation {
-      font-size: 0.78rem;
-      color: var(--muted);
-      margin-top: 0.2rem;
-    }
-
-    .side-card p {
-      font-size: 0.86rem;
-      color: var(--muted);
-      margin-bottom: 0.55rem;
-    }
-
-    .side-card ul {
-      font-size: 0.84rem;
-      color: var(--muted);
-      padding-left: 1.1rem;
-    }
-
-    .side-card li + li {
-      margin-top: 0.25rem;
-    }
-
-    footer {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 1.8rem 1.25rem 1.5rem;
-      border-top: 1px solid rgba(31,41,55,0.9);
-      font-size: 0.76rem;
-      color: var(--muted);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    footer a {
-      text-decoration: underline;
-      text-decoration-style: dotted;
-    }
-
-    @media (max-width: 600px) {
-      .nav-inner {
-        padding-inline: 0.9rem;
-      }
-      .page {
-        padding-inline: 1rem;
-      }
-      footer {
-        padding-inline: 1rem;
-      }
-    }
-
-    /* === Visual pattern & spatial questions === */
-
-    /* Side-by-side mismatch table (left / right columns) */
-    .mismatch-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 0.75rem;
-      font-size: 0.82rem;
-    }
-
-    .mismatch-table th,
-    .mismatch-table td {
-      border: 1px solid rgba(31,41,55,0.9);
-      padding: 0.35rem 0.5rem;
-    }
-
-    .mismatch-table th {
-      background: rgba(15,23,42,0.98);
-      color: #e5e7eb;
-      text-align: left;
-      font-weight: 600;
-    }
-
-    .mismatch-table td {
-      background: rgba(15,23,42,0.94);
-    }
-
-    /* Pattern-sequence layout (top row + options row like the screenshots) */
-    .pattern-grid {
-      margin-top: 0.75rem;
-    }
-
-    .pattern-row {
-      display: flex;
-      gap: 0.6rem;
-      margin-bottom: 0.4rem;
-      justify-content: flex-start;
-      flex-wrap: wrap;
-    }
-
-    .pattern-box {
-      flex: 0 0 72px;
-      height: 72px;
-      border-radius: 10px;
-      border: 2px solid rgba(31,41,55,0.95);
-      background: radial-gradient(circle at 30% 20%, #111827, #020617);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .pattern-box-top {
-      box-shadow: 0 10px 26px rgba(15,23,42,0.9);
-    }
-
-    .pattern-box-option {
-      background: radial-gradient(circle at 30% 20%, #020617, #020617);
-    }
-
-    .pattern-box-question {
-      font-size: 2.2rem;
-      color: #e5e7eb;
-      font-weight: 700;
-    }
-
-    .pattern-label-row {
-      display: flex;
-      gap: 0.6rem;
-      margin-top: 0.1rem;
-    }
-
-    .pattern-label {
-      flex: 0 0 72px;
-      text-align: center;
-      font-size: 0.8rem;
-      color: #9ca3af;
-    }
-
-    .pattern-divider {
-      border-top: 1px solid rgba(31,41,55,0.95);
-      margin: 0.6rem 0 0.4rem;
-    }
-
-    /* Shape primitives used inside pattern boxes */
-    .pattern-shape {
-      width: 64%;
-      height: 64%;
-      background: #e5e7eb;
-    }
-
-    .shape-circle {
-      border-radius: 999px;
-    }
-
-    .shape-diamond {
-      border-radius: 10%;
-      transform: rotate(45deg);
-    }
-
-    .shape-hex {
-      clip-path: polygon(
-        25% 0%,
-        75% 0%,
-        100% 50%,
-        75% 100%,
-        25% 100%,
-        0% 50%
-      );
-    }
-
-    .shape-star8 {
-      clip-path: polygon(
-        50% 0%,
-        61% 18%,
-        82% 18%,
-        68% 32%,
-        75% 50%,
-        68% 68%,
-        82% 82%,
-        61% 82%,
-        50% 100%,
-        39% 82%,
-        18% 82%,
-        32% 68%,
-        25% 50%,
-        32% 32%,
-        18% 18%,
-        39% 18%
-      );
-    }
-
-    .shape-sunburst {
-      clip-path: polygon(
-        50% 0%,
-        60% 15%,
-        78% 8%,
-        72% 26%,
-        92% 28%,
-        78% 40%,
-        96% 50%,
-        78% 60%,
-        92% 72%,
-        72% 74%,
-        78% 92%,
-        60% 85%,
-        50% 100%,
-        40% 85%,
-        22% 92%,
-        28% 74%,
-        8% 72%,
-        22% 60%,
-        4% 50%,
-        22% 40%,
-        8% 28%,
-        28% 26%,
-        22% 8%,
-        40% 15%
-      );
-    }
-
-    .shape-ring {
-      border-radius: 999px;
-      background: transparent;
-      border: 9px solid #e5e7eb;
-    }
-    /* === Spatial / abstract: grid pattern visuals === */
-
-.grid-pattern-wrapper {
-  margin-top: 0.8rem;
-}
-
-.grid-sequence-row,
-.grid-options-row {
-  display: flex;
-  gap: 0.6rem;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-}
-
-.grid-box {
-  flex: 0 0 72px;
-  height: 72px;
-  border-radius: 10px;
-  border: 2px solid rgba(31,41,55,0.95);
-  background: radial-gradient(circle at 30% 20%, #111827, #020617);
-  padding: 6px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  box-shadow: 0 10px 26px rgba(15,23,42,0.9);
-}
-
-.grid-box-question {
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  color: #e5e7eb;
-  font-weight: 700;
-}
-
-.grid-cell-row {
-  flex: 1;
-  display: flex;
-  gap: 2px;
-}
-
-.grid-cell {
-  flex: 1;
-  border-radius: 2px;
-  border: 1px solid rgba(55,65,81,0.9);
-  background: transparent;
-}
-
-.grid-cell.filled {
-  background: #e5e7eb;
-}
-
-/* labels under answer grids (reuse if you already have a pattern-label-row) */
-.pattern-label-row {
-  display: flex;
-  gap: 0.6rem;
-  margin-top: 0.2rem;
-}
-
-.pattern-label {
-  flex: 0 0 72px;
-  text-align: center;
-  font-size: 0.8rem;
-  color: #9ca3af;
-}
-
-/* thin divider line between top-row sequence and options */
-.pattern-divider {
-  border-top: 1px solid rgba(31,41,55,0.95);
-  margin: 0.6rem 0 0.4rem;
-}
+    @media (max-width: 860px) { .test-layout { grid-template-columns: minmax(0, 1fr); } }
+
+    .timer-display { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.7rem; font-size: 0.9rem; }
+    .timer-tag { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.25rem 0.7rem; border-radius: 999px; background: rgba(15,23,42,0.9); border: 1px solid rgba(148,163,184,0.6); font-size: 0.8rem; color: var(--muted); }
+    .time-remaining { font-size: 1rem; font-variant-numeric: tabular-nums; }
+    .time-warning { color: #fca5a5; }
+
+    .question-meta { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; margin-bottom: 0.5rem; font-size: 0.84rem; color: var(--muted); }
+    .question-box { border-radius: 0.9rem; border: 1px solid rgba(31,41,55,0.9); padding: 0.75rem 0.8rem; margin-bottom: 0.65rem; background: rgba(15,23,42,0.96); font-size: 0.92rem; min-height: 90px; }
+    .options { display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.86rem; color: var(--muted); margin-bottom: 0.8rem; }
+    .options label { cursor: pointer; display: flex; align-items: center; gap: 0.4rem; }
+    .options input[type="radio"] { accent-color: #38bdf8; }
+    .nav-row { display: flex; flex-direction: column; gap: 0.4rem; }
+    .nav-info { font-size: 0.8rem; color: var(--muted); }
+
+    .result-box { margin-top: 0.8rem; border-radius: 0.9rem; padding: 0.7rem 0.75rem; background: rgba(15,23,42,0.95); border: 1px dashed rgba(148,163,184,0.7); font-size: 0.86rem; color: var(--muted); }
+    .result-box strong { color: #e5f3ff; }
+
+    .upsell-box { margin-top: 0.8rem; border-radius: 0.9rem; padding: 0.8rem 0.9rem; background: radial-gradient(circle at top left, rgba(56,189,248,0.18), transparent 60%), rgba(15,23,42,0.97); border: 1px solid rgba(56,189,248,0.55); font-size: 0.86rem; color: var(--muted); }
+    .upsell-box strong { color: #e5f3ff; }
+    .upsell-box .btn-primary { margin-top: 0.6rem; width: 100%; justify-content: center; font-size: 0.86rem; }
+
+    .review { margin-top: 0.9rem; max-height: 60vh; overflow-y: auto; padding-right: 0.4rem; }
+    .review-question { border-radius: 0.8rem; border: 1px solid rgba(31,41,55,0.9); padding: 0.6rem 0.7rem; font-size: 0.84rem; margin-bottom: 0.6rem; background: rgba(15,23,42,0.96); }
+    .review-header { display: flex; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.3rem; font-size: 0.8rem; color: var(--muted); }
+    .badge-correct { padding: 0.1rem 0.5rem; border-radius: 999px; background: rgba(22,163,74,0.15); border: 1px solid rgba(34,197,94,0.6); color: #bbf7d0; font-size: 0.78rem; }
+    .badge-incorrect { padding: 0.1rem 0.5rem; border-radius: 999px; background: rgba(220,38,38,0.15); border: 1px solid rgba(248,113,113,0.7); color: #fecaca; font-size: 0.78rem; }
+    .answer-line { font-size: 0.8rem; margin-bottom: 0.15rem; }
+    .answer-line strong { color: #e5f3ff; }
+    .explanation { font-size: 0.78rem; color: var(--muted); margin-top: 0.2rem; }
+
+    .side-card p { font-size: 0.86rem; color: var(--muted); margin-bottom: 0.55rem; }
+    .side-card ul { font-size: 0.84rem; color: var(--muted); padding-left: 1.1rem; }
+    .side-card li + li { margin-top: 0.25rem; }
+
+    /* Visual pattern & spatial questions */
+    .mismatch-table { width: 100%; border-collapse: collapse; margin-top: 0.75rem; font-size: 0.82rem; }
+    .mismatch-table th, .mismatch-table td { border: 1px solid rgba(31,41,55,0.9); padding: 0.35rem 0.5rem; }
+    .mismatch-table th { background: rgba(15,23,42,0.98); color: #e5e7eb; text-align: left; font-weight: 600; }
+    .mismatch-table td { background: rgba(15,23,42,0.94); }
+
+    .pattern-grid { margin-top: 0.75rem; }
+    .pattern-row { display: flex; gap: 0.6rem; margin-bottom: 0.4rem; justify-content: flex-start; flex-wrap: wrap; }
+    .pattern-box { flex: 0 0 72px; height: 72px; border-radius: 10px; border: 2px solid rgba(31,41,55,0.95); background: radial-gradient(circle at 30% 20%, #111827, #020617); display: flex; align-items: center; justify-content: center; }
+    .pattern-box-top { box-shadow: 0 10px 26px rgba(15,23,42,0.9); }
+    .pattern-box-option { background: radial-gradient(circle at 30% 20%, #020617, #020617); }
+    .pattern-box-question { font-size: 2.2rem; color: #e5e7eb; font-weight: 700; }
+    .pattern-label-row { display: flex; gap: 0.6rem; margin-top: 0.1rem; }
+    .pattern-label { flex: 0 0 72px; text-align: center; font-size: 0.8rem; color: #9ca3af; }
+    .pattern-divider { border-top: 1px solid rgba(31,41,55,0.95); margin: 0.6rem 0 0.4rem; }
+    .pattern-shape { width: 64%; height: 64%; background: #e5e7eb; }
+    .shape-circle { border-radius: 999px; }
+    .shape-diamond { border-radius: 10%; transform: rotate(45deg); }
+    .shape-hex { clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); }
+    .shape-star8 { clip-path: polygon(50% 0%,61% 18%,82% 18%,68% 32%,75% 50%,68% 68%,82% 82%,61% 82%,50% 100%,39% 82%,18% 82%,32% 68%,25% 50%,32% 32%,18% 18%,39% 18%); }
+    .shape-sunburst { clip-path: polygon(50% 0%,60% 15%,78% 8%,72% 26%,92% 28%,78% 40%,96% 50%,78% 60%,92% 72%,72% 74%,78% 92%,60% 85%,50% 100%,40% 85%,22% 92%,28% 74%,8% 72%,22% 60%,4% 50%,22% 40%,8% 28%,28% 26%,22% 8%,40% 15%); }
+    .shape-ring { border-radius: 999px; background: transparent; border: 9px solid #e5e7eb; }
+
+    .grid-pattern-wrapper { margin-top: 0.8rem; }
+    .grid-sequence-row, .grid-options-row { display: flex; gap: 0.6rem; flex-wrap: wrap; justify-content: flex-start; }
+    .grid-box { flex: 0 0 72px; height: 72px; border-radius: 10px; border: 2px solid rgba(31,41,55,0.95); background: radial-gradient(circle at 30% 20%, #111827, #020617); padding: 6px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 10px 26px rgba(15,23,42,0.9); }
+    .grid-box-question { align-items: center; justify-content: center; font-size: 2rem; color: #e5e7eb; font-weight: 700; }
+    .grid-cell-row { flex: 1; display: flex; gap: 2px; }
+    .grid-cell { flex: 1; border-radius: 2px; border: 1px solid rgba(55,65,81,0.9); background: transparent; }
+    .grid-cell.filled { background: #e5e7eb; }
+
+    @media (max-width: 600px) { .page { padding-inline: 1rem; } }
   </style>
 </head>
 <body>
@@ -654,7 +97,7 @@
         <a href="index.html#overview">Overview</a>
         <a href="index.html#tips">Tips</a>
         <a href="index.html#package">Pricing</a>
-        <button onclick="window.location.href='login.html'">Login</button>
+        <button id="nav-auth-btn" onclick="window.location.href='login.html'">Login</button>
       </div>
     </div>
   </header>
@@ -663,15 +106,13 @@
     <span class="badge"><span class="icon">⏱</span>Full 50-question CCAT-style simulation</span>
     <h1>Free CCAT practice test</h1>
     <p class="subtitle">
-      This practice test mirrors the real Criteria Cognitive Aptitude Test: 50 questions in 15 minutes. You’ll see one question at a time and cannot go back once you move forward. Answer as many as you can accurately before time runs out.
+      This practice test mirrors the real CCAT: 50 questions in 15 minutes. One question at a time — you cannot go back. Answer as many as you can accurately before time runs out.
     </p>
 
     <div class="test-layout">
       <section class="card">
         <div class="timer-display">
-          <div class="timer-tag">
-            <span>Time remaining</span>
-          </div>
+          <div class="timer-tag"><span>Time remaining</span></div>
           <div class="time-remaining" id="time-remaining">15:00</div>
         </div>
 
@@ -685,31 +126,29 @@
 
         <div class="nav-row">
           <button id="next-btn" class="btn-primary btn-full" disabled>Next question</button>
-          <div class="nav-info">
-            Once you click <strong>Next</strong>, you will not be able to return to this question.
-          </div>
+          <div class="nav-info">Once you click <strong>Next</strong>, you cannot return to this question.</div>
         </div>
 
         <div id="result" class="result-box" style="display:none;"></div>
+        <div id="upsell" class="upsell-box" style="display:none;">
+          <strong>Want more practice?</strong> Unlock 5 additional full timed simulations for a one-time $9.99.
+          <button class="btn-primary" id="upsell-btn">Get 5 more tests →</button>
+        </div>
         <div id="review" class="review" style="display:none;"></div>
       </section>
 
       <aside class="card side-card">
         <h2>How this simulation works</h2>
-        <p>
-          This is a full-length CCAT-style simulation. The real CCAT also uses 50 questions in 15 minutes with a similar mix of verbal, numerical, logic, and spatial items.
-        </p>
+        <p>This is a full-length CCAT-style simulation: 50 questions, 15 minutes, same mix of verbal, numerical, logic, and spatial items as the real test.</p>
         <ul>
           <li>You cannot go back to previous questions once you click <strong>Next</strong>.</li>
-          <li>There is no penalty for wrong answers – guessing is better than leaving blanks.</li>
-          <li>The test will automatically end when the 15-minute timer reaches zero.</li>
-          <li>Your score report shows how many questions you answered and how many were correct, plus detailed explanations.</li>
+          <li>There is no penalty for wrong answers — guessing is better than leaving blanks.</li>
+          <li>The test auto-submits when the 15-minute timer reaches zero.</li>
+          <li>Your score report shows correct/incorrect breakdown with explanations.</li>
         </ul>
-        <p style="margin-top:0.6rem;">
-          To keep practicing, log in or sign up from the main site to unlock 5 additional full CCAT-style tests for a one-time $9.99.
-        </p>
-        <button class="btn-secondary" style="margin-top:0.5rem;" onclick="window.location.href='index.html#package'">
-          View full practice bundle
+        <p style="margin-top:0.6rem;">To keep practicing, log in or sign up to unlock 5 additional full CCAT-style tests for a one-time $9.99.</p>
+        <button class="btn-secondary" style="margin-top:0.5rem;" onclick="window.location.href='login.html'">
+          Unlock 5 more tests
         </button>
       </aside>
     </div>
@@ -723,7 +162,6 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    const QUESTIONS = [
       // 1–17: MATH
       {
         text: 'The number of graduate students applying for a tuition-and-fees waiver in a prestigious university in 2025 is 780. Out of these only 260 were ultimately granted the required waiver. This is an acceptance rate of _____.',
@@ -1751,6 +1189,7 @@ function renderVisualElements(q, container) {
       reviewEl.style.display = 'block';
     }
 
+
     function finishTest(fromTimer = false) {
       finished = true;
       if (timerInterval) {
@@ -1759,7 +1198,7 @@ function renderVisualElements(q, container) {
       }
 
       const { correct, attempted } = gradeTest();
-      const total = QUESTIONS.length;
+      const total    = QUESTIONS.length;
       const accuracy = attempted ? Math.round((correct / attempted) * 100) : 0;
 
       resultEl.style.display = 'block';
@@ -1777,6 +1216,12 @@ function renderVisualElements(q, container) {
       categoryEl.textContent = '';
       nextBtn.disabled = true;
       nextBtn.textContent = 'Test finished';
+
+      // Show upsell at peak motivation — CTA goes to login (updated to my-tests if already logged in)
+      const upsellEl  = document.getElementById('upsell');
+      const upsellBtn = document.getElementById('upsell-btn');
+      upsellEl.style.display = 'block';
+      upsellBtn.onclick = () => { window.location.href = 'login.html'; };
 
       renderReview();
     }
@@ -1799,6 +1244,23 @@ function renderVisualElements(q, container) {
     updateTimer();
     startTimer();
     renderQuestion();
+  </script>
+
+  <!-- Update nav + upsell CTA if already logged in -->
+  <script type="module">
+    import { auth }               from './shared.js';
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    onAuthStateChanged(auth, (user) => {
+      const navBtn = document.getElementById('nav-auth-btn');
+      if (user) {
+        navBtn.textContent = 'My Tests';
+        navBtn.onclick = () => { window.location.href = 'my-tests.html'; };
+        // If test is already finished when auth resolves, update the upsell btn too
+        const upsellBtn = document.getElementById('upsell-btn');
+        if (upsellBtn) upsellBtn.onclick = () => { window.location.href = 'my-tests.html'; };
+      }
+    });
   </script>
 </body>
 </html>

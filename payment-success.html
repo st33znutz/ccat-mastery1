@@ -4,115 +4,131 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Payment successful · CCAT Mastery</title>
+  <meta name="robots" content="noindex" />
+  <link rel="stylesheet" href="shared.css" />
   <style>
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
-      background: radial-gradient(circle at top, #0b1120 0, #020617 40%, #000 100%);
-      color: #e5e7eb;
-      min-height: 100vh;
-      margin: 0;
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .card {
-      max-width: 420px;
+
+    .success-card {
+      max-width: 440px;
       margin: 1rem;
       border-radius: 18px;
       background: rgba(15,23,42,0.98);
       border: 1px solid rgba(148,163,184,0.7);
-      padding: 1.2rem 1.3rem 1.3rem;
+      padding: 1.4rem 1.5rem 1.6rem;
       box-shadow: 0 18px 40px rgba(15,23,42,0.9);
       text-align: center;
-      font-size: 0.9rem;
     }
-    h1 {
-      font-size: 1.3rem;
-      margin-bottom: 0.4rem;
+
+    .success-card h1 { font-size: 1.4rem; margin-bottom: 0.4rem; }
+    .success-card p  { color: var(--muted); margin-bottom: 0.4rem; font-size: 0.9rem; }
+
+    .status-text {
+      margin: 0.6rem 0;
+      font-size: 0.82rem;
+      color: var(--muted);
+      min-height: 2.4rem;
     }
-    p {
-      color: #9ca3af;
-      margin-bottom: 0.4rem;
+
+    .status-text.success { color: #bbf7d0; }
+    .status-text.error   { color: #fecaca; }
+
+    .spinner {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(148,163,184,0.4);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      vertical-align: middle;
+      margin-right: 0.35rem;
     }
-    .btn {
-      margin-top: 0.6rem;
-      padding: 0.6rem 1.4rem;
-      border-radius: 999px;
-      border: none;
-      background: radial-gradient(circle at 20% 0,
-        #e0f2fe,
-        #38bdf8 48%,
-        #0ea5e9 100%);
-      color: #020617;
-      font-weight: 600;
-      font-size: 0.9rem;
-      cursor: pointer;
-      box-shadow: 0 16px 36px rgba(56,189,248,0.75);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-    }
-    .status {
-      margin-top: 0.5rem;
-      font-size: 0.8rem;
-      color: #9ca3af;
-    }
-    .status strong { color: #e5e7eb; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>Payment successful 🎉</h1>
+  <div class="success-card">
+    <p style="font-size:2rem;margin-bottom:0.3rem;">🎉</p>
+    <h1>Payment successful</h1>
     <p>Thank you for unlocking the 5 additional CCAT practice tests.</p>
-    <p id="status-text" class="status">Updating your account...</p>
-    <button class="btn" onclick="window.location.href='my-tests.html'">
+
+    <div id="status-text" class="status-text">
+      <span class="spinner"></span> Confirming your access&hellip;
+    </div>
+
+    <button class="btn-primary btn-full" id="go-btn" style="opacity:0.5;pointer-events:none;"
+            onclick="window.location.href='my-tests.html'">
       Go to my tests
     </button>
   </div>
 
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import {
-      getAuth,
-      onAuthStateChanged
-    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-    import {
-      getFirestore,
-      doc,
-      setDoc
-    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    import { auth, db }              from './shared.js';
+    import { onAuthStateChanged }    from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { doc, getDoc }           from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyBmzy47td8xUSSAVEGkkjGWJd8IrHKYrF4",
-      authDomain: "ccat-mastery.firebaseapp.com",
-      projectId: "ccat-mastery",
-      storageBucket: "ccat-mastery.firebasestorage.app",
-      messagingSenderId: "178388911839",
-      appId: "1:178388911839:web:8fa4126e67fd007dd1cb6a"
-    };
+    const statusEl = document.getElementById('status-text');
+    const goBtn    = document.getElementById('go-btn');
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-    const statusText = document.getElementById('status-text');
-
-    function setStatus(msg) {
-      statusText.innerHTML = msg;
+    function setStatus(msg, type = '') {
+      statusEl.innerHTML = msg;
+      statusEl.className = 'status-text ' + type;
     }
 
-    onAuthStateChanged(auth, async (user) => {
-      if (!user) {
-        setStatus('You are not logged in. Please log in again to access your tests.');
-        return;
-      }
+    function enableBtn() {
+      goBtn.style.opacity       = '1';
+      goBtn.style.pointerEvents = 'auto';
+    }
+
+    // Poll Firestore up to ~15 s waiting for the webhook to set hasPaid=true.
+    // The webhook is the only thing that should write hasPaid — we never write it here.
+    async function pollForAccess(uid, attempts = 0) {
+      const MAX_ATTEMPTS = 10;
+      const DELAY_MS     = 1500;
 
       try {
-        await setDoc(doc(db, 'users', user.uid), { hasPaid: true }, { merge: true });
-        setStatus('<strong>Your account has been updated.</strong> You now have access to the 5 extra tests.');
+        const snap = await getDoc(doc(db, 'users', uid));
+        const data = snap.exists() ? snap.data() : {};
+
+        if (data.hasPaid) {
+          setStatus('✓ Your access is confirmed. You can now start your extra practice tests.', 'success');
+          enableBtn();
+          return;
+        }
+
+        if (attempts >= MAX_ATTEMPTS) {
+          setStatus(
+            'Your payment was received but access confirmation is taking longer than usual. ' +
+            'Click the button below — if tests 2–6 are not yet unlocked, wait a moment and refresh my-tests.',
+            'error'
+          );
+          enableBtn();
+          return;
+        }
+
+        setStatus(`<span class="spinner"></span> Confirming your access&hellip; (${attempts + 1}/${MAX_ATTEMPTS})`);
+        setTimeout(() => pollForAccess(uid, attempts + 1), DELAY_MS);
       } catch (err) {
         console.error(err);
-        setStatus('We could not update your account automatically. Please contact support or try again later.');
+        setStatus('Could not verify access automatically. Please visit your tests page and refresh if tests are not yet unlocked.', 'error');
+        enableBtn();
       }
+    }
+
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        setStatus('You are not logged in. Please log in to access your tests.', 'error');
+        enableBtn();
+        goBtn.onclick = () => { window.location.href = 'login.html'; };
+        return;
+      }
+      pollForAccess(user.uid);
     });
   </script>
 </body>
